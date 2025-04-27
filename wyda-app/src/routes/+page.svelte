@@ -3,9 +3,11 @@
   import ClientAdmin from "../analyticsViews/ClientAdmin.svelte";
   import Learner from "../analyticsViews/Learner.svelte";
   import LearningCoach from "../analyticsViews/LearningCoach.svelte";
+  let roles = ["wydaAdmin", "clientAdmin", "learner", "learningCoach"];
 </script>
 
 <main>
+  <p>test</p>
   <div class="navigation-container">
     <div class="logo-container"></div>
     <div class="locations-container"></div>
