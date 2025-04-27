@@ -7,12 +7,49 @@
 </script>
 
 <main>
-  <p>test</p>
-  <div class="navigation-container">
-    <div class="logo-container"></div>
-    <div class="locations-container"></div>
-    <div class="profile-container"></div>
-    <div class="actions-container"></div>
+  <div class="page-container">
+    <div class="navigation-container">
+      <div class="logo-container">
+        <img src="/full_logo.png" alt="wyda-logo" height="80%" />
+      </div>
+      <div class="locations-container"></div>
+      <div class="profile-container"></div>
+      <div class="actions-container"></div>
+    </div>
+    <div class="dashboard">
+      <p>Dashboard Space</p>
+    </div>
   </div>
-  <div class="dashboard"></div>
 </main>
+
+<style>
+  .navigation-container {
+    background-color: #f0f2f6;
+  }
+
+  .page-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .logo-container {
+    justify-content: center;
+    align-items: center;
+    margin-inline-start: 1em;
+    margin-top: 1em;
+  }
+
+  .dashboard {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navigation-container {
+    width: 200px;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
