@@ -1,0 +1,560 @@
+/* Reset */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    /*line-height: 1.5;*/
+    -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+    isolation: isolate;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+    /*list-style-position: outside;*/
+    padding: 0;
+}
+
+iframe {
+    border: none;
+}
+
+/* Fonts */
+/* Preloaded in the <head> */
+@font-face {
+    font-family: "Geist";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/geist_variable.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "GeistMono";
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/geist_mono_variable.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/montserrat_variable.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Montserrat;
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+    src: url("/fonts/montserrat_italic_variable.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    font-style: normal;
+    src: url("/fonts/roboto_regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    font-style: italic;
+    src: url("/fonts/roboto_regular_italic.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    font-style: normal;
+    src: url("/fonts/roboto_medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    font-style: italic;
+    src: url("/fonts/roboto_medium_italic.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    font-style: normal;
+    src: url("/fonts/roboto_bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Roboto;
+    font-weight: 700;
+    font-style: italic;
+    src: url("/fonts/roboto_bold_italic.ttf") format("truetype");
+}
+
+/* Variables */
+/* Convert RGB to Hexidecimal - https://www.rgbtohex.net/rgb/ */
+:root {
+    /*******
+     COLOURS
+     *******/
+
+    /* --black-hex: #000000; */
+    /* --black-rgb-values: 0, 0, 0; */
+    /* --black-hsl-values: 0, 0, 0; */
+    --black-oklch-values: 0% 0 0;
+    --black: oklch(var(--black-oklch-values));
+
+    /* --white-hex: #FFFFFF; */
+    /* --white-hsl-values: 0, 0, 100; */
+    --white-oklch-values: 100% 0 0;
+    --white: oklch(var(--white-oklch-values));
+
+    /* --midnight-hex: #001F3F; */
+    /* --midnight-rgb-values: 0, 31, 63; */
+    /* --midnight-hsl-values: 210, 100, 12; */
+    --midnight-oklch-values: 23.81% 0.0712 252.01;
+    --midnight: oklch(var(--midnight-oklch-values));
+
+    /* athens-hex: #F0F2F6; */
+    /* athens-rgb-values: 240, 242, 246; */
+    /* athens-hsl-values: 220, 25, 95; */
+    --athens-oklch-values: 96.08% 0.0058 264.53;
+    --athens: oklch(var(--athens-oklch-values));
+
+    /* --ghost-hex: #66798C; */
+    /* --ghost-rgb-values: 102, 121, 140; */
+    /* --ghost-hsl-values: 210, 16, 47; */
+    --ghost-oklch-values: 56.77% 0.0371 248.48;
+    --ghost: oklch(var(--ghost-oklch-values));
+
+    /* --slate-grey-hex: #CCD2D9; */
+    /* --slate-grey-rgb-values: 204, 210, 217; */
+    /* --slate-grey-hsl-values: 212, 15, 83; */
+    --slate-grey-oklch-values: 83.12% 0.0117 252.1;
+    --slate-grey: oklch(var(--slate-grey-oklch-values));
+
+    /* --monte-carlo-hex: #7ACCC6; */
+    /* --monte-carlo-rgb-values: 122, 204, 198; */
+    /* --monte-carlo-hsl-values: 176, 45, 64; */
+    --monte-carlo-oklch-values: 79.12% 0.081 189.65;
+    --monte-carlo: oklch(var(--monte-carlo-oklch-values));
+    --monte-carlo-50: oklch(var(--monte-carlo-oklch-values) / 50%);
+
+    /* --blumine-hex: #1B5D74; */
+    /* --blumine-rgb-values: 27, 93, 116; */
+    /* --blumine-hsl-values: 196, 62, 28; */
+    --blumine-oklch-values: 44.84% 0.0741 225.69;
+    --blumine: oklch(var(--blumine-oklch-values));
+
+    /* --bittersweet-hex: #FF6F61; */
+    /* --bittersweet-rgb-values: 255, 111, 97; */
+    /* --bittersweet-hsl-values: 5, 100, 69; */
+    --bittersweet-oklch-values: 71.51% 0.17847500885103404 27.968737192713117;
+    --bittersweet: oklch(var(--bittersweet-oklch-values));
+
+    /* --bay-of-many: #334C65;  */
+    --bay-of-many-oklch-values: 40.74% 0.0523 249.22;
+    --bay-of-many: oklch(var(--bay-of-many-oklch-values));
+
+    /* --mint-tulip-hex: #CAEBE8; */
+    --mint-tulip-oklch-values: 91.55% 0.0347 189.86;
+    --mint-tulip: oklch(var(--mint-tulip-oklch-values));
+
+    /* --red-600-hex: #DC2626; */
+    /* --red-600-rgb-values: 220, 38, 38; */
+    /* --red-600-hsl-values: 0, 72, 51; */
+    --red-600-oklch-values: 57.71% 0.2152 27.33;
+    --red-600: oklch(var(--red-600-oklch-values));
+
+    /* --zinc-200-hex: #E4E4E6; */
+    /* --zinc-200-rgb-values: 228, 228, 230; */
+    /* --zinc-200-hsl-values: 240, 4, 90; */
+    --zinc-200-oklch-values: 91.94% 0.0027 286.35;
+    --zinc-200: oklch(var(--zinc-200-oklch-values));
+
+    /* --zinc-400-hex: #9F9FA9; */
+    /* --zinc-400-rgb-values: 159, 159, 169; */
+    /* --zinc-400-hsl-values: 240, 5, 64; */
+    --zinc-400-oklch-values: 70.57% 0.0144 286.02;
+    --zinc-400: oklch(var(--zinc-400-oklch-values));
+
+    /* --slate-700-hex: #334155 */
+    --slate-700-oklch-values: 37.17% 0.0392 257.29;
+    --slate-700: oklch(var(--slate-700-oklch-values));
+
+    /* --rhino-hex: #454D5D; */
+    --rhino-oklch-values: 41.94% 0.0287 264.2;
+    --rhino: oklch(var(--rhino-oklch-values));
+
+    /* --comet-hex: #5D6372; */
+    --comet-oklch-values: 49.99% 0.025 268.18;
+    --comet: oklch(var(--comment-oklch-values));
+
+    /*****
+     SIZES
+     *****/
+
+    --one-tenth: 0.1;
+    --one-eighth: 0.125;
+    --one-sixth: 0.1666666667;
+    --three-sixteenths: 0.1875;
+    --one-fifth: 0.2;
+    --quarter: 0.25;
+    --one-third: 0.3333333334;
+    --six-sixteenths: 0.375;
+    --half: 0.5;
+    --ten-sixteenths: 0.625;
+    --two-thirds: 0.6666666667;
+    --eleven-sixteenths: 0.6875;
+    --three-quarters: 0.75;
+    --fourteen-sixteenths: 0.875;
+    --fifteen-sixteenths: 0.9375;
+    --one: 1;
+    --two: 2;
+    --three: 3;
+    --four: 4;
+    --five: 5;
+
+    --one-tenth-rem: calc(var(--one-tenth) * 1rem);
+    --one-eighth-rem: calc(var(--one-eighth) * 1rem);
+    --one-sixth-rem: calc(var(--one-sixth) * 1rem);
+    --three-sixteenths-rem: calc(var(--three-sixteenths) * 1rem);
+    --one-fifth-rem: calc(var(--one-fifth) * 1rem);
+    --quarter-rem: calc(var(--quarter) * 1rem);
+    --one-third-rem: calc(var(--one-third) * 1rem);
+    --six-sixteenths-rem: calc(var(--six-sixteenths) * 1rem);
+    --half-rem: calc(var(--half) * 1rem);
+    --ten-sixteenths-rem: calc(var(--ten-sixteenths) * 1rem);
+    --two-thirds-rem: calc(var(--two-thirds) * 1rem);
+    --eleven-sixteenths-rem: calc(var(--eleven-sixteenths) * 1rem);
+    --three-quarters-rem: calc(var(--three-quarters) * 1rem);
+    --fourteen-sixteenths-rem: calc(var(--fourteen-sixteenths) * 1rem);
+    --fifteen-sixteenths-rem: calc(var(--fifteen-sixteenths) * 1rem);
+    --one-rem: 1rem;
+    --one-and-a-quarter-rem: calc(var(--one) * 1.25rem);
+    --one-and-a-half-rem: calc(var(--one) * 1.5rem);
+    --two-rem: calc(var(--two) * 1rem);
+    --two-and-a-half-rem: calc((var(--two) + var(--half)) * 1rem);
+    --three-rem: calc(var(--three) * 1rem);
+    --four-rem: calc(var(--four) * 1rem);
+    --five-rem: calc(var(--five) * 1rem);
+
+    /*****
+     FONTS
+     *****/
+
+    /* prettier-ignore */
+    --geist: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Ubuntu", sans-serif;
+    --geist-mono: "GeistMono", Menlo, Consolas, monospace;
+
+    --font-size-quarter: calc(var(--quarter) * 1rem);
+    --font-size-six-sixteenths: calc(var(--six-sixteenths) * 1rem);
+    --font-size-half: calc(var(--half) * 1rem);
+    --font-size-ten-sixteenths: calc(var(--ten-sixteenths) * 1rem);
+    --font-size-three-quarters: calc(var(--three-quarters) * 1rem);
+    --font-size-fourteen-sixteenths: calc(var(--fourteen-sixteenths) * 1rem);
+    --font-size-fifteen-sixteenths: calc(var(--fifteen-sixteenths) * 1rem);
+    --font-size-one: 1rem;
+    --font-size-one-and-a-half: calc(var(--one) * 1.5rem);
+
+    --thin: 100;
+    --extra-light: 200;
+    --light: 300;
+    --normal: 400;
+    --regular: var(--normal);
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+    --extra-bold: 800;
+
+    /*******
+     OPACITY
+     *******/
+
+    --disabled-opacity: 0.6;
+    --hover-opacity: 0.6;
+
+    /*****
+     RADII
+     *****/
+
+    --default-border-radius: calc(var(--six-sixteenths) * 1rem);
+    --card-border-radius: var(--three-sixteenths-rem);
+
+    /*******
+     SHADOWS
+     *******/
+    --default-shadow:
+        oklch(var(--black-oklch-values) / 10%) 0 10px 15px -3px,
+        oklch(var(--black-oklch-values) / 5%) 0 4px 6px -2px;
+
+    /*******
+     BUTTONS
+     *******/
+
+    --button-font: var(--geist);
+    --button-font-size: var(--font-size-one);
+    --button-font-weight: var(--extra-bold);
+    --button-height: calc((var(--two) + var(--half)) * 1rem);
+    --button-border-radius: var(--default-border-radius);
+
+    /******
+     HEADER
+     ******/
+
+    --header-height: var(--three-rem);
+
+    /*****
+     INPUT
+     *****/
+
+    --input-border-radius: var(--default-border-radius);
+
+    /*******
+     OUTLINE
+     *******/
+
+    --outline-offset: 2px;
+    --outline-width: 2px;
+
+    /****
+     TEXT
+     ****/
+
+    --a-font: var(--geist);
+
+    --h1-font: var(--geist);
+    --h1-font-size: var(--one-and-a-half-rem);
+    --h1-font-weight: var(--semi-bold);
+    --h1-line-height: calc((var(--two) + var(--quarter)) * 1rem);
+
+    --h2-font: var(--geist);
+    --h2-font-size: calc((var(--one) + var(--fourteen-sixteenths)) * 1rem);
+    --h2-font-weight: var(--semi-bold);
+    --h2-line-height: calc((var(--two) + var(--quarter)) * 1rem);
+
+    --h3-font: var(--geist);
+    --h3-font-size: var(--font-size-one-and-a-half);
+    --h3-font-weight: var(--semi-bold);
+
+    --p-font: var(--geist);
+    --p-font-size: var(--font-size-one);
+
+    --label-font: var(--geist);
+    --label-font-size: var(--fourteen-sixteenths-rem);
+
+    --input-font: var(--geist);
+    --input-font-size: var(--font-size-fourteen-sixteenths);
+
+    /*********** 
+     TRANSITIONS
+     ***********/
+
+    --transition-duration: 200ms;
+    --transition-settings: var(--transition-duration) linear;
+}
+
+[data-theme="light"] {
+    --background-colour: var(--white);
+    --border-colour: var(--athens);
+    --outline-colour: var(--midnight);
+
+    --a-colour: var(--midnight);
+    --a-hover-colour: var(--midnight);
+    --a-outline-colour: var(--midnight);
+
+    --h-colour: var(--midnight);
+
+    --p-colour: var(--midnight);
+    --p-error-colour: var(--red-600);
+    --p-outline-colour: var(--blumine);
+
+    --button-outline-colour: var(--blumine);
+
+    --label-colour: var(--midnight);
+
+    --logo-outline-colour: var(--blumine);
+
+    --field-info-colour: var(--bay-of-many);
+    --field-placeholder-colour: var(--bay-of-many);
+    --input-border-colour: var(--zinc-200);
+    --input-outline-colour: var(--blumine);
+    --select-background-colour: var(--white);
+    --switch-inactive-colour: var(--zinc-200);
+    --switch-active-colour: var(--blumine);
+    --radio-inactive-colour: var(--midnight);
+    --radio-active-colour: var(--blumine);
+
+    --card-border-colour: var(--monte-carlo);
+
+    --table-border-colour: var(--athens);
+    --table-p-colour: var(--midnight);
+    --table-row-p-colour: var(--slate-700);
+}
+
+/* TODO: Add dark theme */
+/* [data-theme="dark"] {
+  
+} */
+
+* {
+    /* fix for flexbox issues */
+    min-width: 0;
+    /* fix for flexbox issues */
+    /* this causes  */
+    /* min-height: 0; */
+    font-family: var(--font-family), sans-serif;
+    font-weight: normal;
+    transition:
+        box-shadow var(--transition-settings),
+        border-color var(--transition-settings),
+        color var(--transition-settings),
+        fill var(--transition-settings),
+        filter var(--transition-settings),
+        opacity var(--transition-settings),
+        transform var(--transition-settings);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(23, 32, 52) rgb(44, 51, 72);
+}
+
+body {
+    background-color: var(--background-colour);
+}
+
+a:focus,
+input:focus,
+button:focus,
+select:focus,
+textarea:focus,
+.field:focus {
+    outline-offset: var(--outline-offset);
+    outline: var(--outline-width) solid inherit;
+}
+
+a:disabled,
+input:disabled,
+button:disabled,
+select:disabled,
+textarea:disabled,
+div[data-disabled="true"] {
+    cursor: not-allowed !important;
+}
+
+p {
+    color: var(--p-colour);
+    font-family: var(--p-font);
+    font-size: var(--p-font-size);
+    line-height: 1.25;
+}
+
+li {
+    color: var(--p-colour);
+    font-family: var(--p-font);
+    font-size: var(--p-font-size);
+}
+
+strong,
+em {
+    color: inherit;
+    font-family: inherit;
+    font-weight: var(--bold);
+}
+
+a {
+    color: var(--a-colour);
+    font-family: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+}
+
+a:focus {
+    outline: var(--outline-width) solid var(--outline-colour);
+    outline-offset: var(--outline-offset);
+}
+
+.bordered {
+    border: 1px solid var(--border-colour);
+}
+
+.backgrounded {
+    background-color: var(--background-colour);
+}
+
+.rounded {
+    border-radius: var(--default-border-radius);
+}
+
+@keyframes flyIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flyOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
