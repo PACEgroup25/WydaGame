@@ -4,6 +4,8 @@
   import Learner from "../analyticsViews/Learner.svelte";
   import LearningCoach from "../analyticsViews/LearningCoach.svelte";
   import { Button } from "../lib/components/ui/button";
+  import * as RadioGroup from "$lib/components/ui/radio-group/index";
+  import { Label } from "$lib/components/ui/label";
   let roles = ["wydaAdmin", "clientAdmin", "learner", "learningCoach"];
 </script>
 
@@ -23,6 +25,27 @@
           class="m-1 hover:bg-[#b4dedd] focus:outline-2 focus:outline-[#000]"
           >Analytics</Button
         >
+      </div>
+      <div class="view-switcher">
+        <RadioGroup.Root value="learner">
+          <div class="flex items-center space-x-2">
+            <RadioGroup.Item value="learner" id="r1" />
+            <Label for="r1">Learner View</Label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <RadioGroup.Item value="wydaAdmin" id="r2" />
+            <Label for="r2">Wyda Admin View</Label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <RadioGroup.Item value="clientAdmin" id="r3" />
+            <Label for="r3">Client Admin View</Label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <RadioGroup.Item value="learningCoach" id="r4" />
+            <Label for="r4">Learning Coach View</Label>
+          </div>
+          <RadioGroup.Input name="spacing" />
+        </RadioGroup.Root>
       </div>
       <div class="profile-container">
         <div class="image-container">JD</div>
@@ -62,7 +85,7 @@
   .locations-container {
     display: flex;
     flex-direction: column;
-    height: 80%;
+    height: 60%;
   }
 
   .dashboard {
@@ -80,5 +103,11 @@
 
   .actions-container {
     display: flex;
+  }
+
+  .view-switcher {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3em;
   }
 </style>
