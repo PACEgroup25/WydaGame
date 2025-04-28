@@ -6,7 +6,7 @@
   import { Button } from "../lib/components/ui/button";
   import * as RadioGroup from "$lib/components/ui/radio-group/index";
   import { Label } from "$lib/components/ui/label";
-  let roles = ["wydaAdmin", "clientAdmin", "learner", "learningCoach"];
+  let role = "learner";
 </script>
 
 <main>
@@ -27,7 +27,7 @@
         >
       </div>
       <div class="view-switcher">
-        <RadioGroup.Root value="learner">
+        <RadioGroup.Root bind:value={role}>
           <div class="flex items-center space-x-2">
             <RadioGroup.Item value="learner" id="r1" />
             <Label for="r1">Learner View</Label>
@@ -56,8 +56,17 @@
         <Button variant="sidebar">Notifications</Button>
       </div>
     </div>
+    <!-- NOTE: roles are to be sourced from JWT Tokens in final product -->
     <div class="dashboard">
-      <p>Dashboard Space</p>
+      {#if role == "learner"}
+        <Learner />
+      {:else if role == "wydaAdmin"}
+        <WydaAdmin />
+      {:else if role == "clientAdmin"}
+        <ClientAdmin />
+      {:else if role == "learningCoach"}
+        <LearningCoach />
+      {/if}
     </div>
   </div>
 </main>
@@ -68,6 +77,8 @@
     border-right: solid 1px;
     border-color: rgb(215, 215, 215);
     height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
   .page-container {
@@ -85,7 +96,7 @@
   .locations-container {
     display: flex;
     flex-direction: column;
-    height: 60%;
+    height: 100%;
   }
 
   .dashboard {
