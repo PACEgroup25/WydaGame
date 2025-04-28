@@ -10,54 +10,54 @@
 </script>
 
 <main>
-  <div class="page-container">
-    <div class="navigation-container">
-      <div class="logo-container">
+  <div class="page-container flex flex-row">
+    <div
+      class="navigation-container bg-[#f0f2f6] border-r border-r-grayBorder h-100dvh flex flex-col"
+    >
+      <div class="logo-container flex flex-row justify-center mt-4 mb-4">
         <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
       </div>
-      <div class="locations-container">
+      <div class="locations-container flex flex-col h-full">
         <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]"
           >Dashboard</Button
         >
         <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]">Help</Button>
-        <Button
-          variant="sidebar"
-          class="m-1 hover:bg-[#b4dedd] focus:outline-2 focus:outline-[#000]"
+        <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]"
           >Analytics</Button
         >
+        <div class="view-switcher flex justify-center mb-12 mt-8">
+          <RadioGroup.Root bind:value={role}>
+            <div class="flex items-center space-x-2">
+              <RadioGroup.Item value="learner" id="r1" />
+              <Label for="r1">Learner View</Label>
+            </div>
+            <div class="flex items-center space-x-2">
+              <RadioGroup.Item value="wydaAdmin" id="r2" />
+              <Label for="r2">Wyda Admin View</Label>
+            </div>
+            <div class="flex items-center space-x-2">
+              <RadioGroup.Item value="clientAdmin" id="r3" />
+              <Label for="r3">Client Admin View</Label>
+            </div>
+            <div class="flex items-center space-x-2">
+              <RadioGroup.Item value="learningCoach" id="r4" />
+              <Label for="r4">Learning Coach View</Label>
+            </div>
+            <RadioGroup.Input name="spacing" />
+          </RadioGroup.Root>
+        </div>
       </div>
-      <div class="view-switcher">
-        <RadioGroup.Root bind:value={role}>
-          <div class="flex items-center space-x-2">
-            <RadioGroup.Item value="learner" id="r1" />
-            <Label for="r1">Learner View</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroup.Item value="wydaAdmin" id="r2" />
-            <Label for="r2">Wyda Admin View</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroup.Item value="clientAdmin" id="r3" />
-            <Label for="r3">Client Admin View</Label>
-          </div>
-          <div class="flex items-center space-x-2">
-            <RadioGroup.Item value="learningCoach" id="r4" />
-            <Label for="r4">Learning Coach View</Label>
-          </div>
-          <RadioGroup.Input name="spacing" />
-        </RadioGroup.Root>
-      </div>
-      <div class="profile-container">
+      <div class="profile-container flex justify-evenly mb-12">
         <div class="image-container">JD</div>
         <div class="text-container">John Doe</div>
       </div>
-      <div class="actions-container">
+      <div class="actions-container flex">
         <Button variant="sidebar">Sign out</Button>
         <Button variant="sidebar">Notifications</Button>
       </div>
     </div>
     <!-- NOTE: roles are to be sourced from JWT Tokens in final product -->
-    <div class="dashboard">
+    <div class="dashboard flex align-center justify-center h-100dvh w-full">
       {#if role == "learner"}
         <Learner />
       {:else if role == "wydaAdmin"}
@@ -72,53 +72,4 @@
 </main>
 
 <style>
-  .navigation-container {
-    background-color: #f0f2f6;
-    border-right: solid 1px;
-    border-color: rgb(215, 215, 215);
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .page-container {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-  }
-
-  .locations-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .dashboard {
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .profile-container {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .actions-container {
-    display: flex;
-  }
-
-  .view-switcher {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3em;
-  }
 </style>

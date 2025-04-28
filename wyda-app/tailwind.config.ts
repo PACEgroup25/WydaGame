@@ -14,7 +14,11 @@ const config: Config = {
 			}
 		},
 		extend: {
+			height:{
+				'100dvh' : '100dvh',
+			},
 			colors: {
+				grayBorder: "rgb(215, 215, 215)",
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
 				ring: "hsl(var(--ring) / <alpha-value>)",
