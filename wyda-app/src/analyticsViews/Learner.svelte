@@ -1,1 +1,1 @@
-<p>I am the learner view</p>
+<p class="text-blue-600 text-4xl">Learner View</p>

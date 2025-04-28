@@ -17,16 +17,13 @@
       <div class="logo-container flex flex-row justify-center mt-4 mb-4">
         <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
       </div>
-      <div class="locations-container flex flex-col h-full">
-        <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]"
-          >Dashboard</Button
-        >
-        <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]">Help</Button>
-        <Button variant="sidebar" class="m-1 hover:bg-[#b4dedd]"
-          >Analytics</Button
-        >
+      <div class="locations-container flex flex-col h-full mt-12 mb-4">
+        <Button variant="sidebar" class="m-1">Dashboard</Button>
+        <Button variant="sidebar" class="m-1">Help</Button>
+        <Button variant="sidebar" class="m-1">Analytics</Button>
         <div class="view-switcher flex justify-center mb-12 mt-8">
           <RadioGroup.Root bind:value={role}>
+            <p>Temporary View Switcher</p>
             <div class="flex items-center space-x-2">
               <RadioGroup.Item value="learner" id="r1" />
               <Label for="r1">Learner View</Label>
@@ -47,17 +44,21 @@
           </RadioGroup.Root>
         </div>
       </div>
-      <div class="profile-container flex justify-evenly mb-12">
-        <div class="image-container">JD</div>
-        <div class="text-container">John Doe</div>
+      <div class="profile-container flex justify-evenly mb-8">
+        <div
+          class="image-container flex justify-center items-center h-12 w-12 bg-blue-500 rounded-full"
+        >
+          JD
+        </div>
+        <div class="text-container flex items-center">John Doe</div>
       </div>
-      <div class="actions-container flex">
-        <Button variant="sidebar">Sign out</Button>
-        <Button variant="sidebar">Notifications</Button>
+      <div class="actions-container flex mb-12">
+        <Button variant="sidebar" class="m-1">Sign out</Button>
+        <Button variant="sidebar" class="m-1">Notifications</Button>
       </div>
     </div>
     <!-- NOTE: roles are to be sourced from JWT Tokens in final product -->
-    <div class="dashboard flex align-center justify-center h-100dvh w-full">
+    <div class="dashboard flex items-center justify-center h-100dvh w-full">
       {#if role == "learner"}
         <Learner />
       {:else if role == "wydaAdmin"}

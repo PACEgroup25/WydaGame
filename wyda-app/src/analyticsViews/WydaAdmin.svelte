@@ -1,1 +1,1 @@
-<p>I am the Wyda Admin View</p>
+<p class="text-blue-600 text-4xl">Wyda Admin View</p>

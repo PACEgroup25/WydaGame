@@ -1,1 +1,1 @@
-<p>I am the Client Admin View</p>
+<p class="text-blue-600 text-4xl">Client Admin View</p>
