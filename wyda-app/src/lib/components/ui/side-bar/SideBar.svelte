@@ -7,6 +7,9 @@
     Bell,
     Info,
   } from "@lucide/svelte";
+
+  import { page } from "$app/stores";
+  $: currentPath = $page.url.pathname;
 </script>
 
 <div
@@ -16,15 +19,32 @@
     <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
   </div>
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
-    <Button variant="sidebar" href="/" class="m-1 flex justify-start">
+    <Button
+      variant="sidebar"
+      href="/"
+      class="m-1 flex justify-start {currentPath === '/'
+        ? 'bg-[#b4dedd]'
+        : 'bg-transparent'}"
+    >
       <LayoutDashboard />
       <span>Dashboard</span>
     </Button>
-    <Button variant="sidebar" class="m-1 flex justify-start">
+    <Button
+      variant="sidebar"
+      class="m-1 flex justify-start {currentPath === '/help'
+        ? 'bg-[#b4dedd]'
+        : 'bg-transparent'}"
+    >
       <Info />
       <span>Help</span>
     </Button>
-    <Button variant="sidebar" href="/analytics" class="m-1 flex justify-start">
+    <Button
+      variant="sidebar"
+      href="/analytics"
+      class="m-1 flex justify-start {currentPath === '/analytics'
+        ? 'bg-[#b4dedd]'
+        : 'bg-transparent'}"
+    >
       <ChartLine />
       <span>Analytics</span>
     </Button>
