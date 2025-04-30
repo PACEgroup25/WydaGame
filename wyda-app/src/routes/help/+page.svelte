@@ -8,7 +8,7 @@
     <div
       class="dashboard flex flex-col items-center justify-center h-100dvh w-full"
     >
-      <div class="text-blue-600 text-4xl">Dashboard Content Placeholder</div>
+      <div class="text-blue-600 text-4xl">Help Content Placeholder</div>
     </div>
   </div>
 </main>
