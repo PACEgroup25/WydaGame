@@ -31,6 +31,7 @@
     </Button>
     <Button
       variant="sidebar"
+      href="/help"
       class="m-1 flex justify-start {currentPath === '/help'
         ? 'bg-[#b4dedd]'
         : 'bg-transparent'}"
