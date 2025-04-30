@@ -3,6 +3,7 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import { Zap } from "@lucide/svelte";
   import * as Table from "$lib/components/ui/table";
+  import { Progress } from "$lib/components/ui/progress";
 </script>
 
 <main>
@@ -11,9 +12,11 @@
     <div
       class="dashboard flex flex-col items-center justify-start h-100dvh w-full"
     >
-      <div class="dash-container max-w-[65em] flex flex-col items-center">
+      <div class="dash-container w-[60em] flex flex-col items-center">
         <div class="heading-container mt-16 flex w-full">
-          <div class="text-container flex flex-col w-full justify-bewteen">
+          <div
+            class="text-container flex flex-col w-full justify-bewteen mb-10"
+          >
             <div class="heading text-3xl font-semibold">
               Business Acumen Essentials
             </div>
@@ -26,29 +29,43 @@
             <Button class="bg-[#1b5d74]"><Zap />Launch next challenge</Button>
           </div>
         </div>
-        <div class="cards-container flex justify-around">
-          <div class="points border border-[#7accc6] p-1 flex flex-col">
+        <div class="cards-container flex justify-between w-full mb-8">
+          <div
+            class="points border border-[#7accc6] p-1 flex flex-col rounded-sm"
+          >
             Points
             <div class="points">102</div>
             <div class="date">Since 10.12.25</div>
           </div>
-          <div class="next-challenge border border-[#7accc6] p-1 flex flex-col">
+          <div
+            class="next-challenge border border-[#7accc6] p-1 flex flex-col rounded-sm"
+          >
             Next challenge
             <div class="challenge-title">Orientation</div>
           </div>
-          <div class="progress border border-[#7accc6] p-1 flex flex-col">
+          <div
+            class="progress border border-[#7accc6] p-1 flex flex-col rounded-sm"
+          >
             Progress
+            <div class="tracker flex">
+              <div class="name w-[5em]">John Doe</div>
+              <Progress class="w-[25em] ml-[1em]" />
+            </div>
+            <div class="tracker flex">
+              <div class="target w-[5em]">Target</div>
+              <Progress class="w-[25em] ml-[1em]" />
+            </div>
           </div>
         </div>
-        <div class="program">
+        <div class="program w-full">
           <div class="header"></div>
-          <div class="table border border-[#7accc6] p-1">
+          <div class="table border border-[#7accc6] p-1 w-full rounded-sm">
             Program
             <Table.Root>
               <Table.Header>
                 <Table.Row>
-                  <Table.Head class="w-[100px]">Title</Table.Head>
-                  <Table.Head class="">Est. Time</Table.Head>
+                  <Table.Head class="w-full">Title</Table.Head>
+                  <Table.Head class="text-right">Est. Time</Table.Head>
                   <Table.Head></Table.Head>
                 </Table.Row>
               </Table.Header>
@@ -57,21 +74,21 @@
                   <Table.Cell class="font-medium"
                     >Onboarding Activities</Table.Cell
                   >
-                  <Table.Cell>40 min</Table.Cell>
+                  <Table.Cell class="text-right">40 min</Table.Cell>
                   <Table.Cell>Launch</Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell class="font-medium"
                     >Orientation to Simulation</Table.Cell
                   >
-                  <Table.Cell>15 min</Table.Cell>
+                  <Table.Cell class="text-right">15 min</Table.Cell>
                   <Table.Cell></Table.Cell>
                 </Table.Row>
                 <Table.Row>
                   <Table.Cell class="font-medium"
                     >Onboarding Activities</Table.Cell
                   >
-                  <Table.Cell>25 min</Table.Cell>
+                  <Table.Cell class="text-right">25 min</Table.Cell>
                   <Table.Cell></Table.Cell>
                 </Table.Row>
               </Table.Body>
