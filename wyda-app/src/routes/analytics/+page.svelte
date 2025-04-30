@@ -4,9 +4,8 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row">
+  <div class="page-container flex flex-row h-dvh">
     <SideBar />
-    <!-- NOTE: roles are to be sourced from JWT Tokens in final product -->
     <AnalyticsContainer />
   </div>
 </main>
