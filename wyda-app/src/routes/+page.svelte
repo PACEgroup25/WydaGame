@@ -1,7 +1,13 @@
 <script>
   import SideBar from "$lib/components/ui/side-bar/SideBar.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
-  import { Zap } from "@lucide/svelte";
+  import {
+    Zap,
+    ChartColumn,
+    BookOpen,
+    TrendingUp,
+    FastForward,
+  } from "@lucide/svelte";
   import * as Table from "$lib/components/ui/table";
   import { Progress } from "$lib/components/ui/progress";
 </script>
@@ -31,21 +37,24 @@
         </div>
         <div class="cards-container flex justify-between w-full mb-8">
           <div
-            class="points border border-[#7accc6] p-1 flex flex-col rounded-sm"
+            class="points border border-[#7accc6] p-4 flex flex-col rounded-sm"
           >
+            <TrendingUp />
             Points
             <div class="points">102</div>
             <div class="date">Since 10.12.25</div>
           </div>
           <div
-            class="next-challenge border border-[#7accc6] p-1 flex flex-col rounded-sm"
+            class="next-challenge border border-[#7accc6] p-4 flex flex-col rounded-sm"
           >
+            <FastForward />
             Next challenge
             <div class="challenge-title">Orientation</div>
           </div>
           <div
-            class="progress border border-[#7accc6] p-1 flex flex-col rounded-sm"
+            class="progress border border-[#7accc6] p-4 flex flex-col rounded-sm"
           >
+            <ChartColumn />
             Progress
             <div class="tracker flex">
               <div class="name w-[5em]">John Doe</div>
@@ -59,7 +68,8 @@
         </div>
         <div class="program w-full">
           <div class="header"></div>
-          <div class="table border border-[#7accc6] p-1 w-full rounded-sm">
+          <div class="table border border-[#7accc6] p-4 w-full rounded-sm">
+            <BookOpen />
             Program
             <Table.Root>
               <Table.Header>
