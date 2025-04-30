@@ -16,15 +16,15 @@
     <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
   </div>
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
-    <Button variant="sidebar" class="m-1 flex justify-start">
+    <Button variant="sidebar" href="/" class="m-1 flex justify-start">
       <LayoutDashboard />
-      <span>Dashboard</span></Button
-    >
+      <span>Dashboard</span>
+    </Button>
     <Button variant="sidebar" class="m-1 flex justify-start">
       <Info />
       <span>Help</span>
     </Button>
-    <Button variant="sidebar" class="m-1 flex justify-start">
+    <Button variant="sidebar" href="/analytics" class="m-1 flex justify-start">
       <ChartLine />
       <span>Analytics</span>
     </Button>
