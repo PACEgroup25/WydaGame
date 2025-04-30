@@ -5,7 +5,7 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row">
+  <div class="page-container flex flex-row h-dvh">
     <SideBar />
     <div
       class="dashboard flex flex-col items-start justify-start items-center h-100dvh w-full"

@@ -13,7 +13,7 @@
 </script>
 
 <div
-  class="navigation-container bg-[#f0f2f6] border-r border-r-greyBorder h-100dvh flex flex-col"
+  class="navigation-container bg-[#f0f2f6] border-r border-r-greyBorder h-full flex flex-col"
 >
   <div class="logo-container flex flex-row justify-center mt-4 mb-4">
     <img src="/full_logo.png" alt="wyda-logo" class="h-7" />

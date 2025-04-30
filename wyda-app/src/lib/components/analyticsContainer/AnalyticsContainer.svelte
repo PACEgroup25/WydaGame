@@ -12,7 +12,7 @@
 <div
   class="dashboard flex flex-col items-center justify-center h-100dvh w-full"
 >
-  <div class="view-switcher flex justify-center mb-12 mt-8">
+  <div class="view-switcher h-[12em] w-[12em] flex justify-center mb-12 mt-8">
     <RadioGroup.Root bind:value={role}>
       <p class="text-center">Temporary View Switcher</p>
       <div class="flex items-center space-x-2">
