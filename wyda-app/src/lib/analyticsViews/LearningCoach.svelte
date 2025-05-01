@@ -53,7 +53,7 @@
   };
 </script>
 
-<div class="main-container flex flex-wrap gap-10">
+<div class="main-container flex flex-wrap gap-10 mt-10">
   <div class="section-1-container w-full flex justify-center">
     <div class="section-1 max-w-[65em] flex flex-col gap-10 justify-center">
       <div class="heading text-4xl w-full p-4 font-bold">
