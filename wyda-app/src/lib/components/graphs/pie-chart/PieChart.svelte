@@ -1,23 +1,23 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Chart from "chart.js/auto";
-
   let ctx: HTMLCanvasElement;
+
+  export let chartLabel: string;
+  export let labels: string[];
+  export let data: number[];
+  export let backgroundColor: string[];
 
   onMount(async () => {
     new Chart(ctx, {
       type: "pie",
       data: {
-        labels: ["Red", "Blue", "Yellow"],
+        labels: labels,
         datasets: [
           {
-            label: "My First Dataset",
-            data: [300, 50, 100],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-            ],
+            label: chartLabel,
+            data: data,
+            backgroundColor: backgroundColor,
             hoverOffset: 4,
           },
         ],
