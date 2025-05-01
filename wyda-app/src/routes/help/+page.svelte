@@ -5,11 +5,9 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row h-dvh">
+  <div class="page-container flex flex-row">
     <SideBar />
-    <div
-      class="dashboard flex flex-col items-start justify-start items-center h-100dvh w-full"
-    >
+    <div class="dashboard flex flex-col justify-start items-center w-full">
       <div class="help-page max-w-[65em]">
         <div class="info flex flex-col p-[3em] w-full">
           <div class="title text-[2.5em] mb-4 font-semibold">Help</div>

@@ -26,4 +26,6 @@
   });
 </script>
 
-<canvas id="chart" bind:this={ctx}></canvas>
+<div class="chart-container h-[20em]">
+  <canvas id="chart" bind:this={ctx}></canvas>
+</div>

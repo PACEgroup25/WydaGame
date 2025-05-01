@@ -13,10 +13,10 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row h-dvh">
+  <div class="page-container flex flex-row">
     <SideBar />
     <div
-      class="dashboard flex flex-col items-center justify-start h-100dvh w-full"
+      class="dashboard flex flex-col flex-wrap items-center justify-start w-full"
     >
       <div class="dash-container w-[60em] flex flex-col items-center">
         <div class="heading-container mt-16 flex w-full">

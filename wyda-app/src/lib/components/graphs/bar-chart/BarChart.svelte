@@ -7,6 +7,10 @@
   let orientation: "x" | "y" | undefined = "x";
 
   export let direction = "x";
+  export let chartLabel: string;
+  export let labels: string[];
+  export let data: number[];
+  export let backgroundColor: string[];
 
   if (direction == "row") {
     orientation = "y";
@@ -16,13 +20,13 @@
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: labels,
         datasets: [
           {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
+            label: chartLabel,
+            data: data,
             borderWidth: 1,
-            backgroundColor: "rgba(180,222,221,1)",
+            backgroundColor: backgroundColor,
           },
         ],
       },

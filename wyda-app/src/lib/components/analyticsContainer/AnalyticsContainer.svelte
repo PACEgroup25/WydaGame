@@ -9,9 +9,7 @@
 </script>
 
 <!-- NOTE: roles are to be sourced from JWT Tokens in final product -->
-<div
-  class="dashboard flex flex-col items-center justify-center h-100dvh w-full"
->
+<div class="dashboard flex flex-col items-center justify-start w-full">
   <div class="view-switcher h-[12em] w-[12em] flex justify-center mb-12 mt-8">
     <RadioGroup.Root bind:value={role}>
       <p class="text-center">Temporary View Switcher</p>
