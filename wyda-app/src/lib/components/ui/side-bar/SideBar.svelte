@@ -13,7 +13,7 @@
 </script>
 
 <div
-  class="navigation-container bg-[#f0f2f6] border-r border-r-greyBorder h-full flex flex-col"
+  class="navigation-container bg-[#f0f2f6] border-r border-r-greyBorder h-dvh flex flex-col sticky top-0"
 >
   <div class="logo-container flex flex-row justify-center mt-4 mb-4">
     <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
@@ -54,9 +54,9 @@
     <div
       class="image-container flex justify-center items-center h-12 w-12 bg-blue-500 rounded-full"
     >
-      JD
+      EU
     </div>
-    <div class="text-container flex items-center">John Doe</div>
+    <div class="text-container flex items-center">Example User</div>
   </div>
   <div
     class="actions-container flex justify-evenly border-t border-t-greyBorder"
