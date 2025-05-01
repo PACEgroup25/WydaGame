@@ -29,9 +29,9 @@
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+      href="/learningCoach"
+      class="m-1 flex justify-start {currentPath === '/learningCoach'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ChartColumnIncreasing />
@@ -41,7 +41,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <Clock />
@@ -51,7 +51,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <BookOpenCheck />
@@ -61,7 +61,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <CalendarDays />
@@ -69,9 +69,9 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+      href="/learningCoach/analytics"
+      class="m-1 flex justify-start {currentPath === '/learningCoach/analytics'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ChartNoAxesCombined />
@@ -81,7 +81,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ClipboardPlus />
