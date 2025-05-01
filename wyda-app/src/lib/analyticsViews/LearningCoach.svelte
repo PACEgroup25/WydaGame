@@ -2,6 +2,8 @@
   import PieChart from "$lib/components/graphs/pie-chart/PieChart.svelte";
   import BarChart from "%lib/components/graphs/bar-chart/BarChart.svelte";
   import * as Table from "$lib/components/ui/table/index";
+  import { UserRound, ChevronRight } from "@lucide/svelte";
+
   const pieChartdata = {
     chartLabel: "User's Reflection Quality",
     labels: ["low", "high"],
@@ -76,7 +78,7 @@
         </div>
       </div>
 
-      <div class="learner-info flex flex-wrap w-full justify-around gap-10">
+      <div class="learner-info flex flex-wrap w-full justify-between gap-10">
         <div
           class="recent-activity border border-[#7accc6] p-4 flex flex-col rounded-sm"
         >
@@ -125,45 +127,37 @@
           <Table.Root>
             <Table.Header>
               <Table.Row>
-                <Table.Head class="w-full">Name</Table.Head>
-                <Table.Head class="text-right">Org/BU</Table.Head>
-                <Table.Head>Challenge</Table.Head>
-                <Table.Head>Date</Table.Head>
+                <Table.Head>Name</Table.Head>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               <Table.Row>
-                <Table.Cell class="font-medium"
-                  >Onboarding Activities</Table.Cell
-                >
-                <Table.Cell class="text-right">40 min</Table.Cell>
-                <Table.Cell>Launch</Table.Cell>
+                <Table.Cell class="flex"><UserRound />Learner #1</Table.Cell>
+                <Table.Cell><ChevronRight /></Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell class="font-medium"
-                  >Orientation to Simulation</Table.Cell
-                >
-                <Table.Cell class="text-right">15 min</Table.Cell>
-                <Table.Cell></Table.Cell>
+                <Table.Cell class="flex"><UserRound />Learner #2</Table.Cell>
+                <Table.Cell><ChevronRight /></Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell class="font-medium"
-                  >Onboarding Activities</Table.Cell
-                >
-                <Table.Cell class="text-right">25 min</Table.Cell>
-                <Table.Cell></Table.Cell>
+                <Table.Cell class="flex"><UserRound />Learner #3</Table.Cell>
+                <Table.Cell><ChevronRight /></Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell class="flex"><UserRound />Learner #4</Table.Cell>
+                <Table.Cell><ChevronRight /></Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table.Root>
         </div>
       </div>
-      <div class="header w-full text-4xl p-4 font-bold">Analytics</div>
     </div>
   </div>
   <div class="analytics-section w-full flex justify-center">
     <div
       class="analytics-container p-2 flex flex-wrap gap-10 justify-around max-w-[70em]"
     >
+      <div class="header w-full text-4xl p-4 font-bold">Analytics</div>
       <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">
         <div class="chart-header font-semibold"></div>
         <BarChart {...userProgressData}
