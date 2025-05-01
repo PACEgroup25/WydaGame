@@ -31,8 +31,9 @@
       </div>
     </RadioGroup.Root>
   </div>
+  <a href="/learningCoach" class="underline">link to learning coach view</a>
   {#if role == "learner"}
-    <Learner />
+    <LearningCoach />
   {:else if role == "wydaAdmin"}
     <WydaAdmin />
   {:else if role == "clientAdmin"}

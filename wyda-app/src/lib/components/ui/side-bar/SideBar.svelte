@@ -31,16 +31,6 @@
     </Button>
     <Button
       variant="sidebar"
-      href="/help"
-      class="m-1 flex justify-start {currentPath === '/help'
-        ? 'bg-[#b4dedd]'
-        : 'bg-transparent'}"
-    >
-      <Info />
-      <span>Help</span>
-    </Button>
-    <Button
-      variant="sidebar"
       href="/analytics"
       class="m-1 flex justify-start {currentPath === '/analytics'
         ? 'bg-[#b4dedd]'
@@ -48,6 +38,16 @@
     >
       <ChartLine />
       <span>Analytics</span>
+    </Button>
+    <Button
+      variant="sidebar"
+      href="/help"
+      class="m-1 flex justify-start {currentPath === '/help'
+        ? 'bg-[#b4dedd]'
+        : 'bg-transparent'}"
+    >
+      <Info />
+      <span>Help</span>
     </Button>
   </div>
   <div class="profile-container flex justify-evenly mb-4">

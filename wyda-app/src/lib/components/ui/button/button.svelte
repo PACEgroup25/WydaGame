@@ -20,6 +20,8 @@
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         sidebar: "bg-transparent hover:bg-[#b4dedd] text-[#001f3f]",
+        sidebarLearningCoach:
+          "bg-transparant hover:bg-[#1b5d74] text-[#f0f2f6]",
       },
       size: {
         default: "h-10 px-4 py-2",
