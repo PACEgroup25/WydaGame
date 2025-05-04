@@ -56,7 +56,7 @@
 <main>
   <div class="page-container flex flex-row">
     <SideBarLearningCoach />
-    <div class="dashboard flex flex-col items-center justify-start w-full">
+    <div class="dashboard">
       <div class="main-container flex flex-wrap gap-10 mt-10">
         <div class="analytics-section w-full flex justify-center">
           <div

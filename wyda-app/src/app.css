@@ -70,6 +70,14 @@
   @apply border border-[#7accc6] p-2 flex flex-col rounded-sm;
 }
 
+.summary-stats {
+  @apply border border-[#7accc6] p-4 flex flex-col rounded-sm;
+}
+
+.dashboard {
+  @apply flex flex-col items-center justify-center w-full;
+}
+
 @layer base {
   * {
     @apply border-border;

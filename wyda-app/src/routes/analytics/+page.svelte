@@ -4,9 +4,11 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row h-dvh">
+  <div class="page-container flex flex-row">
     <SideBar />
-    <AnalyticsContainer />
+    <div class="dashboard">
+      <AnalyticsContainer />
+    </div>
   </div>
 </main>
 

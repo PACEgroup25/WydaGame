@@ -7,7 +7,7 @@
 <main>
   <div class="page-container flex flex-row">
     <SideBar />
-    <div class="dashboard flex flex-col justify-start items-center w-full">
+    <div class="dashboard">
       <div class="help-page max-w-[65em]">
         <div class="info flex flex-col p-[3em] w-full">
           <div class="title text-[2.5em] mb-4 font-semibold">Help</div>

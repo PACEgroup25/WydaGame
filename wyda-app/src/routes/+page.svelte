@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import SideBar from "$lib/components/ui/side-bar/SideBar.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import {
@@ -15,7 +15,7 @@
 <main>
   <div class="page-container flex flex-row">
     <SideBar />
-    <div class="dashboard flex flex-col items-center justify-start w-full">
+    <div class="dashboard">
       <div class="dash-container w-[60em] flex flex-col items-center">
         <div class="heading-container mt-16 flex w-full">
           <div
