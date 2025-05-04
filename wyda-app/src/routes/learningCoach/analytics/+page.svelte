@@ -11,10 +11,11 @@
   };
 
   const userProgressData = {
+    direction: "col",
     chartLabel: "Overall User's Progress By Levels",
     labels: ["Onboarding Activities", "Level Name", "Profitability"],
-    backgroundColor: ["rgb(180,221,221)"],
     data: [12, 10, 5],
+    backgroundColor: ["rgb(180,221,221)"],
   };
 
   const countOfUsersByAttempts = {
@@ -64,9 +65,8 @@
             <div class="header w-full text-4xl p-4 font-bold">Analytics</div>
             <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">
               <div class="chart-header font-semibold"></div>
-              <BarChart {...userProgressData}
-                >Overall User's Progress By levels</BarChart
-              >
+              Overall User's Progress By levels
+              <BarChart {...userProgressData}></BarChart>
             </div>
 
             <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">

@@ -4,7 +4,7 @@
 </script>
 
 <main>
-  <div class="page-container flex flex-row">
+  <div class="page-container flex flex-row h-dvh">
     <SideBar />
     <AnalyticsContainer />
   </div>
