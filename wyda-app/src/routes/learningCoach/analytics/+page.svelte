@@ -63,29 +63,27 @@
             class="analytics-container p-2 flex flex-wrap gap-10 justify-around max-w-[70em]"
           >
             <div class="header w-full text-4xl p-4 font-bold">Analytics</div>
-            <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">
+            <div class="chart-container">
               <div class="chart-header font-semibold"></div>
               Overall User's Progress By levels
               <BarChart {...userProgressData}></BarChart>
             </div>
 
-            <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">
+            <div class="chart-container">
               <div class="chart-header font-semibold">
                 Count of anonymous_id by scenario_name
               </div>
               <BarChart {...scenarioData}></BarChart>
             </div>
 
-            <div class="border border-[#7accc6] p-2 flex flex-col rounded-sm">
+            <div class="chart-container">
               <div class="chart-header font-semibold">
                 Count of Users by Attempts
               </div>
               <BarChart {...countOfUsersByAttempts}></BarChart>
             </div>
 
-            <div
-              class="border border-[#7accc6] p-2 flex flex-col rounded-sm h-fit"
-            >
+            <div class="chart-container h-fit">
               <div class="chart-header font-semibold">
                 User's Reflection Quality
               </div>

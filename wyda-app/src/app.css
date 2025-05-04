@@ -65,6 +65,11 @@
   }
 }
 
+
+.chart-container{
+  @apply border border-[#7accc6] p-2 flex flex-col rounded-sm;
+}
+
 @layer base {
   * {
     @apply border-border;
