@@ -32,6 +32,24 @@
       date: "Yesterday 2:56",
     },
   ];
+  let statistics = [
+    {
+      value: "65%",
+      description: "On track learners",
+    },
+    {
+      value: "10%",
+      description: "At risk",
+    },
+    {
+      value: "5.7",
+      description: "Avg reflection quality",
+    },
+    {
+      value: "20",
+      description: "Active learning streaks",
+    },
+  ];
 </script>
 
 <div class="main-container flex flex-wrap gap-10 mt-10">
@@ -41,22 +59,12 @@
         Welcome Back Example User!
       </div>
       <div class="stats-container flex flex-wrap justify-around w-full gap-10">
+        {#each statistics as stat}
         <div class="summary-stats">
-          <div class="data text-4xl">65%</div>
-          <div class="description font-semibold">On track learners</div>
+          <div class="data text-4xl">{stat.value}</div>
+          <div class="description font-semibold">{stat.description}</div>
         </div>
-        <div class="summary-stats">
-          <div class="data text-4xl">10%</div>
-          <div class="description font-semibold">At risk</div>
-        </div>
-        <div class="summary-stats">
-          <div class="data text-4xl">5.7</div>
-          <div class="description font-semibold">Avg reflection quality</div>
-        </div>
-        <div class="summary-stats">
-          <div class="data text-4xl">20</div>
-          <div class="description font-semibold">Active learning streaks</div>
-        </div>
+        {/each}
       </div>
       <div class="learner-info flex flex-wrap w-full justify-between gap-10">
         <RecentActivity recentActivity={recentActivity}/>
