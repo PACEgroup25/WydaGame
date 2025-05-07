@@ -21,8 +21,8 @@
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
     <Button
       variant="sidebar"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
+      href="/learner"
+      class="m-1 flex justify-start {currentPath === '/learner'
         ? 'bg-[#b4dedd]'
         : 'bg-transparent'}"
     >
@@ -31,8 +31,8 @@
     </Button>
     <Button
       variant="sidebar"
-      href="/analytics"
-      class="m-1 flex justify-start {currentPath === '/analytics'
+      href="/learner/analytics"
+      class="m-1 flex justify-start {currentPath === '/learner/analytics'
         ? 'bg-[#b4dedd]'
         : 'bg-transparent'}"
     >
@@ -41,8 +41,8 @@
     </Button>
     <Button
       variant="sidebar"
-      href="/help"
-      class="m-1 flex justify-start {currentPath === '/help'
+      href="/learner/help"
+      class="m-1 flex justify-start {currentPath === '/learner/help'
         ? 'bg-[#b4dedd]'
         : 'bg-transparent'}"
     >
@@ -61,7 +61,7 @@
   <div
     class="actions-container flex justify-evenly border-t border-t-greyBorder"
   >
-    <Button variant="sidebar" class="m-1 w-[6em]"><LogOut /></Button>
+    <Button variant="sidebar" href="/" class="m-1 w-[6em]"><LogOut /></Button>
     <Button variant="sidebar" class="m-1 w-[6em]"><Bell /></Button>
   </div>
 </div>
