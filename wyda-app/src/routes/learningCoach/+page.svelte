@@ -6,7 +6,7 @@
 <main>
   <div class="page-container flex flex-row">
     <SideBarLearningCoach />
-    <div class="dashboard flex flex-col items-center justify-start w-full">
+    <div class="dashboard">
       <LearningCoach />
     </div>
   </div>

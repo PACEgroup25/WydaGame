@@ -26,6 +26,11 @@
   });
 </script>
 
-<div class=" h-[20em]">
-  <canvas id="chart" bind:this={ctx}></canvas>
+<div class="chart-container h-fit">
+  <div class="font-semibold">
+    {chartLabel}
+  </div>
+  <div class=" h-[20em]">
+    <canvas id="chart" bind:this={ctx}></canvas>
+  </div>
 </div>

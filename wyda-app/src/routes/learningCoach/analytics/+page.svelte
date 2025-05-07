@@ -16,36 +16,12 @@
     <div class="dashboard">
       <div class="main-container flex flex-wrap gap-10 mt-10">
         <div class="analytics-section w-full flex justify-center">
-          <div
-            class="analytics-container p-2 flex flex-wrap gap-10 justify-around max-w-[70em]"
-          >
-            <div class="header w-full text-4xl p-4 font-bold">Analytics</div>
-            <div class="chart-container">
-              <div class="chart-header font-semibold"></div>
-              Overall User's Progress By levels
-              <BarChart {...userProgressData}></BarChart>
-            </div>
-
-            <div class="chart-container">
-              <div class="chart-header font-semibold">
-                Count of anonymous_id by scenario_name
-              </div>
-              <BarChart {...scenarioData}></BarChart>
-            </div>
-
-            <div class="chart-container">
-              <div class="chart-header font-semibold">
-                Count of Users by Attempts
-              </div>
-              <BarChart {...countOfUsersByAttempts}></BarChart>
-            </div>
-
-            <div class="chart-container h-fit">
-              <div class="chart-header font-semibold">
-                User's Reflection Quality
-              </div>
-              <PieChart {...pieChartData}></PieChart>
-            </div>
+          <div class="analytics-container">
+            <div class="analytics-header">Analytics</div>
+            <BarChart {...userProgressData}></BarChart>
+            <BarChart {...scenarioData}></BarChart>
+            <BarChart {...countOfUsersByAttempts}></BarChart>
+            <PieChart {...pieChartData}></PieChart>
           </div>
         </div>
       </div>

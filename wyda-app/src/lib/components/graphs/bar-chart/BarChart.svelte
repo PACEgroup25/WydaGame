@@ -42,4 +42,9 @@
   });
 </script>
 
-<canvas id="chart" height="400px" width="500px" bind:this={ctx}></canvas>
+<div class="chart-container">
+  <div class="chart-header font-semibold">
+    {chartLabel}
+  </div>
+  <canvas id="chart" height="400px" width="500px" bind:this={ctx}></canvas>
+</div>
