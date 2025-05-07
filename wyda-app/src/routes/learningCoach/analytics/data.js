@@ -1,4 +1,8 @@
 
+//PLACE HOLDER DATA
+//As the data presented in each chart is very different, they are
+//to be queried seperately and not naturally formatted in an array as such.
+
 export const chartdata =[
     
     {

@@ -4,8 +4,6 @@
     let recentActivity = data.recentActivity;
 </script>
 
-
-
 <div class="summary-stats">
     <div class="header text-2xl font-semibold">Recent Activity</div>
     <Table.Root>
