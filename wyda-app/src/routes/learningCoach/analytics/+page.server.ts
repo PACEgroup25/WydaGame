@@ -8,7 +8,6 @@ export type ChartDataItem = {
     data: number[];
 }
 
-
 export function load (){
     const processedValues: ChartDataItem[] = chartdata.map(item => ({
         chartLabel: item.chartLabel,

@@ -45,7 +45,4 @@ export const chartdata =[
         backgroundColor: ["rgba(222,90,90,1)", "rgba(180,221,221,1)"],
         data: [300, 150],
     },
-    
-    
-    
 ]

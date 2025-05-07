@@ -1,7 +1,5 @@
 <script>
-  import BarChart from "$lib/components/graphs/bar-chart/BarChart.svelte";
+  import BarChart from "%lib/components/ui/chart/chart.svelte";
 </script>
 
-<div class="">
-  <BarChart direction={"row"}></BarChart>
-</div>
+<div class=""></div>

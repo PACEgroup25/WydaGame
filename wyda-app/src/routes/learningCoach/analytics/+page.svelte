@@ -1,7 +1,6 @@
 <script lang="ts">
   import SideBarLearningCoach from "%lib/components/ui/side-bar/SideBarLearningCoach.svelte";
-  import BarChart from "%lib/components/graphs/bar-chart/BarChart.svelte";
-  import PieChart from "%lib/components/graphs/pie-chart/PieChart.svelte";
+  import Chart from "%lib/components/ui/chart/chart.svelte";
 
   let { data } = $props();
   let userProgressData = data.values[0];
@@ -18,10 +17,10 @@
         <div class="analytics-section w-full flex justify-center">
           <div class="analytics-container">
             <div class="analytics-header">Analytics</div>
-            <BarChart {...userProgressData}></BarChart>
-            <BarChart {...scenarioData}></BarChart>
-            <BarChart {...countOfUsersByAttempts}></BarChart>
-            <PieChart {...pieChartData}></PieChart>
+            <Chart type={"bar"} {...userProgressData} indexAxis={"y"}></Chart>
+            <Chart type={"bar"} {...scenarioData}></Chart>
+            <Chart type={"bar"} {...countOfUsersByAttempts}></Chart>
+            <Chart type={"pie"} {...pieChartData}></Chart>
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@
   } from "@lucide/svelte";
   import * as Table from "$lib/components/ui/table";
   import { Progress } from "$lib/components/ui/progress";
+  let { data } = $props();
+  console.log(data);
 </script>
 
 <main>
