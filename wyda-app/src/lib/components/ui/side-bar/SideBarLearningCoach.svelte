@@ -14,8 +14,8 @@
     ClipboardPlus,
   } from "@lucide/svelte";
 
-  import { page } from "$app/stores";
-  $: currentPath = $page.url.pathname;
+  import { page } from "$app/state";
+  let currentPath = $derived(page.url.pathname);
 </script>
 
 <div
@@ -29,9 +29,19 @@
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+      href="/learningCoach"
+      class="m-1 flex justify-start {currentPath === '/learningCoach'
+        ? 'bg-[#1b5d74]'
+        : 'bg-transparent'}"
+    >
+      <LayoutDashboard/>
+      <span>Dashboard</span>
+    </Button>
+    <Button
+      variant="sidebarLearningCoach"
+      href="/learningCoach/cohortProgress"
+      class="m-1 flex justify-start {currentPath === '/cohortProgress'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ChartColumnIncreasing />
@@ -39,9 +49,9 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+      href="/learningCoach/recentActivity"
+      class="m-1 flex justify-start {currentPath === '/recentActivity'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <Clock />
@@ -51,7 +61,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <BookOpenCheck />
@@ -61,7 +71,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <CalendarDays />
@@ -69,9 +79,9 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+      href="/learningCoach/analytics"
+      class="m-1 flex justify-start {currentPath === '/learningCoach/analytics'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ChartNoAxesCombined />
@@ -81,7 +91,7 @@
       variant="sidebarLearningCoach"
       href="/"
       class="m-1 flex justify-start {currentPath === '/'
-        ? 'bg-[#b4dedd]'
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <ClipboardPlus />

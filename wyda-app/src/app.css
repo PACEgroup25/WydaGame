@@ -65,6 +65,27 @@
   }
 }
 
+
+.chart-container{
+  @apply border border-[#7accc6] p-2 flex flex-col rounded-sm;
+}
+
+.summary-stats {
+  @apply border border-[#7accc6] p-4 flex flex-col rounded-sm;
+}
+
+.dashboard {
+  @apply flex flex-col w-full items-center justify-start;
+}
+
+.analytics-header{
+  @apply w-full text-4xl p-4 font-bold;
+}
+
+.analytics-container {
+  @apply p-2 flex flex-wrap gap-10 justify-around max-w-[70em];
+}
+
 @layer base {
   * {
     @apply border-border;
