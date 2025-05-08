@@ -34,6 +34,16 @@
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
+      <LayoutDashboard/>
+      <span>Dashboard</span>
+    </Button>
+    <Button
+      variant="sidebarLearningCoach"
+      href="/"
+      class="m-1 flex justify-start {currentPath === '/'
+        ? 'bg-[#1b5d74]'
+        : 'bg-transparent'}"
+    >
       <ChartColumnIncreasing />
       <span>Cohort Progress</span>
     </Button>
