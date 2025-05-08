@@ -14,8 +14,8 @@
     ClipboardPlus,
   } from "@lucide/svelte";
 
-  import { page } from "$app/stores";
-  $: currentPath = $page.url.pathname;
+  import { page } from "$app/state";
+  let currentPath = $derived(page.url.pathname);
 </script>
 
 <div
