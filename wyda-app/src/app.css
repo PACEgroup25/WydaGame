@@ -75,7 +75,7 @@
 }
 
 .dashboard {
-  @apply flex flex-col items-center justify-center w-full;
+  @apply flex flex-col w-full items-center justify-start;
 }
 
 .analytics-header{
