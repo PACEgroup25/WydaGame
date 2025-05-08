@@ -39,8 +39,8 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
+      href="/learningCoach/cohortProgress"
+      class="m-1 flex justify-start {currentPath === '/cohortProgress'
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -49,8 +49,8 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/"
-      class="m-1 flex justify-start {currentPath === '/'
+      href="/learningCoach/recentActivity"
+      class="m-1 flex justify-start {currentPath === '/recentActivity'
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >

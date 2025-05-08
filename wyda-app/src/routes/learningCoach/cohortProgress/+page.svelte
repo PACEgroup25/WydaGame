@@ -12,7 +12,7 @@
         <div class="dashboard justify-start items-center">
             <div class="main-container flex flex-wrap gap-10 mt-10">
                 <div class="summary-stats">
-                    <div class="header text-2xl font-semibold">Recent Activity</div>
+                    <div class="header text-2xl font-semibold">Cohort Progress</div>
                     <Table.Root>
                         <Table.Header>
                             <Table.Row>
