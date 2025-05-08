@@ -1,6 +1,6 @@
 <script>
   //TODO: refactor into variant instead of seperate component
-  import SideBarLearningCoach from "%lib/components/ui/side-bar/SideBarLearningCoach.svelte";
+  import SideBarLearningCoach from "%lib/components/ui/side-bar/sideBarLearningCoach.svelte";
   import RecentActivity from "$lib/components/ui/recent-activity/recentActivity.svelte";
   import LearnerSupport from "$lib/components/ui/learner-support/learnerSupport.svelte";
 
