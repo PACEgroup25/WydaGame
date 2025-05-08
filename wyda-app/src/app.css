@@ -75,7 +75,15 @@
 }
 
 .dashboard {
-  @apply flex flex-col items-center justify-center w-full;
+  @apply flex flex-col w-full items-center justify-start;
+}
+
+.analytics-header{
+  @apply w-full text-4xl p-4 font-bold;
+}
+
+.analytics-container {
+  @apply p-2 flex flex-wrap gap-10 justify-around max-w-[70em];
 }
 
 @layer base {
