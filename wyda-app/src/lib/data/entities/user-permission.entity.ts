@@ -2,7 +2,7 @@ import {
     type Entity,
     type UpdatedAtEntity,
     type UserLinkedEntity
-} from "$lib/data/entities/entity"
+} from "./entity"
 
 // partition key: user id
 // row key: id

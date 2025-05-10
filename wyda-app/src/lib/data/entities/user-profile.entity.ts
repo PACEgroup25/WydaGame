@@ -1,8 +1,9 @@
-import { type Entity, type UpdatedAtEntity, type UserLinkedEntity } from "$lib/data/entities/entity" //seems to be another file generated from the login/ auth. process - hidden
+import { type Entity, type UpdatedAtEntity, type UserLinkedEntity } from "./entity" //seems to be another file generated from the login/ auth. process - hidden
 
 // partition key: user id
 // row key: id
 export interface UserProfileEntity extends Entity, UserLinkedEntity, UpdatedAtEntity {
+    //will probably just use firstName and lastName assuming...
     firstName?: string | null | undefined
     lastName?: string | null | undefined
     country?: string | null | undefined
