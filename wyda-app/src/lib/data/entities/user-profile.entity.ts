@@ -1,4 +1,4 @@
-import { type Entity, type UpdatedAtEntity, type UserLinkedEntity } from "$lib/entities/entity" //seems to be another file generated from the login/ auth. process - hidden
+import { type Entity, type UpdatedAtEntity, type UserLinkedEntity } from "$lib/data/entities/entity" //seems to be another file generated from the login/ auth. process - hidden
 
 // partition key: user id
 // row key: id

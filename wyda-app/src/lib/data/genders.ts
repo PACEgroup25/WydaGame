@@ -1,4 +1,4 @@
-import { Gender } from "$lib/entities/user-profile.entity"
+import { Gender } from "src/lib/data/entities/user-profile.entity"
 
 export default [
     { 

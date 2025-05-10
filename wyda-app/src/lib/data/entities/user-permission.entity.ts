@@ -2,7 +2,7 @@ import {
     type Entity,
     type UpdatedAtEntity,
     type UserLinkedEntity
-} from "$lib/entities/entity" //seems to be another file generated from the login/ auth. process - hidden
+} from "$lib/data/entities/entity"
 
 // partition key: user id
 // row key: id
@@ -13,7 +13,12 @@ export interface UserPermissionEntity extends Entity, UserLinkedEntity, UpdatedA
 }
 
 export enum UserPermissionKey {
-    Cohort = "cohort",
-    Flow = "flow",
-    Explore = "explore"
+    //original - not sure what they're used for...
+    // Cohort = "cohort",
+    // Flow = "flow",
+    // Explore = "explore"
+
+    learner = "learner",
+    clientAdmin = "client admin",
+    learningCoach = "learning coach"
 }

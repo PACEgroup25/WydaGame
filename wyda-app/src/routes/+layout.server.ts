@@ -1,6 +1,6 @@
 
 export function load(){
-    console.log("test");
+    console.debug("test");
     return {
         info: "testdata"
     }
