@@ -1,0 +1,47 @@
+{
+    "81d4fae-7dec-11d0-a765-00a0c91e6bf6": {
+        "id": "0573a9b9-c9fc-4aa6-a340-17909a6c34d",
+        "created at": "2025-03-12T01:37:48Z",
+        "email": "bossman@email.com",
+        "first name": "lilly",
+        "last name": "bossguy",
+        "country": "au",
+        "gender": "female",
+        "role": "executive",
+        "education": "bachelor",
+        "accessibility": "0",
+        "learningSupport": null,
+        "permission key": "client admin" 
+    },
+
+    "0573a9b9-c9fc-4aa6-a340-17909a6c34d": {
+        "id": "0573a9b9-c9fc-4aa6-a340-17909a6c34d",
+        "created at": "2025-03-12T01:37:48Z",
+        "email": "johndoe@email.com",
+        "first name": "john",
+        "last name": "doe",
+        "country": "au",
+        "gender": "male",
+        "role": "team_member",
+        "education": "diploma",
+        "accessibility": 0,
+        "learningSupport": "independent_learner",
+        "permission key": "learner" 
+    },
+
+    "550e8400-e29b-41d4-a716-446655440000": {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "created at": "2025-03-12T01:37:48Z",
+        "email": "janedoe@email.com",
+        "first name": "jane",
+        "last name": "doe",
+        "country": "au",
+        "gender": "female",
+        "role": "team_member",
+        "education": "phd",
+        "accessibility": 0,
+        "learningSupport": "frequent_engagement",
+        "permission key": "learner" 
+    }
+   
+}

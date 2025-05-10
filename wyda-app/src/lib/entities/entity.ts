@@ -4,9 +4,12 @@ export interface Entity {
 
 export interface UpdatedAtEntity extends Entity {
     createdAt: Date //Created_at
-    updatedAt?: Date | null | undefined
+    updatedAt?: Date | null | undefined //not sure if we need this?
 }
 
 export interface UserLinkedEntity extends Entity {
     userID: String //row key in user-permission.entity
 }
+
+
+//possible addition: CohortLinkedEntity

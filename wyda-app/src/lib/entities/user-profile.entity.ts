@@ -1,3 +1,6 @@
+//appeares when you go into user settings on the website
+// not neccisarily useful for the project but good to know what data can be fetched
+
 import { type Entity, type UpdatedAtEntity, type UserLinkedEntity } from "./entity" //seems to be another file generated from the login/ auth. process - hidden
 
 // partition key: user id

@@ -1,0 +1,14 @@
+{
+    "id": "0573a9b9-c9fc-4aa6-a340-17909a6c34d",
+    "created at": "2025-03-12T01:37:48Z",
+    "email": "johndoe@email.com",
+    "first name": "john",
+    "last name": "doe",
+    "country": "au",
+    "gender": "Male",
+    "role": "team_member",
+    "education": "phd",
+    "accessibility": "0",
+    "learningSupport": "independent_learner",
+    "permission key": "learner"
+}
