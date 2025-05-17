@@ -1,5 +1,9 @@
-export const recentActivityData = {
-    recentActivity : [
+
+
+
+
+
+export const recentActivityData = [
       {
         name: "Learner #1",
         org: "Sales",
@@ -32,6 +36,4 @@ export const recentActivityData = {
         reflectionQuality: 3,
         date: "Yesterday 2:56",
       },
-    ],
-
-}
+  ]
