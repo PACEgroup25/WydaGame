@@ -1,5 +1,5 @@
 <script lang="ts" generics="TData, TValue">
-    import { type ColumnDef, getCoreRowModel } from '@tanstack/table-core';
+    import { type ColumnDef, type PaginationState, getCoreRowModel, getPaginationRowModel } from '@tanstack/table-core';
     import {
         createSvelteTable,
         FlexRender,
@@ -13,12 +13,27 @@
 
     let { data, columns }: DataTableProps<TData,TValue> = $props();
 
+    let pagination = $state<PaginationState>({pageIndex: 0, pageSize: 10});
+
     const table = createSvelteTable({
         get data() {
             return data;
         },
         columns,
+        state: {
+          get pagination() {
+            return pagination;
+          },
+        },
+        onPaginationChnage: (updater) =>{
+          if(typeof updater === "function"){
+            pagination = updater(pagination);
+          } else {
+            pagination = updater;
+          }
+        },
         getCoreRowModel: getCoreRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
     });
 </script>
 
