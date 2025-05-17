@@ -1,6 +1,7 @@
 import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
-import { renderSnippet } from "$lib/components/ui/data-table/index.js";
+import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
+import DataTableActions from "./data-table-actions.svelte";
 
 
 export type RecentActivity = {
@@ -139,6 +140,12 @@ export const columns: ColumnDef<RecentActivity>[] = [
                 row.getValue("date")
             );
         },
-    }
+    },
+    {
+        id: "actions",
+        cell:({row}) => {
+            return renderComponent(DataTableActions,{id: row.original.name})
+        },
+    },
 ]
 

@@ -24,11 +24,11 @@
   <DropdownMenu.Group>
    <DropdownMenu.GroupHeading>Actions</DropdownMenu.GroupHeading>
    <DropdownMenu.Item onclick={() => navigator.clipboard.writeText(id)}>
-    Copy payment ID
+    Learner Profile
    </DropdownMenu.Item>
   </DropdownMenu.Group>
   <DropdownMenu.Separator />
-  <DropdownMenu.Item>View customer</DropdownMenu.Item>
-  <DropdownMenu.Item>View payment details</DropdownMenu.Item>
+  <DropdownMenu.Item>Learner Statistics</DropdownMenu.Item>
+  <DropdownMenu.Item>Learner Workshops</DropdownMenu.Item>
  </DropdownMenu.Content>
 </DropdownMenu.Root>
