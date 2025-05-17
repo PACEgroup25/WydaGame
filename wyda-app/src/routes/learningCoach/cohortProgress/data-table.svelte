@@ -1,40 +1,41 @@
 <script lang="ts" generics="TData, TValue">
-    import { type ColumnDef, type PaginationState, getCoreRowModel, getPaginationRowModel } from '@tanstack/table-core';
-    import {
-        createSvelteTable,
-        FlexRender,
-    } from "$lib/components/ui/data-table/index.js";
-    import * as Table from "$lib/components/ui/table/index.js";
+  import { type ColumnDef, type PaginationState, getCoreRowModel, getPaginationRowModel } from '@tanstack/table-core';
+  import {
+      createSvelteTable,
+      FlexRender,
+  } from "$lib/components/ui/data-table/index.js";
+  import * as Table from "$lib/components/ui/table/index.js";
+  import {Button} from "$lib/components/ui/button/index.js"
 
-    type DataTableProps<TData, TValue> = {
-        columns: ColumnDef<TData, TValue>[];
-        data: TData[];
-    };
+  type DataTableProps<TData, TValue> = {
+      columns: ColumnDef<TData, TValue>[];
+      data: TData[];
+  };
 
-    let { data, columns }: DataTableProps<TData,TValue> = $props();
+  let { data, columns }: DataTableProps<TData,TValue> = $props();
 
-    let pagination = $state<PaginationState>({pageIndex: 0, pageSize: 10});
+  let pagination = $state<PaginationState>({pageIndex: 0, pageSize: 9});
 
-    const table = createSvelteTable({
-        get data() {
-            return data;
-        },
-        columns,
-        state: {
-          get pagination() {
-            return pagination;
-          },
-        },
-        onPaginationChnage: (updater) =>{
-          if(typeof updater === "function"){
-            pagination = updater(pagination);
-          } else {
-            pagination = updater;
-          }
-        },
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-    });
+  const table = createSvelteTable({
+    get data() {
+      return data;
+    },
+    columns,
+    state: {
+      get pagination() {
+        return pagination;
+      },
+    },
+    onPaginationChange: (updater) => {
+      if (typeof updater === "function") {
+        pagination = updater(pagination);
+      } else {
+        pagination = updater;
+      }
+    },
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
 </script>
 
 <div class="rounded-md border">
@@ -76,4 +77,22 @@
       {/each}
     </Table.Body>
   </Table.Root>
+</div>
+<div class="flex items-center justify-end space-x-2 py-4">
+  <Button
+    variant="outline"
+    size="sm"
+    onclick={() => {table.previousPage(); console.log("previous page pressed!")}}
+    disabled={!table.getCanPreviousPage()}
+  >
+    Previous
+  </Button>
+  <Button
+    variant="outline"
+    size="sm"
+    onclick={() => {table.nextPage(); console.log("next page pressed!")}}
+    disabled={!table.getCanNextPage()}
+  >
+    Next
+  </Button>
 </div>
