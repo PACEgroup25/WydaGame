@@ -5,5 +5,4 @@ export const load: PageServerLoad = async ({ params }) => {
     const info = params;
     console.log(params);
     return params;
-	error(404, 'Not found');
 };
