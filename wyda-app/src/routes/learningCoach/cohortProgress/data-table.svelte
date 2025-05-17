@@ -1,11 +1,21 @@
 <script lang="ts" generics="TData, TValue">
-  import { type ColumnDef, type PaginationState, getCoreRowModel, getPaginationRowModel } from '@tanstack/table-core';
+  import { 
+    type ColumnDef,
+    type PaginationState,
+    type SortingState,
+    type ColumnFiltersState,
+    getCoreRowModel, 
+    getPaginationRowModel,
+    getSortedRowModel,
+    getFilteredRowModel,
+  } from '@tanstack/table-core';
   import {
       createSvelteTable,
       FlexRender,
   } from "$lib/components/ui/data-table/index.js";
   import * as Table from "$lib/components/ui/table/index.js";
   import {Button} from "$lib/components/ui/button/index.js"
+  import Input from "$lib/components/ui/input/input.svelte"
 
   type DataTableProps<TData, TValue> = {
       columns: ColumnDef<TData, TValue>[];
@@ -15,17 +25,18 @@
   let { data, columns }: DataTableProps<TData,TValue> = $props();
 
   let pagination = $state<PaginationState>({pageIndex: 0, pageSize: 9});
+  let sorting = $state<SortingState>([]);
+  let columnFilters = $state<ColumnFiltersState>([]);
 
   const table = createSvelteTable({
     get data() {
       return data;
     },
     columns,
-    state: {
-      get pagination() {
-        return pagination;
-      },
-    },
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
         pagination = updater(pagination);
@@ -33,11 +44,47 @@
         pagination = updater;
       }
     },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: (updater) => {
+      if (typeof updater === "function") {
+        sorting = updater(sorting);
+      } else {
+        sorting = updater;
+      }
+    },
+    onColumnFiltersChange: (updater) => {
+      if (typeof updater === "function") {
+        columnFilters = updater(columnFilters);
+      } else {
+        columnFilters = updater;
+      }
+    },
+    state: {
+      get pagination() {
+        return pagination;
+      },
+      get sorting() {
+        return sorting;
+      },
+      get columnFilters() {
+        return columnFilters;
+      }
+    },
   });
 </script>
 
+<div class="flex items-center py-4">
+  <Input
+    placeholder="Filter by name..."
+    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+    onchange={(e) => {
+      table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+    }}
+    oninput={(e) => {
+      table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+    }}
+    class="max-w-sm"
+  />
+</div>
 <div class="rounded-md border">
   <Table.Root>
     <Table.Header>
