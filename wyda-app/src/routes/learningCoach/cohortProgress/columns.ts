@@ -2,6 +2,7 @@ import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
 import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
 import DataTableActions from "./data-table-actions.svelte";
+import DataTableStatusButton from "./data-table-status-button.svelte";
 
 
 export type RecentActivity = {
@@ -59,17 +60,12 @@ export const columns: ColumnDef<RecentActivity>[] = [
     },
     {
         accessorKey:"status",
-        header: () => {
-            const nameHeaderSnippet = createRawSnippet(()=>({
-                render: () => `<div>Status</div>`,
-            }));
-            return renderSnippet(nameHeaderSnippet,"");
-        },
+        header: ({column}) => renderComponent(DataTableStatusButton, {onclick: column.getToggleSortingHandler()}),
         cell:({row}) => {
             const nameCellSnippet = createRawSnippet<[string]>((getStatus) =>{
                 const status = getStatus();
                 return {
-                    render: () => `<div class="font-medium">${status}</div>`,
+                    render: () => `<div class="font-medium text-center">${status}</div>`,
                 };
             });
             return renderSnippet(
