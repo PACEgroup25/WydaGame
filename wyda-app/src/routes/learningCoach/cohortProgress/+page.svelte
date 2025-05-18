@@ -4,7 +4,7 @@
   import DataTable from "./data-table.svelte";
   import { columns } from "./columns.ts";
   let { data } = $props();
-
+  import { CircleCheckBig } from "@lucide/svelte";
 </script>
 
 <main>
@@ -13,8 +13,10 @@
     <div class="dashboard justify-start items-center">
       <div class="main-container flex flex-wrap gap-10 mt-10">
         <div class="summary-stats">
-          <div class="header text-2xl font-semibold mb-[1em]">Cohort Progress</div>
-            <DataTable columns={columns} data={data.value} />
+          <div class="header text-2xl font-semibold mb-[1em]">
+            Cohort Progress
+          </div>
+          <DataTable {columns} data={data.value} />
         </div>
       </div>
     </div>

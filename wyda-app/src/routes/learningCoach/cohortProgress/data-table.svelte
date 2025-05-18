@@ -1,30 +1,35 @@
 <script lang="ts" generics="TData, TValue">
-  import { 
+  import {
     type ColumnDef,
     type PaginationState,
     type SortingState,
     type ColumnFiltersState,
-    getCoreRowModel, 
+    getCoreRowModel,
     getPaginationRowModel,
     getSortedRowModel,
     getFilteredRowModel,
-  } from '@tanstack/table-core';
+  } from "@tanstack/table-core";
   import {
-      createSvelteTable,
-      FlexRender,
+    createSvelteTable,
+    FlexRender,
   } from "$lib/components/ui/data-table/index.js";
   import * as Table from "$lib/components/ui/table/index.js";
-  import {Button} from "$lib/components/ui/button/index.js"
-  import Input from "$lib/components/ui/input/input.svelte"
+  import { Button } from "$lib/components/ui/button/index.js";
+  import Input from "$lib/components/ui/input/input.svelte";
+  import {
+    CircleAlertIcon,
+    CircleCheckBigIcon,
+    TriangleAlert,
+  } from "@lucide/svelte";
 
   type DataTableProps<TData, TValue> = {
-      columns: ColumnDef<TData, TValue>[];
-      data: TData[];
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
   };
 
-  let { data, columns }: DataTableProps<TData,TValue> = $props();
+  let { data, columns }: DataTableProps<TData, TValue> = $props();
 
-  let pagination = $state<PaginationState>({pageIndex: 0, pageSize: 9});
+  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 9 });
   let sorting = $state<SortingState>([]);
   let columnFilters = $state<ColumnFiltersState>([]);
 
@@ -68,10 +73,11 @@
       },
       get columnFilters() {
         return columnFilters;
-      }
+      },
     },
   });
   let page = $state(1);
+  console.log(table);
 
   //for filter button:
   //use dropdown menu to hold toggleable buttons to determine and set
@@ -116,10 +122,28 @@
         <Table.Row data-state={row.getIsSelected() && "selected"}>
           {#each row.getVisibleCells() as cell (cell.id)}
             <Table.Cell>
-              <FlexRender
-                content={cell.column.columnDef.cell}
-                context={cell.getContext()}
-              />
+              {#if cell.getContext().getValue() == "On track"}
+                <div class="flex justify-between items-center">
+                  <FlexRender
+                    content={cell.column.columnDef.cell}
+                    context={cell.getContext()}
+                  />
+                  <CircleCheckBigIcon color="green" />
+                </div>
+              {:else if cell.getContext().getValue() == "Behind"}
+                <div class="flex justify-between items-center">
+                  <FlexRender
+                    content={cell.column.columnDef.cell}
+                    context={cell.getContext()}
+                  />
+                  <TriangleAlert color="red" />
+                </div>
+              {:else}
+                <FlexRender
+                  content={cell.column.columnDef.cell}
+                  context={cell.getContext()}
+                />
+              {/if}
             </Table.Cell>
           {/each}
         </Table.Row>
@@ -137,32 +161,37 @@
   <Button
     variant="outline"
     size="sm"
-    onclick={() => {table.previousPage(); console.log("previous page pressed!");
+    onclick={() => {
+      table.previousPage();
+      console.log("previous page pressed!");
       page--;
     }}
     disabled={!table.getCanPreviousPage()}
   >
     Previous
   </Button>
-  <Input class="w-[3em] text-center"
+  <Input
+    class="w-[3em] text-center"
     bind:value={page}
     onchange={(e) => {
       let count = table.getPageCount();
       //reset page number if out of bounds
-      if(page > count){
+      if (page > count) {
         page = count;
       }
-      if(page < 1){
+      if (page < 1) {
         page = 1;
       }
       //page is one indexed but setPage is zero indexed
-      table.setPageIndex(page-1)
+      table.setPageIndex(page - 1);
     }}
   />
   <Button
     variant="outline"
     size="sm"
-    onclick={() => {table.nextPage(); console.log("next page pressed!");
+    onclick={() => {
+      table.nextPage();
+      console.log("next page pressed!");
       page++;
     }}
     disabled={!table.getCanNextPage()}
