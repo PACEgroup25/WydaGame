@@ -4,7 +4,6 @@
   import DataTable from "./data-table.svelte";
   import { columns } from "./columns.ts";
   let { data } = $props();
-  import { CircleCheckBig } from "@lucide/svelte";
 </script>
 
 <main>

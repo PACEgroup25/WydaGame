@@ -16,6 +16,7 @@
   import * as Table from "$lib/components/ui/table/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
   import Input from "$lib/components/ui/input/input.svelte";
+  import FilterButton from "./data-table-filter-button.svelte";
   import {
     CircleAlertIcon,
     CircleCheckBigIcon,
@@ -87,17 +88,20 @@
 </script>
 
 <div class="flex items-center py-4">
-  <Input
-    placeholder="Filter by name..."
-    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-    onchange={(e) => {
-      table.getColumn("name")?.setFilterValue(e.currentTarget.value);
-    }}
-    oninput={(e) => {
-      table.getColumn("name")?.setFilterValue(e.currentTarget.value);
-    }}
-    class="max-w-sm"
-  />
+  <div class="flex w-full">
+    <Input
+      class="outline-none focus:outline-none max-w-sm"
+      placeholder="Filter by name..."
+      value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+      onchange={(e) => {
+        table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+      }}
+      oninput={(e) => {
+        table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+      }}
+    />
+    <FilterButton />
+  </div>
 </div>
 <div class="rounded-md border">
   <Table.Root>
