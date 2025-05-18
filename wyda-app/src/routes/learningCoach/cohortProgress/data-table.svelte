@@ -70,6 +70,7 @@
       }
     },
   });
+  let page = $state(0);
 </script>
 
 <div class="flex items-center py-4">
@@ -129,15 +130,28 @@
   <Button
     variant="outline"
     size="sm"
-    onclick={() => {table.previousPage(); console.log("previous page pressed!")}}
+    onclick={() => {table.previousPage(); console.log("previous page pressed!");
+      page--;
+    }}
     disabled={!table.getCanPreviousPage()}
   >
     Previous
   </Button>
+  <Input
+    bind:value={page}
+    onchange={(e) => {
+      table.setPageIndex(page)
+    }}
+    oninput={(e) => {
+      table.setPageIndex(page)
+    }}
+  />
   <Button
     variant="outline"
     size="sm"
-    onclick={() => {table.nextPage(); console.log("next page pressed!")}}
+    onclick={() => {table.nextPage(); console.log("next page pressed!");
+      page++;
+    }}
     disabled={!table.getCanNextPage()}
   >
     Next
