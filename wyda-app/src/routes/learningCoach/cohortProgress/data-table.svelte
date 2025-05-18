@@ -37,6 +37,7 @@
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
         pagination = updater(pagination);
@@ -70,7 +71,13 @@
       }
     },
   });
-  let page = $state(0);
+  let page = $state(1);
+
+  //for filter button:
+  //use dropdown menu to hold toggleable buttons to determine and set
+  //filter parameters
+
+  //TODO:make filter by name a general search through all columns
 </script>
 
 <div class="flex items-center py-4">
@@ -137,13 +144,19 @@
   >
     Previous
   </Button>
-  <Input
+  <Input class="w-[3em] text-center"
     bind:value={page}
     onchange={(e) => {
-      table.setPageIndex(page)
-    }}
-    oninput={(e) => {
-      table.setPageIndex(page)
+      let count = table.getPageCount();
+      //reset page number if out of bounds
+      if(page > count){
+        page = count;
+      }
+      if(page < 1){
+        page = 1;
+      }
+      //page is one indexed but setPage is zero indexed
+      table.setPageIndex(page-1)
     }}
   />
   <Button
