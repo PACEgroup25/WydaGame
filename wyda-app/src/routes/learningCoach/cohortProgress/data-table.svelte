@@ -18,7 +18,6 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
   import {
-    CircleAlertIcon,
     CircleCheckBigIcon,
     TriangleAlert,
   } from "@lucide/svelte";
@@ -33,6 +32,7 @@
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 9 });
   let sorting = $state<SortingState>([]);
   let columnFilters = $state<ColumnFiltersState>([]);
+  let globalFilter = $state<string>("");
 
   const table = createSvelteTable({
     get data() {
@@ -43,6 +43,7 @@
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: 'includesString',
 
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
@@ -65,7 +66,19 @@
         columnFilters = updater;
       }
     },
+    onGlobalFilterChange: (updater) =>{
+      if (typeof updater === "function") {
+        console.log(globalFilter);
+        globalFilter = updater(globalFilter);
+      } else {
+        globalFilter = updater;
+      }
+      console.log(globalFilter);
+    },
     state: {
+      get globalFilter(){
+        return globalFilter;
+      },
       get pagination() {
         return pagination;
       },
@@ -78,7 +91,6 @@
     },
   });
   let page = $state(1);
-  console.log(table);
 
   //for filter button:
   //use dropdown menu to hold toggleable buttons to determine and set
@@ -91,13 +103,13 @@
   <div class="flex w-full">
     <Input
       class="outline-none focus:outline-none max-w-sm"
-      placeholder="Filter by name..."
-      value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+      placeholder="Search..."
+
       onchange={(e) => {
-        table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+        table.setGlobalFilter(e.currentTarget.value);
       }}
       oninput={(e) => {
-        table.getColumn("name")?.setFilterValue(e.currentTarget.value);
+        table.setGlobalFilter(e.currentTarget.value);
       }}
     />
     <FilterButton />
