@@ -17,10 +17,7 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import Input from "$lib/components/ui/input/input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
-  import {
-    CircleCheckBigIcon,
-    TriangleAlert,
-  } from "@lucide/svelte";
+  import { CircleCheckBigIcon, TriangleAlert } from "@lucide/svelte";
 
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -29,22 +26,26 @@
 
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
+  //local reactive variables
   let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 9 });
   let sorting = $state<SortingState>([]);
   let columnFilters = $state<ColumnFiltersState>([]);
   let globalFilter = $state<string>("");
 
+  //Initialisation of svelte table instance
   const table = createSvelteTable({
     get data() {
       return data;
     },
     columns,
+    //function parameters needed for table features
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    globalFilterFn: 'includesString',
+    globalFilterFn: "includesString",
 
+    //change handler parameters take in a function to update our reactive variables
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
         pagination = updater(pagination);
@@ -66,7 +67,7 @@
         columnFilters = updater;
       }
     },
-    onGlobalFilterChange: (updater) =>{
+    onGlobalFilterChange: (updater) => {
       if (typeof updater === "function") {
         console.log(globalFilter);
         globalFilter = updater(globalFilter);
@@ -75,8 +76,10 @@
       }
       console.log(globalFilter);
     },
+    //pass in getters to state for table to
+    //access our variables when it needs to
     state: {
-      get globalFilter(){
+      get globalFilter() {
         return globalFilter;
       },
       get pagination() {
@@ -94,17 +97,16 @@
 
   //for filter button:
   //use dropdown menu to hold toggleable buttons to determine and set
-  //filter parameters
-
-  //TODO:make filter by name a general search through all columns
+  //filter parameters, need to pass in column references to filter button
+  //for it to toggle sorting handler
 </script>
 
 <div class="flex items-center py-4">
   <div class="flex w-full">
+    <!-- global search input -->
     <Input
       class="outline-none focus:outline-none max-w-sm"
       placeholder="Search..."
-
       onchange={(e) => {
         table.setGlobalFilter(e.currentTarget.value);
       }}
@@ -138,6 +140,7 @@
         <Table.Row data-state={row.getIsSelected() && "selected"}>
           {#each row.getVisibleCells() as cell (cell.id)}
             <Table.Cell>
+              <!-- render the appropriate symbol based on cell content -->
               {#if cell.getContext().getValue() == "On track"}
                 <div class="flex justify-between items-center">
                   <FlexRender
@@ -173,6 +176,7 @@
     </Table.Body>
   </Table.Root>
 </div>
+<!-- UI elements for pagination -->
 <div class="flex items-center justify-end space-x-2 py-4">
   <Button
     variant="outline"

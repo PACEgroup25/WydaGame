@@ -15,6 +15,7 @@ export type RecentActivity = {
     date: string;
 }
 
+//used for defining the structure of the columns in our table
 export const columns: ColumnDef<RecentActivity>[] = [
     {
         accessorKey: "name",
@@ -61,6 +62,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
     },
     {
         accessorKey:"status",
+        //currently renders the data table status button for toggling sorting of that column on click
         header: ({column}) => renderComponent(DataTableStatusButton, {onclick: column.getToggleSortingHandler()}),
         cell:({row}) => {
             const nameCellSnippet = createRawSnippet<[string]>((getStatus) =>{
@@ -138,6 +140,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
             );
         },
     },
+    //actions added to column for individual row actions
     {
         id: "actions",
         cell:({row}) => {
