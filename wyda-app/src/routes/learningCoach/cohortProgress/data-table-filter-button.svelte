@@ -8,7 +8,7 @@
 
 <DropdownMenu.Root>
   <DropdownMenu.Trigger>
-    <Button variant="ghost" size="icon" class="relative size-8 p-0">
+    <Button variant="ghost" size="icon" class="relative size-8 bg-[#f5f5f5]">
       <span class="sr-only">Open menu</span>
       <Funnel />
     </Button>

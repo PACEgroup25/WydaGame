@@ -16,6 +16,7 @@
   import * as Table from "$lib/components/ui/table/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
   import Input from "$lib/components/ui/input/input.svelte";
+  import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
   import { CircleCheckBigIcon, TriangleAlert, Search } from "@lucide/svelte";
 
@@ -79,7 +80,6 @@
       } else {
         globalFilter = updater;
       }
-      console.log(globalFilter);
     },
     //pass in getters to state for table to
     //access our variables when it needs to
@@ -129,16 +129,15 @@
 <div class="flex items-center py-4">
   <div class="flex w-full items-center space-x-2">
     <!-- global search input -->
-    <Input
-      class="outline-none focus:outline-none max-w-sm"
-      placeholder="Search..."
-      onchange={(e) => {
-        table.setGlobalFilter(e.currentTarget.value);
-      }}
-      oninput={(e) => {
-        table.setGlobalFilter(e.currentTarget.value);
-      }}
-    />
+    <TableInput      
+    class="outline-none focus:outline-none max-w-sm"
+    placeholder="Search..."
+    onchange={(e) => {
+      table.setGlobalFilter(e.currentTarget.value);
+    }}
+    oninput={(e) => {
+      table.setGlobalFilter(e.currentTarget.value);
+    }}/>
     <FilterButton columns={filterColumns} />
   </div>
 </div>
