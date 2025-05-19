@@ -124,6 +124,9 @@
     }
     return itemBoundaryEnd() - (pageSize - 1);
   };
+
+  //reactive value for rendering alternative metadata
+  let tableInput = $state("");
 </script>
 
 <div class="flex items-center py-4">
@@ -132,6 +135,7 @@
     <TableInput      
     class="outline-none focus:outline-none max-w-sm"
     placeholder="Search..."
+    bind:value={tableInput}
     onchange={(e) => {
       table.setGlobalFilter(e.currentTarget.value);
     }}
@@ -203,9 +207,15 @@
 <!-- UI elements for pagination -->
 <div class="flex items-center justify-between space-x-2 py-4">
   <div class="flex">Items per page: {pageSize}</div>
+  <!-- if user is searching through input display amount of items found
+  else render normal table meta data -->
+  {#if tableInput}
+    <div>{table.getRowCount()} Items out of {rowAmount}</div>
+  {:else}
   <div class="flex">
     Items {itemBoundaryStart()} - {itemBoundaryEnd()} of {rowAmount}
   </div>
+  {/if}
   <div class="flex items-center justify-end space-x-2 py-4">
     <Button
       variant="outline"
