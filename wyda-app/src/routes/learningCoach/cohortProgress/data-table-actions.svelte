@@ -28,7 +28,7 @@
       <DropdownMenu.Item onclick={() => navigator.clipboard.writeText(id)}>
         Learner Profile
       </DropdownMenu.Item>
-      <DropdownMenu.Item>Learner Statistics</DropdownMenu.Item>
+      <DropdownMenu.Item>Learner Analytics</DropdownMenu.Item>
       <DropdownMenu.Item>Learner Workshops</DropdownMenu.Item>
     </DropdownMenu.Group>
   </DropdownMenu.Content>
