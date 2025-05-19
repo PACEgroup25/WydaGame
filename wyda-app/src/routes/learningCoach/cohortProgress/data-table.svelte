@@ -17,7 +17,7 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import Input from "$lib/components/ui/input/input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
-  import { CircleCheckBigIcon, TriangleAlert } from "@lucide/svelte";
+  import { CircleCheckBigIcon, TriangleAlert, Search } from "@lucide/svelte";
 
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -127,7 +127,7 @@
 </script>
 
 <div class="flex items-center py-4">
-  <div class="flex w-full">
+  <div class="flex w-full items-center space-x-2">
     <!-- global search input -->
     <Input
       class="outline-none focus:outline-none max-w-sm"
@@ -144,7 +144,7 @@
 </div>
 <div class="rounded-md border">
   <Table.Root>
-    <Table.Header>
+    <Table.Header class="bg-[#f0fcff]">
       {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
         <Table.Row>
           {#each headerGroup.headers as header (header.id)}
@@ -167,20 +167,20 @@
             <Table.Cell>
               <!-- render the appropriate symbol based on cell content -->
               {#if cell.getContext().getValue() == "On track"}
-                <div class="flex justify-between items-center">
+                <div class="flex justify-center bg-green-50 p-1 rounded-md">
                   <FlexRender
                     content={cell.column.columnDef.cell}
                     context={cell.getContext()}
                   />
-                  <CircleCheckBigIcon color="green" />
                 </div>
               {:else if cell.getContext().getValue() == "Behind"}
-                <div class="flex justify-between items-center">
+                <div
+                  class="flex justify-center items-center bg-red-100 p-1 rounded-md"
+                >
                   <FlexRender
                     content={cell.column.columnDef.cell}
                     context={cell.getContext()}
                   />
-                  <TriangleAlert color="red" />
                 </div>
               {:else}
                 <FlexRender

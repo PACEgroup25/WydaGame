@@ -15,7 +15,7 @@
   </DropdownMenu.Trigger>
   <DropdownMenu.Content>
     <DropdownMenu.Group>
-      <DropdownMenu.GroupHeading>Filter By</DropdownMenu.GroupHeading>
+      <DropdownMenu.GroupHeading>Add Filter</DropdownMenu.GroupHeading>
       <DropdownMenuSeparator />
       <DropdownMenu.Item onclick={() => {}}>Cohort</DropdownMenu.Item>
       <DropdownMenu.Item onclick={() => {}}

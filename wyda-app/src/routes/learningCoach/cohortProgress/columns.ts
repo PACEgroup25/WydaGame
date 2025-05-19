@@ -68,7 +68,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
             const nameCellSnippet = createRawSnippet<[string]>((getStatus) =>{
                 const status = getStatus();
                 return {
-                    render: () => `<div class="font-medium text-center">${status}</div>`,
+                    render: () => `<div class="font-medium flex">${status}</div>`,
                 };
             });
             return renderSnippet(
