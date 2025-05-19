@@ -3,6 +3,7 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import DropdownMenuSeparator from "$lib/components/ui/dropdown-menu/dropdown-menu-separator.svelte";
+  let { columns } = $props();
 </script>
 
 <DropdownMenu.Root>
@@ -16,9 +17,11 @@
     <DropdownMenu.Group>
       <DropdownMenu.GroupHeading>Filter By</DropdownMenu.GroupHeading>
       <DropdownMenuSeparator />
-      <DropdownMenu.Item>Cohort</DropdownMenu.Item>
-      <DropdownMenu.Item>Reflection Quality</DropdownMenu.Item>
-      <DropdownMenu.Item>Date</DropdownMenu.Item>
+      <DropdownMenu.Item onclick={() => {}}>Cohort</DropdownMenu.Item>
+      <DropdownMenu.Item onclick={() => {}}
+        >Reflection Quality
+      </DropdownMenu.Item>
+      <DropdownMenu.Item onclick={() => {}}>Date</DropdownMenu.Item>
     </DropdownMenu.Group>
   </DropdownMenu.Content>
 </DropdownMenu.Root>

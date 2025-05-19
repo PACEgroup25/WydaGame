@@ -27,10 +27,15 @@
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
   //local reactive variables
-  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 9 });
+  let pageSize = $state(10);
+  let pagination = $state<PaginationState>({
+    pageIndex: 0,
+    pageSize: pageSize,
+  });
   let sorting = $state<SortingState>([]);
   let columnFilters = $state<ColumnFiltersState>([]);
   let globalFilter = $state<string>("");
+  let page = $state(1);
 
   //Initialisation of svelte table instance
   const table = createSvelteTable({
@@ -93,12 +98,32 @@
       },
     },
   });
-  let page = $state(1);
 
-  //for filter button:
-  //use dropdown menu to hold toggleable buttons to determine and set
-  //filter parameters, need to pass in column references to filter button
-  //for it to toggle sorting handler
+  const filterColumns = {
+    reflectionQuality: table.getColumn("reflectionQuality"),
+    date: table.getColumn("date"),
+  };
+
+  //Item boundary calculations to display on table
+
+  let rowAmount = table.getRowCount();
+  //page size is reactive, (user may change it in the future)
+  //so let numPages derive for pageSize updates
+  let numPages = $derived(rowAmount / pageSize);
+  let itemBoundaryEnd = () => {
+    let res = pageSize * page;
+    if (page > numPages) {
+      res = rowAmount;
+    }
+    return res;
+  };
+
+  let itemBoundaryStart = () => {
+    if (page > numPages) {
+      return pageSize * page - (pageSize - 1);
+    }
+    return itemBoundaryEnd() - (pageSize - 1);
+  };
 </script>
 
 <div class="flex items-center py-4">
@@ -114,7 +139,7 @@
         table.setGlobalFilter(e.currentTarget.value);
       }}
     />
-    <FilterButton />
+    <FilterButton columns={filterColumns} />
   </div>
 </div>
 <div class="rounded-md border">
@@ -177,45 +202,51 @@
   </Table.Root>
 </div>
 <!-- UI elements for pagination -->
-<div class="flex items-center justify-end space-x-2 py-4">
-  <Button
-    variant="outline"
-    size="sm"
-    onclick={() => {
-      table.previousPage();
-      console.log("previous page pressed!");
-      page--;
-    }}
-    disabled={!table.getCanPreviousPage()}
-  >
-    Previous
-  </Button>
-  <Input
-    class="w-[3em] text-center"
-    bind:value={page}
-    onchange={(e) => {
-      let count = table.getPageCount();
-      //reset page number if out of bounds
-      if (page > count) {
-        page = count;
-      }
-      if (page < 1) {
-        page = 1;
-      }
-      //page is one indexed but setPage is zero indexed
-      table.setPageIndex(page - 1);
-    }}
-  />
-  <Button
-    variant="outline"
-    size="sm"
-    onclick={() => {
-      table.nextPage();
-      console.log("next page pressed!");
-      page++;
-    }}
-    disabled={!table.getCanNextPage()}
-  >
-    Next
-  </Button>
+<div class="flex items-center justify-between space-x-2 py-4">
+  <div class="flex">Items per page: {pageSize}</div>
+  <div class="flex">
+    Items {itemBoundaryStart()} - {itemBoundaryEnd()} of {rowAmount}
+  </div>
+  <div class="flex items-center justify-end space-x-2 py-4">
+    <Button
+      variant="outline"
+      size="sm"
+      onclick={() => {
+        table.previousPage();
+        console.log("previous page pressed!");
+        page--;
+      }}
+      disabled={!table.getCanPreviousPage()}
+    >
+      Previous
+    </Button>
+    <Input
+      class="w-[3em] text-center"
+      bind:value={page}
+      onchange={(e) => {
+        let count = table.getPageCount();
+        //reset page number if out of bounds
+        if (page > count) {
+          page = count;
+        }
+        if (page < 1) {
+          page = 1;
+        }
+        //page is one indexed but setPage is zero indexed
+        table.setPageIndex(page - 1);
+      }}
+    />
+    <Button
+      variant="outline"
+      size="sm"
+      onclick={() => {
+        table.nextPage();
+        console.log("next page pressed!");
+        page++;
+      }}
+      disabled={!table.getCanNextPage()}
+    >
+      Next
+    </Button>
+  </div>
 </div>

@@ -33,6 +33,14 @@ export const recentActivityData = [
         date: "Yesterday 2:56",
       },
       {
+        name: "Learner #5",
+        org: "Sales",
+        status: "Behind",
+        challenge: "Challenge 1",
+        reflectionQuality: 5,
+        date: "Yesterday 12:15",
+      },
+      {
         name: "Learner #6",
         org: "Sales",
         status: "On track",
@@ -128,7 +136,7 @@ export const recentActivityData = [
         reflectionQuality: 3,
         date: "Yesterday 2:56",
       },
-            {
+      {
         name: "Learner #18",
         org: "Marketing",
         status: "Behind",
@@ -146,6 +154,30 @@ export const recentActivityData = [
       },
       {
         name: "Learner #20",
+        org: "Sales",
+        status: "On track",
+        challenge: "Challenge 2",
+        reflectionQuality: 3,
+        date: "Yesterday 2:56",
+      },
+      {
+        name: "Learner #21",
+        org: "Marketing",
+        status: "Behind",
+        challenge: "Challenge 1",
+        reflectionQuality: 2,
+        date: "Yesterday 9:00",
+      },
+      {
+        name: "Learner #22",
+        org: "Tech",
+        status: "On track",
+        challenge: "Challenge 3",
+        reflectionQuality: 4,
+        date: "Yesterday 3:15",
+      },
+      {
+        name: "Learner #23",
         org: "Sales",
         status: "On track",
         challenge: "Challenge 2",
