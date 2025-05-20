@@ -18,7 +18,8 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
-  import { CircleCheckBigIcon, TriangleAlert, Search } from "@lucide/svelte";
+  import { ChevronRight, ChevronLeft } from "lucide-svelte";
+  import { ChevronsLeft, ChevronsRight } from "@lucide/svelte";
 
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -109,7 +110,7 @@
   let rowAmount = table.getRowCount();
   //page size is reactive, (user may change it in the future)
   //so let numPages derive for pageSize updates
-  let numPages = $derived(rowAmount / pageSize);
+  let numPages = $derived(Math.ceil(rowAmount / pageSize));
   let itemBoundaryEnd = () => {
     let res = pageSize * page;
     if (page > numPages) {
@@ -119,9 +120,8 @@
   };
 
   let itemBoundaryStart = () => {
-    let res = pageSize * page;
     if (page > numPages) {
-      return res = pageSize * page - (pageSize - 1);
+      return pageSize * page - (pageSize - 1);
     }
     return itemBoundaryEnd() - (pageSize - 1);
   };
@@ -218,47 +218,57 @@
       Items {itemBoundaryStart()} - {itemBoundaryEnd()} of {rowAmount}
     {/if}
   </div>
-  <div class="flex items-center justify-end space-x-2 py-4">
-    <Button
-      variant="outline"
-      size="sm"
-      onclick={() => {
-        table.previousPage();
-        console.log("previous page pressed!");
-        page--;
-      }}
-      disabled={!table.getCanPreviousPage()}
-    >
-      Previous
-    </Button>
-    <Input
-      type="number"
-      class="w-[3em] text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      bind:value={page}
-      onchange={(e) => {
-        let count = table.getPageCount();
-        //reset page number if out of bounds
-        if (page > count) {
-          page = count;
-        }
-        if (page < 1) {
+  <div class="flex flex-col">
+    <div class="flex items-center justify-end space-x-2 py-4">
+      <Button
+        variant="outline"
+        size="sm"
+        onclick={() => {
+          table.firstPage();
           page = 1;
-        }
-        //page is one indexed but setPage is zero indexed
-        table.setPageIndex(page - 1);
-      }}
-    />
-    <Button
-      variant="outline"
-      size="sm"
-      onclick={() => {
-        table.nextPage();
-        console.log("next page pressed!");
-        page++;
-      }}
-      disabled={!table.getCanNextPage()}
-    >
-      Next
-    </Button>
+        }}
+        disabled={!table.getCanPreviousPage()}
+      >
+        <ChevronsLeft />
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onclick={() => {
+          table.previousPage();
+          console.log("previous page pressed!");
+          page--;
+        }}
+        disabled={!table.getCanPreviousPage()}
+      >
+        <ChevronLeft />
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onclick={() => {
+          table.nextPage();
+          console.log("next page pressed!");
+          page++;
+        }}
+        disabled={!table.getCanNextPage()}
+      >
+        <ChevronRight />
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        onclick={() => {
+          table.lastPage();
+          page = numPages;
+        }}
+        disabled={!table.getCanNextPage()}
+      >
+        <ChevronsRight />
+      </Button>
+    </div>
+    <div class="flex justify-center">
+      Page {page} of {numPages}
+    </div>
   </div>
 </div>
