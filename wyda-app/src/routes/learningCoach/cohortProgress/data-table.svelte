@@ -144,7 +144,13 @@
         table.setGlobalFilter(e.currentTarget.value);
       }}
     />
-    <FilterButton columns={filterColumns} />
+    <FilterButton data={filterColumns} {columnFilters} />
+    <Button
+      variant="outline"
+      onclick={() => {
+        filterColumns.reflectionQuality?.setFilterValue(undefined);
+      }}>test</Button
+    >
   </div>
 </div>
 <div class="rounded-md border">
@@ -212,7 +218,7 @@
   <!-- if user is searching through input display amount of items found
   else render normal table meta data -->
   <div class="font-medium">
-    {#if tableInput}
+    {#if tableInput || table.getState().columnFilters.length > 0}
       {table.getRowCount()} Items out of {rowAmount}
     {:else}
       Items {itemBoundaryStart()} - {itemBoundaryEnd()} of {rowAmount}

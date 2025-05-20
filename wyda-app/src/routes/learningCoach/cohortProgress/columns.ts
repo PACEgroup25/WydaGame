@@ -63,7 +63,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
     {
         accessorKey:"status",
         //currently renders the data table status button for toggling sorting of that column on click
-        header: ({column}) => renderComponent(DataTableStatusButton, {onclick: column.getToggleSortingHandler()}),
+        header: ({column}) => renderComponent(DataTableStatusButton, {column}),
         cell:({row}) => {
             const nameCellSnippet = createRawSnippet<[string]>((getStatus) =>{
                 const status = getStatus();
@@ -118,6 +118,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
                 row.getValue("reflectionQuality")
             );
         },
+        filterFn: 'equals',
     },
     {
         accessorKey:"date",

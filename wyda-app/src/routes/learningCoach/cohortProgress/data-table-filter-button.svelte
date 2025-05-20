@@ -4,7 +4,19 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import DropdownMenuSeparator from "$lib/components/ui/dropdown-menu/dropdown-menu-separator.svelte";
   import Input from "$lib/components/ui/input/input.svelte";
-  let { columns } = $props();
+  import Label from "$lib/components/ui/label/label.svelte";
+  let { data, columnFilters } = $props();
+  let filterValue = $state("");
+
+  const columns = {
+    reflectionQuality: data.reflectionQuality,
+    date: data.date,
+  };
+
+  //TODO: type these variables so typescript stops complaining
+  function applyFilter(column, filterValue) {
+    column.setFilterValue(Number(filterValue));
+  }
 </script>
 
 <DropdownMenu.Root>
@@ -19,9 +31,17 @@
       <DropdownMenu.GroupHeading>Add Filter</DropdownMenu.GroupHeading>
       <DropdownMenuSeparator />
       <DropdownMenu.Sub>
-        <DropdownMenu.SubTrigger>Cohort</DropdownMenu.SubTrigger>
-        <DropdownMenu.SubContent>
-          <Input />
+        <DropdownMenu.SubTrigger>Reflection Quality</DropdownMenu.SubTrigger>
+        <DropdownMenu.SubContent class="grid gap-2 p-4">
+          <Label>Filter Value</Label>
+          <Input bind:value={filterValue} />
+          <!-- on click take the column and apply the filter and create a filter active component -->
+          <Button
+            variant="outline"
+            onclick={() => {
+              applyFilter(columns.reflectionQuality, filterValue);
+            }}>Apply Filter</Button
+          >
         </DropdownMenu.SubContent>
       </DropdownMenu.Sub>
       <DropdownMenu.Sub>
