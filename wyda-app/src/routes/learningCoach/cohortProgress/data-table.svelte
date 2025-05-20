@@ -18,6 +18,7 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterButton from "./data-table-filter-button.svelte";
+  import FilterTag from "./data-table-filter-tag.svelte";
   import { ChevronRight, ChevronLeft } from "lucide-svelte";
   import { ChevronsLeft, ChevronsRight } from "@lucide/svelte";
 
@@ -29,7 +30,7 @@
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
   //local reactive variables
-  let pageSize = $state(10);
+  let pageSize = 10;
   let pagination = $state<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
@@ -37,7 +38,7 @@
   let sorting = $state<SortingState>([]);
   let columnFilters = $state<ColumnFiltersState>([]);
   let globalFilter = $state<string>("");
-  let page = $state(1);
+  let currentPageIndex = $state(1);
 
   //Initialisation of svelte table instance
   const table = createSvelteTable({
@@ -100,7 +101,7 @@
     },
   });
 
-  const filterColumns = {
+  const filterableColumns = {
     reflectionQuality: table.getColumn("reflectionQuality"),
     date: table.getColumn("date"),
   };
@@ -112,16 +113,16 @@
   //so let numPages derive for pageSize updates
   let numPages = $derived(Math.ceil(rowAmount / pageSize));
   let itemBoundaryEnd = () => {
-    let res = pageSize * page;
-    if (page > numPages) {
+    let res = pageSize * currentPageIndex;
+    if (res > rowAmount) {
       res = rowAmount;
     }
     return res;
   };
 
   let itemBoundaryStart = () => {
-    if (page > numPages) {
-      return pageSize * page - (pageSize - 1);
+    if (pageSize * currentPageIndex > rowAmount) {
+      return pageSize * currentPageIndex - (pageSize - 1);
     }
     return itemBoundaryEnd() - (pageSize - 1);
   };
@@ -144,13 +145,15 @@
         table.setGlobalFilter(e.currentTarget.value);
       }}
     />
-    <FilterButton data={filterColumns} {columnFilters} />
+    <FilterButton data={filterableColumns} {columnFilters} />
     <Button
       variant="outline"
       onclick={() => {
-        filterColumns.reflectionQuality?.setFilterValue(undefined);
+        filterableColumns.reflectionQuality?.setFilterValue(undefined);
       }}>test</Button
     >
+    <FilterTag column={filterableColumns.reflectionQuality} {columnFilters}
+    ></FilterTag>
   </div>
 </div>
 <div class="rounded-md border">
@@ -231,7 +234,7 @@
         size="sm"
         onclick={() => {
           table.firstPage();
-          page = 1;
+          currentPageIndex = 1;
         }}
         disabled={!table.getCanPreviousPage()}
       >
@@ -243,7 +246,7 @@
         onclick={() => {
           table.previousPage();
           console.log("previous page pressed!");
-          page--;
+          currentPageIndex--;
         }}
         disabled={!table.getCanPreviousPage()}
       >
@@ -255,7 +258,7 @@
         onclick={() => {
           table.nextPage();
           console.log("next page pressed!");
-          page++;
+          currentPageIndex++;
         }}
         disabled={!table.getCanNextPage()}
       >
@@ -266,7 +269,7 @@
         size="sm"
         onclick={() => {
           table.lastPage();
-          page = numPages;
+          currentPageIndex = numPages;
         }}
         disabled={!table.getCanNextPage()}
       >
@@ -274,7 +277,7 @@
       </Button>
     </div>
     <div class="flex justify-center">
-      Page {page} of {numPages}
+      Page {currentPageIndex} of {numPages}
     </div>
   </div>
 </div>
