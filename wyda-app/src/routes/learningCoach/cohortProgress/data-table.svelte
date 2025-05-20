@@ -119,8 +119,9 @@
   };
 
   let itemBoundaryStart = () => {
+    let res = pageSize * page;
     if (page > numPages) {
-      return pageSize * page - (pageSize - 1);
+      return res = pageSize * page - (pageSize - 1);
     }
     return itemBoundaryEnd() - (pageSize - 1);
   };
@@ -231,7 +232,8 @@
       Previous
     </Button>
     <Input
-      class="w-[3em] text-center"
+      type="number"
+      class="w-[3em] text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       bind:value={page}
       onchange={(e) => {
         let count = table.getPageCount();
