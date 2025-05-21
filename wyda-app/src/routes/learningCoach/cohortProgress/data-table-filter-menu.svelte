@@ -4,7 +4,7 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import DropdownMenuSeparator from "$lib/components/ui/dropdown-menu/dropdown-menu-separator.svelte";
   import DropdownMenuSubContent from "$lib/components/ui/dropdown-menu/dropdown-menu-sub-content.svelte";
-  import FilterAction from "./data-table-filter-action.svelte"
+  import FilterAction from "./data-table-filter-action.svelte";
   let { filterColumns } = $props();
 </script>
 
@@ -19,14 +19,14 @@
     <DropdownMenu.Group>
       <DropdownMenu.GroupHeading>Add Filter</DropdownMenu.GroupHeading>
       <DropdownMenuSeparator />
-        {#each filterColumns as filterColumn}
+      {#each filterColumns as filterColumn}
         <DropdownMenu.Sub>
           <DropdownMenu.SubTrigger>{filterColumn.name}</DropdownMenu.SubTrigger>
-          <DropdownMenuSubContent class = "grid gap-2 p-4">
-              <FilterAction data={filterColumn}/>
+          <DropdownMenuSubContent>
+            <FilterAction data={filterColumn} />
           </DropdownMenuSubContent>
         </DropdownMenu.Sub>
-        {/each}
+      {/each}
     </DropdownMenu.Group>
   </DropdownMenu.Content>
 </DropdownMenu.Root>
