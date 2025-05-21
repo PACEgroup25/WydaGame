@@ -74,6 +74,11 @@
       } else {
         columnFilters = updater;
       }
+      if(table.getRowCount() == 0){
+        currentPageIndex = 0;
+      } else{ 
+        currentPageIndex = 1;
+      }
     },
     onGlobalFilterChange: (updater) => {
       if (typeof updater === "function") {
@@ -81,6 +86,11 @@
         globalFilter = updater(globalFilter);
       } else {
         globalFilter = updater;
+      }
+      if(table.getRowCount() == 0){
+        currentPageIndex = 0;
+      } else{ 
+        currentPageIndex = 1;
       }
     },
     //pass in getters to state for table to
@@ -276,8 +286,14 @@
         <ChevronsRight />
       </Button>
     </div>
+    {#if tableInput || table.getState().columnFilters.length > 0}
+    <div class="flex justify-cetner">
+      Page {currentPageIndex} of {Math.ceil(table.getRowCount()/pageSize)} 
+    </div>
+    {:else}
     <div class="flex justify-center">
       Page {currentPageIndex} of {numPages}
     </div>
+    {/if}
   </div>
 </div>
