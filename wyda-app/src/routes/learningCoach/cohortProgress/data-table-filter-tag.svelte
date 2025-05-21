@@ -4,12 +4,12 @@
   let { columnData, columnFilters } = $props();
 </script>
 
-{#if columnData.reflectionQualityFilterActive}
+{#if columnData.filterActive}
   <Button
     variant="outline"
     onclick={() => {
-      columnData.reflectionQualityFilterActive = false;
-      columnData.reflectionQuality.setFilterValue(undefined);
+      columnData.filterActive = false;
+      columnData.column.setFilterValue(undefined);
     }}
   >
     {columnFilters[0].id} = {columnFilters[0].value}

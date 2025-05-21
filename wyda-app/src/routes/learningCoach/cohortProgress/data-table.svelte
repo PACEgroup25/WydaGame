@@ -114,8 +114,19 @@
   });
 
   const filterableColumns = $state({
-    reflectionQuality: table.getColumn("reflectionQuality"),
-    reflectionQualityFilterActive: false,
+    status: {
+      column: table.getColumn("status"),
+      filterActive: false,
+    },
+    reflectionQuality: {
+      column: table.getColumn("reflectionQuality"),
+      filterActive: false,
+    }
+    //cohort
+    //status
+    //date
+    //name
+    //org
   });
 
   //Item boundary calculations to display on table
@@ -160,11 +171,11 @@
     <Button
     variant="outline"
     onclick={() => {
-      filterableColumns.reflectionQuality?.setFilterValue(undefined);
+      filterableColumns.reflectionQuality.column?.setFilterValue(undefined);
     }}>test</Button
     >
-    {#if filterableColumns.reflectionQualityFilterActive}
-      <FilterTag columnData={filterableColumns} columnFilters={columnFilters}/>
+    {#if filterableColumns.reflectionQuality.filterActive}
+      <FilterTag columnData={filterableColumns.reflectionQuality} columnFilters={columnFilters}/>
     {/if}
   </div>
 </div>

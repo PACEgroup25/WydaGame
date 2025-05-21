@@ -11,7 +11,7 @@
 
 
   function applyFilter<TData,TValue>(column : Column<TData,TValue>, filterValue : string) {
-    data.reflectionQualityFilterActive = true;
+    data.reflectionQuality.filterActive = true;
     column.setFilterValue(Number(filterValue));
     filterValue = "";
   }
@@ -37,7 +37,7 @@
           <Button
             variant="outline"
             onclick={() => {
-              applyFilter(data.reflectionQuality, filterValue);
+              applyFilter(data.reflectionQuality.column, filterValue);
             }}>Apply Filter</Button
           >
         </DropdownMenu.SubContent>
