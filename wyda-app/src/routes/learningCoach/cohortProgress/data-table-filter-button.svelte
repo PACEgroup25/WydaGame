@@ -5,17 +5,15 @@
   import DropdownMenuSeparator from "$lib/components/ui/dropdown-menu/dropdown-menu-separator.svelte";
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
-  let { data, columnFilters } = $props();
+  import type { Column } from "@tanstack/table-core";
+  let { data } = $props();
   let filterValue = $state("");
 
-  const columns = {
-    reflectionQuality: data.reflectionQuality,
-    date: data.date,
-  };
 
-  //TODO: type these variables so typescript stops complaining
-  function applyFilter(column, filterValue) {
+  function applyFilter<TData,TValue>(column : Column<TData,TValue>, filterValue : string) {
+    data.reflectionQualityFilterActive = true;
     column.setFilterValue(Number(filterValue));
+    filterValue = "";
   }
 </script>
 
@@ -39,7 +37,7 @@
           <Button
             variant="outline"
             onclick={() => {
-              applyFilter(columns.reflectionQuality, filterValue);
+              applyFilter(data.reflectionQuality, filterValue);
             }}>Apply Filter</Button
           >
         </DropdownMenu.SubContent>

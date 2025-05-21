@@ -113,16 +113,16 @@
     },
   });
 
-  const filterableColumns = {
+  const filterableColumns = $state({
     reflectionQuality: table.getColumn("reflectionQuality"),
-    date: table.getColumn("date"),
-  };
+    reflectionQualityFilterActive: false,
+  });
 
   //Item boundary calculations to display on table
 
   let rowAmount = $state(table.getRowCount());
   let numPages = $state(Math.ceil(rowAmount / pageSize));
-  
+
   let itemBoundaryEnd = () => {
     let res = pageSize * currentPageIndex;
     if (res > rowAmount) {
@@ -156,15 +156,16 @@
         table.setGlobalFilter(e.currentTarget.value);
       }}
     />
-    <FilterButton data={filterableColumns} {columnFilters} />
+    <FilterButton data={filterableColumns} />
     <Button
-      variant="outline"
-      onclick={() => {
-        filterableColumns.reflectionQuality?.setFilterValue(undefined);
-      }}>test</Button
+    variant="outline"
+    onclick={() => {
+      filterableColumns.reflectionQuality?.setFilterValue(undefined);
+    }}>test</Button
     >
-    <FilterTag column={filterableColumns.reflectionQuality} {columnFilters}
-    ></FilterTag>
+    {#if filterableColumns.reflectionQualityFilterActive}
+      <FilterTag columnData={filterableColumns} columnFilters={columnFilters}/>
+    {/if}
   </div>
 </div>
 <div class="rounded-md border">
