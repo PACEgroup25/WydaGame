@@ -79,6 +79,7 @@
       } else{ 
         currentPageIndex = 1;
       }
+      numPages = Math.ceil(table.getRowCount()/pageSize);
     },
     onGlobalFilterChange: (updater) => {
       if (typeof updater === "function") {
@@ -92,6 +93,7 @@
       } else{ 
         currentPageIndex = 1;
       }
+      numPages = Math.ceil(table.getRowCount()/pageSize);
     },
     //pass in getters to state for table to
     //access our variables when it needs to
@@ -118,10 +120,9 @@
 
   //Item boundary calculations to display on table
 
-  let rowAmount = table.getRowCount();
-  //page size is reactive, (user may change it in the future)
-  //so let numPages derive for pageSize updates
-  let numPages = $derived(Math.ceil(rowAmount / pageSize));
+  let rowAmount = $state(table.getRowCount());
+  let numPages = $state(Math.ceil(rowAmount / pageSize));
+  
   let itemBoundaryEnd = () => {
     let res = pageSize * currentPageIndex;
     if (res > rowAmount) {
@@ -286,14 +287,8 @@
         <ChevronsRight />
       </Button>
     </div>
-    {#if tableInput || table.getState().columnFilters.length > 0}
-    <div class="flex justify-cetner">
-      Page {currentPageIndex} of {Math.ceil(table.getRowCount()/pageSize)} 
-    </div>
-    {:else}
     <div class="flex justify-center">
       Page {currentPageIndex} of {numPages}
     </div>
-    {/if}
   </div>
 </div>

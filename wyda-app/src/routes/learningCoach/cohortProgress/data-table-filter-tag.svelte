@@ -1,6 +1,9 @@
 <script>
   import { Button } from "$lib/components/ui/button/index.js";
   let { column, columnFilters } = $props();
+  console.log(columnFilters);
+  let columnName = $derived(columnFilters[0]?.id);
+  let columnValue = $derived(columnFilters[0]?.value);
 </script>
 
 <Button
@@ -9,5 +12,5 @@
     column.setFilterValue(undefined);
   }}
 >
-  {column.name} = {columnFilters}
+  {columnName} = {columnValue}
 </Button>
