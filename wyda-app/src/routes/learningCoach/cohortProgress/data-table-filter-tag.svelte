@@ -2,6 +2,18 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import X from "@lucide/svelte/icons/x"
   let { columnData, columnFilters } = $props();
+  console.log(columnData.name + " tag created")
+
+  function valueIndex() {
+    for(var i = 0; i<columnFilters.length; i++){
+      if(columnFilters[i].id == columnData.id){
+        console.log("value found");
+        return columnFilters[i].value;
+      }
+    }
+    console.log("value not found returning first:")
+    return columnFilters[0].value;
+  }
 </script>
 
 {#if columnData.filterActive}
@@ -12,7 +24,7 @@
       columnData.column.setFilterValue(undefined);
     }}
   >
-    {columnFilters[0].id} = {columnFilters[0].value}
+    {columnData.name} = {valueIndex()}
     <X/>
   </Button>
 {/if}

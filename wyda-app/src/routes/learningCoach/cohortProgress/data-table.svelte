@@ -17,7 +17,7 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import Input from "$lib/components/ui/input/input.svelte";
   import TableInput from "$lib/components/ui/input/table-input.svelte";
-  import FilterButton from "./data-table-filter-button.svelte";
+  import FilterMenu from "./data-table-filter-menu.svelte";
   import FilterTag from "./data-table-filter-tag.svelte";
   import { ChevronRight, ChevronLeft } from "lucide-svelte";
   import { ChevronsLeft, ChevronsRight } from "@lucide/svelte";
@@ -113,21 +113,20 @@
     },
   });
 
-  const filterableColumns = $state({
-    status: {
+  const filterableColumns = $state([
+    {
+      name: "Status",
+      id: "status",
       column: table.getColumn("status"),
       filterActive: false,
     },
-    reflectionQuality: {
+    {
+      name: "Reflection Quality",
+      id: "reflectionQuality",
       column: table.getColumn("reflectionQuality"),
       filterActive: false,
     }
-    //cohort
-    //status
-    //date
-    //name
-    //org
-  });
+  ]);
 
   //Item boundary calculations to display on table
 
@@ -167,16 +166,12 @@
         table.setGlobalFilter(e.currentTarget.value);
       }}
     />
-    <FilterButton data={filterableColumns} />
-    <Button
-    variant="outline"
-    onclick={() => {
-      filterableColumns.reflectionQuality.column?.setFilterValue(undefined);
-    }}>test</Button
-    >
-    {#if filterableColumns.reflectionQuality.filterActive}
-      <FilterTag columnData={filterableColumns.reflectionQuality} columnFilters={columnFilters}/>
-    {/if}
+    <FilterMenu filterColumns={filterableColumns} />
+    {#each filterableColumns as filterColumn}
+      {#if filterColumn.filterActive}
+        <FilterTag columnData={filterColumn} columnFilters={columnFilters}/>
+      {/if}
+    {/each}
   </div>
 </div>
 <div class="rounded-md border">
