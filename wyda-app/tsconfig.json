@@ -10,22 +10,26 @@
 		"checkJs": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": true,
 		"sourceMap": true,
+
+		"allowImportingTsExtensions": true,
+    	"noEmit": true,
 		
 		
 		"baseUrl": ".",
 		"rootDir": "src",
-    	"outDir": "dist",
+		"outDir": "dist",
 
 		"paths": {
-			"$lib/*": ["src/lib/*"],
-			"src/*": ["./src/*"]
+			"$lib/*": ["lib/*"],
 		}
 	},
-	"include": ["src/**/*"]
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist"]
 	// Path aliases are handled by https://svelte.dev/docs/kit/configuration#alias
 	// except $lib which is handled by https://svelte.dev/docs/kit/configuration#files
 	//
