@@ -1,4 +1,4 @@
-import { chartdata } from "./data";
+import { chartdata } from "./data.js";
 
 
 export type ChartDataItem = {
