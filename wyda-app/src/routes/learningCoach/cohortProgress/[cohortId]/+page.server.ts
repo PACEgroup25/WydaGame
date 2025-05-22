@@ -17,12 +17,10 @@ export function load({params}) {
         email: string;
         status: string;
         reflectionQuality: number;
-        organisation: string;
+        org: string;
         cohortid: number;
         date: string;
-    }[] = [];
-    //mock fetch function
-        userData = data[Number(params.cohortId)];
+    }[] = data[Number(params.cohortId)];
         for(var i = 0; i<userData.length; i++){
             if(userData[i].status == "On track"){
                 onTrack++;
