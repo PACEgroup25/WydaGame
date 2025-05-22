@@ -1,6 +1,6 @@
 <script lang="ts">
-  import SideBarLearningCoach from "%lib/components/ui/side-bar/sideBarLearningCoach.svelte";
-  import Chart from "%lib/components/ui/chart/chart.svelte";
+  import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
+  import Chart from "$lib/components/ui/chart/chart.svelte";
 
   let { data } = $props();
   let userProgressData = data.values[0];

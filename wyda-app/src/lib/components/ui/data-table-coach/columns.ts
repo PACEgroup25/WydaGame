@@ -1,8 +1,9 @@
 import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
 import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
-import DataTableActions from "./data-table-actions.svelte";
-import DataTableStatusButton from "./data-table-status-button.svelte";
+import DataTableActions from "$lib/components/ui/data-table-coach/data-table-actions.svelte";
+import DataTableStatusButton from "$lib/components/ui/data-table-coach/data-table-status-button.svelte";
+
 
 
 export type RecentActivity = {
@@ -14,6 +15,7 @@ export type RecentActivity = {
     date: string;
 }
 
+//used for defining the structure of the columns in our table
 export const columns: ColumnDef<RecentActivity>[] = [
     {
         accessorKey: "name",
@@ -60,12 +62,13 @@ export const columns: ColumnDef<RecentActivity>[] = [
     },
     {
         accessorKey:"status",
-        header: ({column}) => renderComponent(DataTableStatusButton, {onclick: column.getToggleSortingHandler()}),
+        //currently renders the data table status button for toggling sorting of that column on click
+        header: ({column}) => renderComponent(DataTableStatusButton, {column}),
         cell:({row}) => {
             const nameCellSnippet = createRawSnippet<[string]>((getStatus) =>{
                 const status = getStatus();
                 return {
-                    render: () => `<div class="font-medium text-center">${status}</div>`,
+                    render: () => `<div class="font-medium flex">${status}</div>`,
                 };
             });
             return renderSnippet(
@@ -115,6 +118,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
                 row.getValue("reflectionQuality")
             );
         },
+        filterFn: 'equals',
     },
     {
         accessorKey:"date",
@@ -137,6 +141,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
             );
         },
     },
+    //actions added to column for individual row actions
     {
         id: "actions",
         cell:({row}) => {

@@ -34,13 +34,14 @@
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
-      <LayoutDashboard/>
+      <LayoutDashboard />
       <span>Dashboard</span>
     </Button>
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach/cohortProgress"
-      class="m-1 flex justify-start {currentPath === '/cohortProgress'
+      class="m-1 flex justify-start {currentPath ===
+      '/learningCoach/cohortProgress'
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -50,7 +51,8 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach/recentActivity"
-      class="m-1 flex justify-start {currentPath === '/recentActivity'
+      class="m-1 flex justify-start {currentPath ===
+      '/learningCoach/recentActivity'
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
