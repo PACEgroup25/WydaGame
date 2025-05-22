@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { Button } from "$lib/components/ui/button/index.js";
   import Label from "$lib/components/ui/label/label.svelte";
   import Input from "$lib/components/ui/input/input.svelte";
   let { data } = $props();
   let filterValue = $state("");
 
-  function applyFilter(data, filterValue) {
+  function applyFilter(data : any, filterValue : any) {
     data.filterActive = true;
     data.column.setFilterValue(Number(filterValue));
     filterValue = "";
