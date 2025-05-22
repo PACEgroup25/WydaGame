@@ -1,8 +1,8 @@
 import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
 import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
-import DataTableActions from "./data-table-actions.svelte";
-import DataTableStatusButton from "./data-table-status-button.svelte";
+import DataTableActions from "$lib/components/ui/data-table-coach/data-table-actions.svelte";
+import DataTableStatusButton from "$lib/components/ui/data-table-coach/data-table-status-button.svelte";
 
 
 

@@ -1,9 +1,10 @@
 <script lang="ts">
   import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
-  import * as Select from "$lib/components/ui/select/index"
-  import DataTable from "./data-table.svelte";
-  import { columns } from "./columns.ts";
+  import * as Select from "$lib/components/ui/select/index";
+  import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
+  import { columns } from "$lib/components/ui/data-table-coach/columns.js";
   let { data } = $props();
+  console.log(data);
   let statistics = [
       {
         value: "65%",
