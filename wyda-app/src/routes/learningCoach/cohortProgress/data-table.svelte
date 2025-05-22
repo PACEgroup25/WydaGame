@@ -167,9 +167,9 @@
       }}
     />
     <FilterMenu filterColumns={filterableColumns} />
-    {#each filterableColumns as filterColumn}
+    {#each filterableColumns as filterColumn, i}
       {#if filterColumn.filterActive}
-        <FilterTag columnData={filterColumn} columnFilters={columnFilters}/>
+        <FilterTag bind:columnData={filterableColumns[i]} columnFilters={columnFilters}/>
       {/if}
     {/each}
   </div>

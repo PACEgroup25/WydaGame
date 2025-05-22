@@ -1,7 +1,7 @@
 <script>
   import { Button } from "$lib/components/ui/button/index.js";
   import X from "@lucide/svelte/icons/x"
-  let { columnData, columnFilters } = $props();
+  let { columnData = $bindable(), columnFilters } = $props();
   console.log(columnData.name + " tag created")
 
   function valueIndex() {
