@@ -20,7 +20,7 @@ export function load({params}) {
         org: string;
         cohortid: number;
         date: string;
-    }[] = data[Number(params.cohortId)];
+    }[] = data[Number(params.cohortId)-1];
         for(var i = 0; i<userData.length; i++){
             if(userData[i].status == "On track"){
                 onTrack++;
