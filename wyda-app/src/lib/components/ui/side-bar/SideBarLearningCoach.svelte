@@ -30,7 +30,7 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach"
-      class="m-1 flex justify-start {currentPath === '/learningCoach'
+      class="m-1 flex justify-start {currentPath === "/learningCoach"
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -40,8 +40,7 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach/cohortProgress"
-      class="m-1 flex justify-start {currentPath ===
-      '/learningCoach/cohortProgress'
+      class="m-1 flex justify-start {currentPath.includes('/learningCoach/cohortProgress')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -51,8 +50,7 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach/recentActivity"
-      class="m-1 flex justify-start {currentPath ===
-      '/learningCoach/recentActivity'
+      class="m-1 flex justify-start {currentPath.includes('/learningCoach/recentActivity')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -82,7 +80,7 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learningCoach/analytics"
-      class="m-1 flex justify-start {currentPath === '/learningCoach/analytics'
+      class="m-1 flex justify-start {currentPath.includes('/learningCoach/analytics')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
