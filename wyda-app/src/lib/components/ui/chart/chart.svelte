@@ -6,49 +6,42 @@
 
   let data = $props();
 
-  let height = data.size
-    ? data.size.height
-      ? data.size.height
-      : "450px"
-    : "450px";
-  let width = data.size
-    ? data.size.width
-      ? data.size.width
-      : "450px"
-    : "450px";
+  let height = data.size?.height ?? "450px";
+  let width = data.size?.width ?? "450px";
+  let y = data.y ?? undefined;
 
-  let y = data.y ? data.y : undefined;
-
-  onMount(async () => {
+  onMount(() => {
     new Chart(ctx, {
       type: data.type,
       data: {
         labels: data.labels,
-        datasets: [
+        datasets: data.datasets ?? [
           {
             label: data.chartLabel,
             data: data.data,
-            borderWidth: data.borderWidth,
-            borderColor: data.borderColor,
             backgroundColor: data.backgroundColor,
+            borderColor: data.borderColor,
+            borderWidth: data.borderWidth,
             cubicInterpolationMode: data.cubicInterpolationMode,
-            tension: data.tension,
-          },
-        ],
+            tension: data.tension
+          }
+        ]
       },
       options: {
         indexAxis: data.indexAxis,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
-          y,
-        },
-      },
+          y
+        }
+      }
     });
   });
 </script>
 
-<div class="chart-container">
+<div class="chart-container" style="width: {width}; height: {height}">
   <div class="chart-header font-semibold">
     {data.chartLabel}
   </div>
-  <canvas id="chart" {height} {width} bind:this={ctx}></canvas>
+  <canvas bind:this={ctx}></canvas>
 </div>

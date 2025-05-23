@@ -45,6 +45,14 @@ export const chartdata =[
         data: [300, 150],
     },
     
+
+    {
+        chartLabel: "Cohort Progress by Levels",
+        labels: ["5d5f86144b98850017a51fea", "5d7738a41373480017b2c5d1", "N/A"],
+        backgroundColor: ["rgba(222,90,90,1)", "rgba(180,221,221,1)"],
+        data: [32,79,66],
+    },
+    
     
     
 ]
