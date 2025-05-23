@@ -1,30 +1,10 @@
 <script lang="ts">
-  import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
   import * as Select from "$lib/components/ui/select/index";
   import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
   import { columns } from "$lib/components/ui/data-table-coach/columns.js";
   let { data } = $props();
   console.log(data);
-  let statistics = [
-      {
-        value: "65%",
-        description: "On track learners",
-      },
-      {
-        value: "10%",
-        description: "At risk",
-      },
-      {
-        value: "5.7",
-        description: "Avg reflection quality",
-      },
-      {
-        value: "20",
-        description: "Active learning streaks",
-      },
-    ];
-
-    let cohort = $state("1");
+  let cohort = $state("1");
 </script>
 
 {#snippet stat(statistic : string ,description : string)}

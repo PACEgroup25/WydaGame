@@ -3,7 +3,6 @@
   console.log(data.data.value);
   import { columns } from "$lib/components/ui/data-table-coach/columns.js";
   import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
-  import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
 </script>
 
 {#snippet stat(statistic : string ,description : string)}
