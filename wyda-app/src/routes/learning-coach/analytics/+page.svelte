@@ -9,24 +9,14 @@
   let pieChartData = data.values[3];
 </script>
 
-<main>
-  <div class="page-container flex flex-row">
-    <SideBarLearningCoach />
-    <div class="dashboard">
-      <div class="main-container flex flex-wrap gap-10 mt-10">
-        <div class="analytics-section w-full flex justify-center">
-          <div class="analytics-container">
-            <div class="analytics-header">Analytics</div>
-            <Chart type={"bar"} {...userProgressData} indexAxis={"y"}></Chart>
-            <Chart type={"bar"} {...scenarioData}></Chart>
-            <Chart type={"bar"} {...countOfUsersByAttempts}></Chart>
-            <Chart type={"pie"} {...pieChartData}></Chart>
-          </div>
-        </div>
-      </div>
+<div class="main-container flex flex-wrap gap-10 mt-10">
+  <div class="analytics-section w-full flex justify-center">
+    <div class="analytics-container">
+      <div class="analytics-header">Analytics</div>
+      <Chart type={"bar"} {...userProgressData} indexAxis={"y"}></Chart>
+      <Chart type={"bar"} {...scenarioData}></Chart>
+      <Chart type={"bar"} {...countOfUsersByAttempts}></Chart>
+      <Chart type={"pie"} {...pieChartData}></Chart>
     </div>
   </div>
-</main>
-
-<style>
-</style>
+</div>
