@@ -6,6 +6,19 @@
 
   let data = $props();
 
+  let height = data.size
+    ? data.size.height
+      ? data.size.height
+      : "450px"
+    : "450px";
+  let width = data.size
+    ? data.size.width
+      ? data.size.width
+      : "450px"
+    : "450px";
+
+  let y = data.y ? data.y : undefined;
+
   onMount(async () => {
     new Chart(ctx, {
       type: data.type,
@@ -26,20 +39,16 @@
       options: {
         indexAxis: data.indexAxis,
         scales: {
-          y: 
-          {
-            beginAtZero: false,
-            max: 3.5,
-          },
+          y,
         },
       },
     });
   });
 </script>
 
-<div class="chart-container h-[{data.size.height}] w-[{data.size.width}]">
+<div class="chart-container">
   <div class="chart-header font-semibold">
     {data.chartLabel}
   </div>
-  <canvas id="chart" height={data.size.height} width={data.size.width} bind:this={ctx}></canvas>
+  <canvas id="chart" {height} {width} bind:this={ctx}></canvas>
 </div>

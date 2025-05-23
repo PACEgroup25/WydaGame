@@ -7,9 +7,7 @@
 <main>
   <div class="page-container flex flex-row">
     <SideBar />
-    <div class="dashboard">
-
-    </div>
+    <div class="dashboard"></div>
   </div>
 </main>
 

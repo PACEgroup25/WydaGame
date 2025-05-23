@@ -14,6 +14,10 @@
     borderColor: "rgb(87, 197, 255)",
     tension: 0.3,
     size: { height: "2", width: "5" },
+    y: {
+      beginAtZero: false,
+      max: 3.5,
+    },
   };
 
   //the max data value and use for max y scale in chart
@@ -28,7 +32,7 @@
   </div>
 {/snippet}
 
-<div class="">
+<main>
   <div class="header text-2xl font-semibold mb-[1em] flex justify-between">
     Cohort: {data.data.cohortId}
   </div>
@@ -45,4 +49,4 @@
   </div>
   <Chart type={"line"} {...chartData} />
   <DataTable {columns} data={data.data.value} />
-</div>
+</main>
