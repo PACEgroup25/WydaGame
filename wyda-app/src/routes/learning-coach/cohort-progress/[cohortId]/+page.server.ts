@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from './$types.js';
 import data from "./data.js";
 import { isNumber } from 'chart.js/helpers';
 

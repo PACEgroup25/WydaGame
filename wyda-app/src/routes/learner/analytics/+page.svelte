@@ -1,5 +1,5 @@
-<script>
-  import SideBar from "%lib/components/ui/side-bar/sideBar.svelte";
+<script lang="ts">
+  import SideBar from "$lib/components/ui/side-bar/SideBar.svelte";
   let { data } = $props();
   console.log(data);
 </script>
