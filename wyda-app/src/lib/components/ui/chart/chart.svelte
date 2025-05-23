@@ -6,6 +6,19 @@
 
   let data = $props();
 
+  let height = data.size
+    ? data.size.height
+      ? data.size.height
+      : "450px"
+    : "450px";
+  let width = data.size
+    ? data.size.width
+      ? data.size.width
+      : "450px"
+    : "450px";
+
+  let y = data.y ? data.y : undefined;
+
   onMount(async () => {
     new Chart(ctx, {
       type: data.type,
@@ -15,17 +28,18 @@
           {
             label: data.chartLabel,
             data: data.data,
-            borderWidth: 1,
+            borderWidth: data.borderWidth,
+            borderColor: data.borderColor,
             backgroundColor: data.backgroundColor,
+            cubicInterpolationMode: data.cubicInterpolationMode,
+            tension: data.tension,
           },
         ],
       },
       options: {
         indexAxis: data.indexAxis,
         scales: {
-          y: {
-            beginAtZero: true,
-          },
+          y,
         },
       },
     });
@@ -36,5 +50,5 @@
   <div class="chart-header font-semibold">
     {data.chartLabel}
   </div>
-  <canvas id="chart" height="400px" width="500px" bind:this={ctx}></canvas>
+  <canvas id="chart" {height} {width} bind:this={ctx}></canvas>
 </div>
