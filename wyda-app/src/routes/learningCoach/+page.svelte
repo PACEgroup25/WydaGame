@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   //TODO: refactor into variant instead of seperate component
   import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
   import RecentActivity from "$lib/components/ui/recent-activity/recentActivity.svelte";

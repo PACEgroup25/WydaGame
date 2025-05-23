@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import SideBarLearningCoach from "$lib/components/ui/side-bar/SideBarLearningCoach.svelte";
     import * as Table from "$lib/components/ui/table/index.js"
   

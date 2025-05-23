@@ -1,5 +1,5 @@
 <script>
-  import SideBar from "%lib/components/ui/side-bar/sideBar.svelte";
+  import SideBar from "$lib/components/ui/side-bar/SideBar.svelte";
   import { Hotel, Mail } from "@lucide/svelte";
   import * as Accordion from "$lib/components/ui/accordion";
 </script>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="accordion p-[3em] w-full">
-          <Accordion.Root>
+          <Accordion.Root type="single">
             <Accordion.Item value="item-1">
               <Accordion.Trigger>FAQ</Accordion.Trigger>
             </Accordion.Item>
