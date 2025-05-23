@@ -1,12 +1,12 @@
-import * as mysql from 'mysql2/promise';
+import * as sql from 'mssql'; //azure databse -> SQL not mySql
 import { type UserLinkedEntity, type EntityProfile } from "./entity.ts";
 import { getPool } from "./createPool.ts";
 
 export class populateEntity{
-    private poolPromise: Promise<mysql.Pool>;
+    private poolPromise: Promise<sql.ConnectionPool>;
 
     constructor(){
-        this.poolPromise = getPool()
+        this.poolPromise = getPool();
     }
 
     async findEntity(newUser: string, table: string): Promise<Boolean>{ //checks if the entity exists in the db        
@@ -17,16 +17,18 @@ export class populateEntity{
                 return false;
             }
 
-            const sql = `SELECT * FROM \`${table}\` WHERE id = ?`; //change id to PartitianKey when db updates
-            const [rows] = await pool.query(sql, [newUser]);
+            const result = await pool.request()
+            .input('partKey', sql.VarChar, newUser) // or sql.Int or the actual data type
+            .query(`SELECT * FROM ${table} WHERE PartitianKey = @partKey`);
 
-            if (Array.isArray(rows) && rows.length > 0) {
-                const user = rows[0] as any;
+            if (result.recordset.length > 0) {
+                const user = result.recordset[0];
                 console.log('User found:', user);
-            } else {
+            } else{
                 console.log(`No user found with ID ${newUser}`);
                 return false;
             }
+
             //this.createEntity();
             return true;
 
@@ -41,11 +43,24 @@ export class populateEntity{
             console.log(newUser);
             const pool = await this.poolPromise;
 
-            const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [newUser]);
+            const result = await pool.request()
+            .input('userId', sql.VarChar, newUser) // change VarChar to actual type if needed
+            .query('SELECT * FROM users WHERE id = @userId');
 
-            if (!Array.isArray(rows) || rows.length === 0){
-                return Promise.reject("Invalid state error");
-            };
+            const rows = result.recordset;
+
+
+//   if (!Array.isArray(rows) || rows.length === 0) {
+//     return Promise.reject(new Error("Invalid state error"));
+//   }
+
+//             const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [newUser]);
+
+//             if (!Array.isArray(rows) || rows.length === 0){
+//                 return Promise.reject("Invalid state error");
+//             };
+
+            
             
             const row = rows[0] as any;
 
@@ -67,15 +82,26 @@ export class populateEntity{
         }          
     }
 
-    async defineRole(newUser: string) {
-        try{
-            const pool = await this.poolPromise;
-            const [rows] = await pool.query('DESCRIBE userrole');
-            console.log(rows);
-        }catch (error){
-            console.log('Database query failed: ', error);
-        }
-    }
+    // async defineRole(newUser: string) {
+    //     try{
+    //         const pool = await this.poolPromise;
+    //         const [rows] = await pool.query('DESCRIBE userrole');
+    //         console.log(rows);
+    //     }catch (error){
+    //         console.log('Database query failed: ', error);
+    //     }
+    // }
+
+    // async checkDB(){
+    //      try{
+    //          const pool = await this.poolPromise;
+    //          const [rows] = await pool.query('SELECT * FROM cohorts');
+    //          console.log(rows);
+
+    //  }catch(error){
+    //     console.log('query failed', error);
+    //  } return true;
+    // }
 }
 
 
@@ -90,7 +116,7 @@ async function test(){
         entityID: 'ff321e1d-808e-43e7-bd0d-22ffad3b438a'
     }
 
-    const pool = await getPool();
+    const testPool = await getPool();
     const table = 'users'
 
     console.log(testEntity);
@@ -106,8 +132,8 @@ async function test(){
         console.log(newProfile);
         console.log("test success");
 
-        console.log("next test");
-        pe.defineRole(newProfile.entityID);
+        // console.log("next test");
+        // pe.defineRole(newProfile.entityID);
         //pe.defineRole(newProfile.entityID);
         //await pool.end();
 
@@ -115,9 +141,19 @@ async function test(){
         console.log("test failure");
     }
     
-    //await pool.end();
+    //await testPool.end();
 }
 
 test().catch(console.error);
+
+// const pool = await getPool();
+// const pe = new populateEntity();
+// const db = await pe.checkDB();
+// if(db){
+//     await pool.end();
+// }
+
+
+//test().catch(console.error);
 
 
