@@ -29,8 +29,8 @@
   <div class="locations-container flex flex-col h-full mt-8 mb-4">
     <Button
       variant="sidebarLearningCoach"
-      href="/learningCoach"
-      class="m-1 flex justify-start {currentPath === "/learningCoach"
+      href="/learning-coach"
+      class="m-1 flex justify-start {currentPath === "/learning-coach"
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -39,8 +39,8 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/learningCoach/cohortProgress"
-      class="m-1 flex justify-start {currentPath.includes('/learningCoach/cohortProgress')
+      href="/learning-coach/cohort-progress"
+      class="m-1 flex justify-start {currentPath.includes('/learning-coach/cohort-progress')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -49,8 +49,8 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/learningCoach/recentActivity"
-      class="m-1 flex justify-start {currentPath.includes('/learningCoach/recentActivity')
+      href="/learning-coach/recent-activity"
+      class="m-1 flex justify-start {currentPath.includes('/learning-coach/recent-activity')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
@@ -79,8 +79,8 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/learningCoach/analytics"
-      class="m-1 flex justify-start {currentPath.includes('/learningCoach/analytics')
+      href="/learning-coach/analytics"
+      class="m-1 flex justify-start {currentPath.includes('/learning-coach/analytics')
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
