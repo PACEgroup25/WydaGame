@@ -46,7 +46,7 @@ export class populateEntity{
 
             const result = await pool.request()
             .input('userId', sql.VarChar, newUser)
-            .query('SELECT * FROM UsersProfiles WHERE PartitionKey = @userId');
+            .query('SELECT * FROM UsersProfiles WHERE RowKey = @userId');
 
             const rows = result.recordset;
 
@@ -77,11 +77,8 @@ export class populateEntity{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
-            .input('targetColumn', sql.VarChar, targetColumn)
-            .input('table', sql.VarChar, table)
-            .input('referenceColumn', sql.VarChar, referenceColumn)
             .input('key', sql.VarChar, key)
-            .query(`SELECT @targetColumn FROM @table WHERE @referenceColumn = @key`) //sanatise
+            .query(`SELECT ${targetColumn} FROM ${table} WHERE ${referenceColumn} = @key`) //sanatise
             
             const found = result.recordset[0]?.[targetColumn];
 
@@ -113,13 +110,13 @@ export class populateEntity{
         }
     }
 
-    async coachLinkedCohorts(user: string){
+    async coachLinkedCohorts(user: string): Promise<string[]>{
         try{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
-            .input('user', sql.VarChar, user)
-            .query(`SELECT RowKey FROM UsersCohorts WHERE PartitionKey = @user`)
+                .input('user', sql.VarChar, user)
+                .query(`SELECT RowKey FROM CoachAssignedCohorts WHERE PartitionKey = @user`)
 
             const cohorts: string[] = result.recordset.map(row => row.RowKey);
             return cohorts;
@@ -166,9 +163,9 @@ export class populateEntity{
 
 async function test(){
     
-    const id = '0573a9b9-c9fc-4aa6-a340-17909a6c34d2'
+    const id = 'fb18cdce-d9e3-42ff-84c6-b6961e840cbc' //RowKey
     const table = 'Users'
-    const column = 'PartitionKey'
+    const column = 'RowKey'
 
     const pe = new populateEntity();
     const found = await pe.findEntity(id, column, table);
@@ -191,11 +188,15 @@ async function test(){
             console.log("test failure");
         }
         
-        console.log("next test");
+        console.log("test: fetching EntityHome info");
         const finalEntity: EntityHome = await pe.populateHome(newProfile, newProfile.entityID);
-        console.log(finalEntity);        
-
+        console.log(finalEntity);  
+        
+        console.log("test: grouping users by cohort")
         console.log(await pe.buildcohort('1063eaf1-3e34-47c2-a16f-5072ec33bd79'));
+
+        console.log("test: getting cohorts linked to coach");
+        console.log(await pe.coachLinkedCohorts('4ca98e99-3328-4cb7-86b6-715c0be96358'));
 
     } else{
         console.log("test failure");
@@ -204,7 +205,7 @@ async function test(){
     //await testPool.end();
 }
 
-test().catch(console.error);
+//test().catch(console.error);
 
 // const pool = await getPool();
 // const pe = new populateEntity();

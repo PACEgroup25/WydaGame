@@ -1,10 +1,11 @@
-import {type Entity, type UserLinkedEntity, type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
+//import CollapsibleContent from "bits-ui/dist/bits/collapsible/components/collapsible-content.svelte";
+import {type Entity,type EntityProfile, type EntityHome} from "./entity.ts";
 import { populateEntity } from "./populateEntity.ts";
 
 
 export class Client{ 
     role: string;
-    clientEntity: Entity; // id (PartitionKey)
+    //clientEntity: Entity; // id (PartitionKey)
     clientProfile: EntityProfile; // id, entityID (RowKey), firstName, lastName, createdAt, updatedAt
     clientHome: EntityHome; // id, entityID (RowKey), firstName, lastName, createdAt, updatedAt, cohortID, organisationID
 
@@ -12,43 +13,62 @@ export class Client{
 
     constructor(clientRole:string){
         this.role = clientRole;
-        this.clientEntity = {id: ''};
-        this.clientProfile ={ ...this.clientEntity, entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null};
+        //this.clientEntity = {id: ''};
+        this.clientProfile ={ id: '', entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null};
         this.clientHome ={...this.clientProfile, cohortID: null, organisationID: null};
     }
 
-    async delcareClient(){ //assignes an id to the end-user
+    async declareClient(): Promise<boolean>{ //assignes an id to the end-user
     
         if(this.role == 'Learning Coach'){
-            this.clientProfile.id = '481a35ed-f0aa-404e-9edb-fdc4a82fc5a0'; //PartitionKey
+            this.clientProfile.entityID = '4ca98e99-3328-4cb7-86b6-715c0be96358'; //PartitionKey
             if(await this.buildClient()){
-                this.assignCoachCohorts();
+                await this.assignCoachCohorts();
             }
         
         } else if (this.role == 'Learner'){
-            this.clientProfile.id = '0573a9b9-c9fc-4aa6-a340-17909a6c34d2'; //PartitionKey
-            this.buildClient();
+            this.clientProfile.entityID = 'fb18cdce-d9e3-42ff-84c6-b6961e840cbc'; //PartitionKey
+            await this.buildClient();
+            console.log(this.clientProfile)
 
         } else if (this.role == 'Client Admin'){
-            this.clientProfile.id = '9caf0959-d5c8-4590-ab6e-0b60c8475fc6'; //PartitionKey
+            this.clientProfile.entityID = '1d7f4057-be1c-427f-a3c4-99edec2ac38b'; //PartitionKey
             if(await this.buildClient()){
-                this. assignCohorts();
+                await this. assignCohorts();
             }
-        }  
+        }
+        return true
     }
 
     async buildClient(): Promise<boolean>{ //builds client Entity interface
-        this.clientProfile = await this.populate.populateProfile(this.clientEntity.id);  
+        this.clientProfile = await this.populate.populateProfile(this.clientProfile.entityID);
+
+        console.log("profile made")
+        console.log(this.clientProfile);
+
         return true         
     }
 
-    async assignCoachCohorts(){ //assigns the learning coach their cohorts and org info
-        this.clientHome.organisationID = await this.populate.getValue('PartitionKey', 'UsersOrganisations', 'RowKey', this.clientProfile.entityID);
-        this.clientHome.cohortID = await this.populate.coachLinkedCohorts(this.clientProfile.entityID);
+    async assignCoachCohorts(): Promise<boolean>{ //assigns the learning coach their cohorts and org info
+        this.clientHome = {
+            ...this.clientProfile,
+            organisationID: await this.populate.getValue('PartitionKey', 'UsersOrganisations', 'RowKey', this.clientProfile.entityID),
+            cohortID: await this.populate.coachLinkedCohorts(this.clientProfile.entityID)
+        }
+        
+        console.log("coach cohorts assigned")
+        console.log(this.clientHome);
+
+        return true
     }
 
-    async assignCohorts(){ // assigns the clients admin their cohort and org info
+    async assignCohorts(): Promise<boolean>{ // assigns the clients admin their cohort and org info
+
         this.clientHome = await this.populate.populateHome(this.clientProfile, this.clientProfile.entityID);
+
+        console.log("cohort assigned");
+        console.log(this.clientHome);
+        return true
     }
 
     async getClientProfile(): Promise<EntityProfile>{ //returns client EntityProfile interface
@@ -59,3 +79,18 @@ export class Client{
         return this.clientHome
     }
 }
+
+//RUN WITH: npx ts-node --esm -r tsconfig-paths/register src/lib/data/buildProfile.ts
+
+
+// async function test(){
+//     console.log("Client Admin test")
+//     const learner = new Client('Client Admin');
+//     if(await learner.declareClient()){
+//         console.log("client made")
+        
+//         const profile: EntityProfile = await learner.getClientProfile()
+//     }
+// }
+
+// test()

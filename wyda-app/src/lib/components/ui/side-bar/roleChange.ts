@@ -7,5 +7,5 @@ export async  function roleChange(role: string) {
     else if (role === 'Client Admin') location.href = '/client-admin';
 
     const newClient = new Client(role)
-    await newClient.delcareClient();
+    await newClient.declareClient();
 }
