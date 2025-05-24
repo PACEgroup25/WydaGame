@@ -23,6 +23,7 @@
     if (!target) return;
     const role = target.value
 
+
     roleChange(role);
   }
   
@@ -134,7 +135,7 @@
         <option>Learner</option>
         <option>Learning Coach</option>
         <option>Client Admin</option>
-        <option>Wyda Admin</option>
+       
       </select>
     </div>
 
