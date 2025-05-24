@@ -1,5 +1,5 @@
 import sql from 'mssql'; //azure databse -> SQL not mySql
-import { type UserLinkedEntity, type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
+import {type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
 import { getPool } from "./createPool.ts";
 import { isFileLoadingAllowed } from 'vite';
 
@@ -46,17 +46,17 @@ export class populateEntity{
 
             const result = await pool.request()
             .input('userId', sql.VarChar, newUser)
-            .query('SELECT * FROM UsersProfiles WHERE PartitionKey = @userId');
+            .query('SELECT * FROM UsersProfiles WHERE RowKey = @userId');
 
             const rows = result.recordset;
 
             const row = rows[0] as any;
 
             const profile: EntityProfile ={
-                id: newUser,//update when db updates
+                id: newUser, 
                 entityID: row.id,
-                firstName: row.first_name, //update when db updates
-                lastName: row.last_name, //update when db updates
+                firstName: row.first_name,
+                lastName: row.last_name, 
                 createdAt: new Date (row.createdAt), //INVALLID DATE -> fix
                 updatedAt: new Date (row.updatedAt) //INVALLID DATE -> fix
             }
@@ -69,7 +69,7 @@ export class populateEntity{
         }          
     }
 
-    async getValue(table: string, column: string, key: string, goal:string){
+    async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user
   
@@ -77,10 +77,10 @@ export class populateEntity{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
-            .input('goal', sql.VarChar, goal)
-            .query(`SELECT ${column} FROM ${table} WHERE ${key} = @goal`) //sanatise
+            .input('key', sql.VarChar, key)
+            .query(`SELECT ${targetColumn} FROM ${table} WHERE ${referenceColumn} = @key`) //sanatise
             
-            const found = result.recordset[0]?.[column];
+            const found = result.recordset[0]?.[targetColumn];
 
             if(found != null){
                 return found;
@@ -103,6 +103,23 @@ export class populateEntity{
 
             const members: string[] = result.recordset.map(row => row.RowKey);
             return members;
+
+        }catch(err){
+            console.log('query isFileLoadingAllowed:', err);
+            throw new Error("Invalid state error")
+        }
+    }
+
+    async coachLinkedCohorts(user: string): Promise<string[]>{
+        try{
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+                .input('user', sql.VarChar, user)
+                .query(`SELECT RowKey FROM CoachAssignedCohorts WHERE PartitionKey = @user`)
+
+            const cohorts: string[] = result.recordset.map(row => row.RowKey);
+            return cohorts;
 
         }catch(err){
             console.log('query isFileLoadingAllowed:', err);
@@ -146,9 +163,9 @@ export class populateEntity{
 
 async function test(){
     
-    const id = '0573a9b9-c9fc-4aa6-a340-17909a6c34d2'
+    const id = 'fb18cdce-d9e3-42ff-84c6-b6961e840cbc' //RowKey
     const table = 'Users'
-    const column = 'PartitionKey'
+    const column = 'RowKey'
 
     const pe = new populateEntity();
     const found = await pe.findEntity(id, column, table);
@@ -159,7 +176,7 @@ async function test(){
         console.log(newProfile);
 
         console.log("next test");
-        const accessRole = await pe.getValue('UsersRoles', 'role', 'RowKey', newProfile.entityID);
+        const accessRole = await pe.getValue('role', 'UsersRoles', 'RowKey', newProfile.entityID);
         if(accessRole != null){
             const updatedProfile: EntityRole = {
                 ...newProfile,
@@ -171,11 +188,15 @@ async function test(){
             console.log("test failure");
         }
         
-        console.log("next test");
+        console.log("test: fetching EntityHome info");
         const finalEntity: EntityHome = await pe.populateHome(newProfile, newProfile.entityID);
-        console.log(finalEntity);        
-
+        console.log(finalEntity);  
+        
+        console.log("test: grouping users by cohort")
         console.log(await pe.buildcohort('1063eaf1-3e34-47c2-a16f-5072ec33bd79'));
+
+        console.log("test: getting cohorts linked to coach");
+        console.log(await pe.coachLinkedCohorts('4ca98e99-3328-4cb7-86b6-715c0be96358'));
 
     } else{
         console.log("test failure");
@@ -184,7 +205,7 @@ async function test(){
     //await testPool.end();
 }
 
-test().catch(console.error);
+//test().catch(console.error);
 
 // const pool = await getPool();
 // const pe = new populateEntity();
