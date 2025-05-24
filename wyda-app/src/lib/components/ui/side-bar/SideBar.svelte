@@ -13,7 +13,7 @@
 
   import { roleChange } from "./roleChange.ts"
 
-  function handleRoleChange(event: Event){
+  async function handleRoleChange(event: Event){
     const target = event.target as HTMLSelectElement | null;
 
     if (!target) return;

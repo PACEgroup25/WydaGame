@@ -53,10 +53,10 @@ export class populateEntity{
             const row = rows[0] as any;
 
             const profile: EntityProfile ={
-                id: newUser, //update when db updates
+                id: newUser, 
                 entityID: row.id,
-                firstName: row.first_name, //update when db updates
-                lastName: row.last_name, //update when db updates
+                firstName: row.first_name,
+                lastName: row.last_name, 
                 createdAt: new Date (row.createdAt), //INVALLID DATE -> fix
                 updatedAt: new Date (row.updatedAt) //INVALLID DATE -> fix
             }
@@ -69,7 +69,7 @@ export class populateEntity{
         }          
     }
 
-    async getValue(column: string, table: string,  key: string, goal:string){
+    async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user
   
@@ -77,13 +77,13 @@ export class populateEntity{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
-            .input('column', sql.VarChar, column)
+            .input('targetColumn', sql.VarChar, targetColumn)
             .input('table', sql.VarChar, table)
-            .input('goalKey', sql.VarChar, key)
-            .input('goal', sql.VarChar, goal)
-            .query(`SELECT @column FROM @table WHERE @goalKey = @goal`) //sanatise
+            .input('referenceColumn', sql.VarChar, referenceColumn)
+            .input('key', sql.VarChar, key)
+            .query(`SELECT @targetColumn FROM @table WHERE @referenceColumn = @key`) //sanatise
             
-            const found = result.recordset[0]?.[column];
+            const found = result.recordset[0]?.[targetColumn];
 
             if(found != null){
                 return found;
@@ -106,6 +106,23 @@ export class populateEntity{
 
             const members: string[] = result.recordset.map(row => row.RowKey);
             return members;
+
+        }catch(err){
+            console.log('query isFileLoadingAllowed:', err);
+            throw new Error("Invalid state error")
+        }
+    }
+
+    async coachLinkedCohorts(user: string){
+        try{
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+            .input('user', sql.VarChar, user)
+            .query(`SELECT RowKey FROM UsersCohorts WHERE PartitionKey = @user`)
+
+            const cohorts: string[] = result.recordset.map(row => row.RowKey);
+            return cohorts;
 
         }catch(err){
             console.log('query isFileLoadingAllowed:', err);
