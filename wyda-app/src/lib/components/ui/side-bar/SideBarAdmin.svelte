@@ -33,8 +33,8 @@
     <div class="locations-container flex flex-col h-full mt-8 mb-4 gap-y-2">
       <Button
         variant="sidebarLearningCoach"
-        href="/learner"
-        class="m-1 flex justify-start {currentPath === "/learner"
+        href="/client-admin"
+        class="m-1 flex justify-start {currentPath === "/client-admin"
           ? 'bg-[#676969]'
           : 'bg-transparent'}"
       >
@@ -42,24 +42,13 @@
         <span>Home</span>
       </Button>
 
-      <Button
-        variant="sidebarLearningCoach"
-        href="/learner"
-        class="m-1 flex justify-start {currentPath === "/learner"
-          ? 'bg-[#676969]'
-          : 'bg-transparent'}"
-      >
-        <Boxes />
-        <span>Cohort Overview</span>
-      </Button>
-
       
       
   
       <Button
         variant="sidebarLearningCoach"
-        href="/learner/analytics"
-        class="m-1 flex justify-start {currentPath.includes('/learner/analytics')
+        href="/client-admin/analytics"
+        class="m-1 flex justify-start {currentPath.includes('/client-admin/analytics')
           ? 'bg-[#1b5d74]'
           : 'bg-transparent'}"
       >
@@ -68,8 +57,8 @@
       </Button>
       <Button
         variant="sidebarLearningCoach"
-        href="/learner/reports"
-        class="m-1 flex justify-start {currentPath.includes('/learner/reports')
+        href="/client-admin/reports"
+        class="m-1 flex justify-start {currentPath.includes('/client-admin/reports')
           ? 'bg-[#1b5d74]'
           : 'bg-transparent'}"
       >

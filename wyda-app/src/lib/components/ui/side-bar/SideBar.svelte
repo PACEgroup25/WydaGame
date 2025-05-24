@@ -2,7 +2,6 @@
   import Button from "../button/button.svelte";
   import {
     Home,
-    ChartNoAxesCombined,
     Clock,
     Info,
     ClipboardPlus
@@ -54,26 +53,7 @@
       <span>Recent Activity</span>
     </Button>
 
-    <Button
-      variant="sidebarLearningCoach"
-      href="/learner/analytics"
-      class="m-1 flex justify-start {currentPath.includes('/learner/analytics')
-        ? 'bg-[#1b5d74]'
-        : 'bg-transparent'}"
-    >
-      <ChartNoAxesCombined />
-      <span>Analytics</span>
-    </Button>
-    <Button
-      variant="sidebarLearningCoach"
-      href="/learner/reports"
-      class="m-1 flex justify-start {currentPath.includes('/learner/reports')
-        ? 'bg-[#1b5d74]'
-        : 'bg-transparent'}"
-    >
-      <ClipboardPlus />
-      <span>Reports</span>
-    </Button>
+  
     <Button
     variant="sidebarLearningCoach"
     href="/learner/help"

@@ -91,8 +91,7 @@
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">Learner Support</h1>
       <div class="text-right text-sm">
-        <div class="font-semibold text-blue-900">Wed 30 Apr 16:40</div>
-        <div class="text-gray-500">Last login: 2 hrs ago</div>
+        
       </div>
     </div>
   
