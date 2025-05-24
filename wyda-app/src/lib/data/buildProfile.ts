@@ -80,17 +80,22 @@ export class Client{
     }
 }
 
+
+
+
+async function test(role: string){
+    console.log(role, "test")
+    const learner = new Client(role);
+    if(await learner.declareClient()){
+        console.log("client made")
+        
+        const profile: EntityProfile = await learner.getClientProfile()
+    }
+}
+
+
 //RUN WITH: npx ts-node --esm -r tsconfig-paths/register src/lib/data/buildProfile.ts
 
-
-// async function test(){
-//     console.log("Client Admin test")
-//     const learner = new Client('Client Admin');
-//     if(await learner.declareClient()){
-//         console.log("client made")
-        
-//         const profile: EntityProfile = await learner.getClientProfile()
-//     }
-// }
-
-// test()
+// test('Learner')
+// test('Client Admin')
+// test('Learning Coach')
