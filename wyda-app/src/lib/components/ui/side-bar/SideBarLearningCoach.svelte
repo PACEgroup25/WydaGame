@@ -23,7 +23,7 @@
     if (role === 'Learner') location.href = '/learner';
     else if (role === 'Learning Coach') location.href = '/learning-coach';
     else if (role === 'Client Admin') location.href = '/client-admin';
-    else if (role === 'Wyda Admin') location.href = '/wyda-admin';
+    
   }
 </script>
 
@@ -118,7 +118,7 @@
         <option>Learner</option>
         <option>Learning Coach</option>
         <option>Client Admin</option>
-        <option>Wyda Admin</option>
+       
       </select>
     </div>
 
