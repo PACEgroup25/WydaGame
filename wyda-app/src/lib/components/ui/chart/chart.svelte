@@ -23,18 +23,18 @@
             borderColor: data.borderColor,
             borderWidth: data.borderWidth,
             cubicInterpolationMode: data.cubicInterpolationMode,
-            tension: data.tension
-          }
-        ]
+            tension: data.tension,
+          },
+        ],
       },
       options: {
         indexAxis: data.indexAxis,
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-          y
-        }
-      }
+          y,
+        },
+      },
     });
   });
 </script>

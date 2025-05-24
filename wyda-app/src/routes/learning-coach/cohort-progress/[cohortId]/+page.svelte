@@ -13,11 +13,17 @@
     borderWidth: 5,
     borderColor: "rgb(87, 197, 255)",
     tension: 0.3,
-    size: { height: "2", width: "5" },
     y: {
       beginAtZero: false,
       max: 3.5,
     },
+  };
+
+  const chartData2 = {
+    chartLabel: "Cohort Status",
+    labels: ["Users At risk", "Users On Track"],
+    backgroundColor: ["rgba(222,90,90,1)", "rgba(180,221,221,1)"],
+    data: [data.data.usersAtRisk, data.data.usersOnTrack],
   };
 
   //the max data value and use for max y scale in chart
@@ -39,14 +45,25 @@
   <div
     class="stats-container flex flex-wrap justify-between w-full gap-10 mb-5"
   >
-    {@render stat(data.data.onTrackUsers, "Users on track")}
-    {@render stat(data.data.usersAtRisk, "Users at risk")}
+    {@render stat(data.data.percentageOnTrackUsers, "Users on track")}
+    {@render stat(data.data.percentageUsersAtRisk, "Users at risk")}
     {@render stat(
       data.data.averageReflectionQuality,
       "Average reflection Quality"
     )}
     {@render stat((23).toString(), "Learning Streaks")}
   </div>
-  <Chart type={"line"} {...chartData} />
+  <div class="flex">
+    <Chart
+      type={"line"}
+      {...chartData}
+      size={{ height: "500px", width: "500px" }}
+    />
+    <Chart
+      type={"pie"}
+      {...chartData2}
+      size={{ height: "500px", width: "500px" }}
+    />
+  </div>
   <DataTable {columns} data={data.data.value} />
 </main>

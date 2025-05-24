@@ -31,8 +31,10 @@ export function load({params}) {
     averageReflectionQuality = (totalReflectionQuality/userData.length).toFixed(2).toString();
     return {
         cohortId: params.cohortId,
-        onTrackUsers: onTrackUsers,
-        usersAtRisk: usersAtRisk,
+        percentageOnTrackUsers: onTrackUsers,
+        usersOnTrack: onTrack,
+        percentageUsersAtRisk: usersAtRisk,
+        usersAtRisk: behind,
         averageReflectionQuality: averageReflectionQuality,
         value: userData
     };
