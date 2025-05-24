@@ -1,5 +1,5 @@
 import sql from 'mssql'; //azure databse -> SQL not mySql
-import { type UserLinkedEntity, type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
+import {type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
 import { getPool } from "./createPool.ts";
 import { isFileLoadingAllowed } from 'vite';
 
@@ -69,7 +69,7 @@ export class populateEntity{
         }          
     }
 
-    async getValue(table: string, column: string, key: string, goal:string){
+    async getValue(column: string, table: string,  key: string, goal:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user
   
@@ -77,8 +77,11 @@ export class populateEntity{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
+            .input('column', sql.VarChar, column)
+            .input('table', sql.VarChar, table)
+            .input('goalKey', sql.VarChar, key)
             .input('goal', sql.VarChar, goal)
-            .query(`SELECT ${column} FROM ${table} WHERE ${key} = @goal`) //sanatise
+            .query(`SELECT @column FROM @table WHERE @goalKey = @goal`) //sanatise
             
             const found = result.recordset[0]?.[column];
 
@@ -159,7 +162,7 @@ async function test(){
         console.log(newProfile);
 
         console.log("next test");
-        const accessRole = await pe.getValue('UsersRoles', 'role', 'RowKey', newProfile.entityID);
+        const accessRole = await pe.getValue('role', 'UsersRoles', 'RowKey', newProfile.entityID);
         if(accessRole != null){
             const updatedProfile: EntityRole = {
                 ...newProfile,
