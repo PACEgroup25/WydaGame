@@ -10,21 +10,37 @@
     ClipboardPlus,
   } from "@lucide/svelte";
 
+ 
+
   import { page } from "$app/state";
   let currentPath = $derived(page.url.pathname);
 
-  function handleRoleChange(event: Event) {
+  import { roleChange } from "./roleChange.ts"
+
+  function handleRoleChange(event: Event){
     const target = event.target as HTMLSelectElement | null;
 
     if (!target) return;
+    const role = target.value
 
-    const role = target.value;
-
-    if (role === 'Learner') location.href = '/learner';
-    else if (role === 'Learning Coach') location.href = '/learning-coach';
-    else if (role === 'Client Admin') location.href = '/client-admin';
-    else if (role === 'Wyda Admin') location.href = '/wyda-admin';
+    roleChange(role);
   }
+  
+
+
+
+  // function handleRoleChange(event: Event) {
+  //   const target = event.target as HTMLSelectElement | null;
+
+  //   if (!target) return;
+
+  //   const role = target.value;
+
+  //   if (role === 'Learner') location.href = '/learner';
+  //   else if (role === 'Learning Coach') location.href = '/learning-coach';
+  //   else if (role === 'Client Admin') location.href = '/client-admin';
+  //   else if (role === 'Wyda Admin') location.href = '/wyda-admin';
+  // }
 </script>
 
 <div

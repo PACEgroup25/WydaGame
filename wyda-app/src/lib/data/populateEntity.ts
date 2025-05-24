@@ -53,7 +53,7 @@ export class populateEntity{
             const row = rows[0] as any;
 
             const profile: EntityProfile ={
-                id: newUser,//update when db updates
+                id: newUser, //update when db updates
                 entityID: row.id,
                 firstName: row.first_name, //update when db updates
                 lastName: row.last_name, //update when db updates
