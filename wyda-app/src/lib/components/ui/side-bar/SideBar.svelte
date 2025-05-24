@@ -1,67 +1,108 @@
-<script>
+<script lang="ts">
   import Button from "../button/button.svelte";
   import {
-    LayoutDashboard,
-    ChartLine,
-    LogOut,
-    Bell,
+    Home,
+    ChartNoAxesCombined,
+    Clock,
     Info,
+    ClipboardPlus
   } from "@lucide/svelte";
 
   import { page } from "$app/state";
   let currentPath = $derived(page.url.pathname);
+
+  function handleRoleChange(event: Event) {
+    const target = event.target as HTMLSelectElement | null;
+
+    if (!target) return;
+
+    const role = target.value;
+
+    if (role === 'Learner') location.href = '/learner';
+    else if (role === 'Learning Coach') location.href = '/learning-coach';
+    else if (role === 'Client Admin') location.href = '/client-admin';
+    else if (role === 'Wyda Admin') location.href = '/wyda-admin';
+  }
 </script>
 
 <div
-  class="navigation-container bg-[#f0f2f6] border-r border-r-greyBorder h-dvh flex flex-col sticky top-0"
+  class="navigation-container w-60 bg-[#494A4A] border-r border-r-greyBorder h-dvh flex flex-col sticky top-0"
 >
-  <div class="logo-container flex flex-row justify-center mt-4 mb-4">
-    <img src="/full_logo.png" alt="wyda-logo" class="h-7" />
-  </div>
-  <div class="locations-container flex flex-col h-full mt-8 mb-4">
+
+
+
+  <div class="locations-container flex flex-col h-full mt-8 mb-4 gap-y-2">
     <Button
-      variant="sidebar"
+      variant="sidebarLearningCoach"
       href="/learner"
-      class="m-1 flex justify-start {currentPath === '/learner'
-        ? 'bg-[#b4dedd]'
+      class="m-1 flex justify-start {currentPath === "/learner"
+        ? 'bg-[#676969]'
         : 'bg-transparent'}"
     >
-      <LayoutDashboard />
-      <span>Dashboard</span>
+      <Home />
+      <span>Home</span>
     </Button>
+    
     <Button
-      variant="sidebar"
-      href="/learner/analytics"
-      class="m-1 flex justify-start {currentPath === '/learner/analytics'
-        ? 'bg-[#b4dedd]'
+      variant="sidebarLearningCoach"
+      href="/learner/recent-activity"
+      class="m-1 flex justify-start {currentPath.includes('/learner/recent-activity')
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
-      <ChartLine />
+      <Clock />
+      <span>Recent Activity</span>
+    </Button>
+
+    <Button
+      variant="sidebarLearningCoach"
+      href="/learner/analytics"
+      class="m-1 flex justify-start {currentPath.includes('/learner/analytics')
+        ? 'bg-[#1b5d74]'
+        : 'bg-transparent'}"
+    >
+      <ChartNoAxesCombined />
       <span>Analytics</span>
     </Button>
     <Button
-      variant="sidebar"
-      href="/learner/help"
-      class="m-1 flex justify-start {currentPath === '/learner/help'
-        ? 'bg-[#b4dedd]'
+      variant="sidebarLearningCoach"
+      href="/learner/reports"
+      class="m-1 flex justify-start {currentPath.includes('/learner/reports')
+        ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
-      <Info />
-      <span>Help</span>
+      <ClipboardPlus />
+      <span>Reports</span>
     </Button>
-  </div>
-  <div class="profile-container flex justify-evenly mb-4">
-    <div
-      class="image-container flex justify-center items-center h-12 w-12 bg-blue-500 rounded-full"
-    >
-      EU
-    </div>
-    <div class="text-container flex items-center">Example User</div>
-  </div>
-  <div
-    class="actions-container flex justify-evenly border-t border-t-greyBorder"
+    <Button
+    variant="sidebarLearningCoach"
+    href="/learner/help"
+    class="m-1 flex justify-start {currentPath.includes('/learner/help')
+      ? 'bg-[#1b5d74]'
+      : 'bg-transparent'}"
   >
-    <Button variant="sidebar" href="/" class="m-1 w-[6em]"><LogOut /></Button>
-    <Button variant="sidebar" class="m-1 w-[6em]"><Bell /></Button>
+    <Info />
+    <span>Help</span>
+  </Button>
+    
+
+    <div class="mt-auto pt-4 mb-8 border-t border-gray-600 flex flex-col items-center">
+      <label for="role-switcher" class="block text-sm font-semibold text-white mb-2 text-center">
+       
+      </label>
+      <select
+        id="role-switcher"
+        onchange={handleRoleChange}
+        class="w-30 bg-gray-100 text-black font-medium rounded-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        <option disabled selected>Switch View</option>
+        <option>Learner</option>
+        <option>Learning Coach</option>
+        <option>Client Admin</option>
+        <option>Wyda Admin</option>
+      </select>
+    </div>
+
   </div>
+  
 </div>
