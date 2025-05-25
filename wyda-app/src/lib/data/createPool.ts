@@ -27,21 +27,6 @@ export async function getPool(){
             }
 
         });
-
-        //final project db
-        // pool = mysql.createPool({
-        //     host: "pace-test.database.windows.net",
-        //     user: "pacetest",
-        //     password: "p(6-Lp91j%",
-        //     database: "paceTest",
-        //     port: 3306,
-        //     ssl: {rejectUnauthorized: false},
-        //     waitForConnections: true,
-        //     connectionLimit: 10,
-        //     queueLimit: 0
-        // });
-
-       
     }
     if(!pool){
         console.log("failed connection")
@@ -49,30 +34,6 @@ export async function getPool(){
     console.log("db found");
     return pool;
 }
-
-//test function
-
-// async function test() {
-//     let poolTest: sql.ConnectionPool | undefined;
-//     try{
-//         poolTest = await getPool();
-//         const tables = await poolTest.request().query(`
-//         SELECT TABLE_NAME
-//         FROM INFORMATION_SCHEMA.
-//         TABLES WHERE TABLE_TYPE = 'BASE TABLE';
-//     `);
-//     console.log('Tables:', tables.recordset);
-
-//     }catch (err){
-//         console.error('Database error:', err);
-//     }finally{
-//         if(poolTest !== undefined){
-//             await poolTest.close();
-//         }
-//     }
-// }
-
-// test();
 
 
 //npx ts-node --esm -r tsconfig-paths/register src/lib/data/createPool.ts

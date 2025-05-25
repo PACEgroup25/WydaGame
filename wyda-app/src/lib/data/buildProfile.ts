@@ -94,8 +94,8 @@ async function test(role: string){
 }
 
 
-//RUN WITH: npx ts-node --esm -r tsconfig-paths/register src/lib/data/buildProfile.ts
+// RUN WITH: npx ts-node --esm -r tsconfig-paths/register src/lib/data/buildProfile.ts
 
 // test('Learner')
-// test('Client Admin')
+test('Client Admin')
 // test('Learning Coach')
