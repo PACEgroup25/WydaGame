@@ -15,12 +15,18 @@
   } from "$lib/components/ui/data-table/index.js";
   import * as Table from "$lib/components/ui/table/index.js";
   import { Button } from "$lib/components/ui/button/index.js";
-  import Input from "$lib/components/ui/input/input.svelte";
+  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterMenu from "./data-table-filter-menu.svelte";
   import FilterTag from "./data-table-filter-tag.svelte";
-  import { ChevronRight, ChevronLeft } from "lucide-svelte";
-  import { ChevronsLeft, ChevronsRight } from "@lucide/svelte";
+  import {
+    ChevronRight,
+    ChevronLeft,
+    ChevronsLeft,
+    ChevronsRight,
+    Download,
+  } from "@lucide/svelte";
 
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
@@ -74,12 +80,12 @@
       } else {
         columnFilters = updater;
       }
-      if(table.getRowCount() == 0){
+      if (table.getRowCount() == 0) {
         currentPageIndex = 0;
-      } else{ 
+      } else {
         currentPageIndex = 1;
       }
-      numPages = Math.ceil(table.getRowCount()/pageSize);
+      numPages = Math.ceil(table.getRowCount() / pageSize);
     },
     onGlobalFilterChange: (updater) => {
       if (typeof updater === "function") {
@@ -88,12 +94,12 @@
       } else {
         globalFilter = updater;
       }
-      if(table.getRowCount() == 0){
+      if (table.getRowCount() == 0) {
         currentPageIndex = 0;
-      } else{ 
+      } else {
         currentPageIndex = 1;
       }
-      numPages = Math.ceil(table.getRowCount()/pageSize);
+      numPages = Math.ceil(table.getRowCount() / pageSize);
     },
     //pass in getters to state for table to
     //access our variables when it needs to
@@ -125,7 +131,7 @@
       id: "reflectionQuality",
       column: table.getColumn("reflectionQuality"),
       filterActive: false,
-    }
+    },
   ]);
 
   //Item boundary calculations to display on table
@@ -153,25 +159,38 @@
 </script>
 
 <div class="flex items-center py-4">
-  <div class="flex w-full items-center space-x-2">
+  <div class="flex w-full justify-between items-center space-x-2">
     <!-- global search input -->
-    <TableInput
-      class="outline-none focus:outline-none max-w-sm"
-      placeholder="Search..."
-      bind:value={tableInput}
-      onchange={(e) => {
-        table.setGlobalFilter(e.currentTarget.value);
-      }}
-      oninput={(e) => {
-        table.setGlobalFilter(e.currentTarget.value);
-      }}
-    />
-    <FilterMenu filterColumns={filterableColumns} />
-    {#each filterableColumns as filterColumn, i}
-      {#if filterColumn.filterActive}
-        <FilterTag bind:columnData={filterableColumns[i]} columnFilters={columnFilters}/>
-      {/if}
-    {/each}
+    <div class="flex space-x-2">
+      <TableInput
+        class="outline-none focus:outline-none max-w-sm"
+        placeholder="Search..."
+        bind:value={tableInput}
+        onchange={(e) => {
+          table.setGlobalFilter(e.currentTarget.value);
+        }}
+        oninput={(e) => {
+          table.setGlobalFilter(e.currentTarget.value);
+        }}
+      />
+      <FilterMenu filterColumns={filterableColumns} />
+      {#each filterableColumns as filterColumn, i}
+        {#if filterColumn.filterActive}
+          <FilterTag bind:columnData={filterableColumns[i]} {columnFilters} />
+        {/if}
+      {/each}
+    </div>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger class={buttonVariants({ variant: "outline" })}
+        ><Download />Export</DropdownMenu.Trigger
+      >
+      <DropdownMenu.Content>
+        <DropdownMenu.Group>
+          <DropdownMenu.Item>Export as CSV</DropdownMenu.Item>
+          <DropdownMenu.Item>Export as PDF</DropdownMenu.Item>
+        </DropdownMenu.Group>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   </div>
 </div>
 <div class="rounded-md border">
