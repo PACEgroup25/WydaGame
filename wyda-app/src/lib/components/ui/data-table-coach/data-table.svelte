@@ -34,6 +34,23 @@
     data: TData[];
   };
 
+
+  function downloadCSV(){
+      let csvContent = "data:text/csv;charset=utf-8";
+    
+      for(var i = 0; i<data.length; i++){
+        let row = Object.values(data[i]).join(",");
+        csvContent += row + "\r\n";
+      }
+    
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download","my_data.csv");
+      document.body.appendChild(link);
+      link.click();
+  }
+
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
   //local reactive variables
