@@ -20,7 +20,11 @@
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterMenu from "./data-table-filter-menu.svelte";
   import FilterTag from "./data-table-filter-tag.svelte";
-  import {toast} from "svelte-sonner";
+  import pdfMake from "pdfmake/build/pdfmake";
+  import pdfFonts from "pdfmake/build/vfs_fonts";
+  (pdfMake as any).addVirtualFileSystem(pdfFonts);
+
+  import { toast } from "svelte-sonner";
   import {
     ChevronRight,
     ChevronLeft,
@@ -29,32 +33,50 @@
     Download,
   } from "@lucide/svelte";
 
+  async function downloadAsPDF() {
+    const docDefinition = {
+      content: [
+        { text: "Hello, world!", fontSize: 18 },
+        { text: "This is a PDF generated with pdfmake.", margin: [0, 10] },
+        {
+          table: {
+            body: [
+              ["Column 1", "Column 2"],
+              ["Data 1", "Data 2"],
+            ],
+          },
+          margin: [0, 10],
+        },
+      ],
+    };
+    pdfMake.createPdf(docDefinition).download("my-pdf");
+  }
+
   type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
   };
 
+  function downloadCSV(data: any[]) {
+    let csvContent = "";
 
-  function downloadCSV(data){
-      let csvContent = "";
+    const headers = Object.keys(data[0]).join(",") + "\r\n";
+    csvContent += headers;
 
-      const headers = Object.keys(data[0]).join(",")+ "\r\n";
-      csvContent += headers;
+    for (var i = 0; i < data.length; i++) {
+      let row = Object.values(data[i]).join(",");
+      console.log(row);
+      csvContent += row + "\r\n";
+    }
 
-      for(var i = 0; i<data.length; i++){
-        let row = Object.values(data[i]).join(",");
-        console.log(row);
-        csvContent += row + "\r\n";
-      }
-    
-      const blob = new Blob([csvContent],{type:'text/csv;charset=utf-8;'});
-      const url = URL.createObjectURL(blob);
-      var link = document.createElement("a");
-      link.setAttribute("href", url);
-      link.setAttribute("download","my_data.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
   let { data, columns }: DataTableProps<TData, TValue> = $props();
@@ -210,15 +232,28 @@
       >
       <DropdownMenu.Content>
         <DropdownMenu.Group>
-            <div class="flex flex-col">
-              <Button variant={"ghost"} onclick={() => {toast("Your CSV file is downloading"); downloadCSV(data); console.log("downloading")}}>
-                Export as CSV
-              </Button>
-              <Button variant={"ghost"} onclick={() => toast("Your PDF file is downloading")}>
-                Export as PDF
-              </Button>
-            </div>
-          </DropdownMenu.Group>
+          <div class="flex flex-col">
+            <Button
+              variant={"ghost"}
+              onclick={() => {
+                toast("Your CSV file is downloading");
+                downloadCSV(data);
+                console.log("downloading");
+              }}
+            >
+              Export as CSV
+            </Button>
+            <Button
+              variant={"ghost"}
+              onclick={() => {
+                toast("Your PDF file is downloading");
+                downloadAsPDF();
+              }}
+            >
+              Export as PDF
+            </Button>
+          </div>
+        </DropdownMenu.Group>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   </div>
