@@ -22,6 +22,7 @@
   import FilterTag from "./data-table-filter-tag.svelte";
   import pdfMake from "pdfmake/build/pdfmake";
   import pdfFonts from "pdfmake/build/vfs_fonts";
+  import type { TDocumentDefinitions } from "pdfmake/interfaces";
   (pdfMake as any).addVirtualFileSystem(pdfFonts);
 
   import { toast } from "svelte-sonner";
@@ -33,21 +34,28 @@
     Download,
   } from "@lucide/svelte";
 
-  async function downloadAsPDF() {
-    const docDefinition = {
+  function downloadAsPDF(data: any[]) {
+    let bodyArr: (string | number)[][] = [];
+    let tableColHeaders = Object.keys(data[0]);
+
+    for (var i = 0; i < data.length; i++) {
+      let row: (string | number)[] = Object.values(data[i]);
+      bodyArr.push(row);
+    }
+
+    const docDefinition: TDocumentDefinitions = {
       content: [
-        { text: "Hello, world!", fontSize: 18 },
-        { text: "This is a PDF generated with pdfmake.", margin: [0, 10] },
+        { text: "Cohort Data", fontSize: 18 },
         {
           table: {
-            body: [
-              ["Column 1", "Column 2"],
-              ["Data 1", "Data 2"],
-            ],
+            body: [tableColHeaders, ...bodyArr],
           },
           margin: [0, 10],
         },
       ],
+      defaultStyle: {
+        fontSize: 8,
+      },
     };
     pdfMake.createPdf(docDefinition).download("my-pdf");
   }
@@ -247,7 +255,7 @@
               variant={"ghost"}
               onclick={() => {
                 toast("Your PDF file is downloading");
-                downloadAsPDF();
+                downloadAsPDF(data);
               }}
             >
               Export as PDF
