@@ -35,20 +35,26 @@
   };
 
 
-  function downloadCSV(){
-      let csvContent = "data:text/csv;charset=utf-8";
-    
+  function downloadCSV(data){
+      let csvContent = "";
+
+      const headers = Object.keys(data[0]).join(",")+ "\r\n";
+      csvContent += headers;
+
       for(var i = 0; i<data.length; i++){
         let row = Object.values(data[i]).join(",");
+        console.log(row);
         csvContent += row + "\r\n";
       }
     
-      var encodedUri = encodeURI(csvContent);
+      const blob = new Blob([csvContent],{type:'text/csv;charset=utf-8;'});
+      const url = URL.createObjectURL(blob);
       var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
+      link.setAttribute("href", url);
       link.setAttribute("download","my_data.csv");
       document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
   }
 
   let { data, columns }: DataTableProps<TData, TValue> = $props();
@@ -205,7 +211,7 @@
       <DropdownMenu.Content>
         <DropdownMenu.Group>
             <div class="flex flex-col">
-              <Button variant={"ghost"} onclick={() => toast("Your CSV file is downloading")}>
+              <Button variant={"ghost"} onclick={() => {toast("Your CSV file is downloading"); downloadCSV(data); console.log("downloading")}}>
                 Export as CSV
               </Button>
               <Button variant={"ghost"} onclick={() => toast("Your PDF file is downloading")}>
