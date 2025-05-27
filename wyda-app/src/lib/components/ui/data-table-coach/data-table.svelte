@@ -20,6 +20,7 @@
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import FilterMenu from "./data-table-filter-menu.svelte";
   import FilterTag from "./data-table-filter-tag.svelte";
+  import {toast} from "svelte-sonner";
   import {
     ChevronRight,
     ChevronLeft,
@@ -186,9 +187,15 @@
       >
       <DropdownMenu.Content>
         <DropdownMenu.Group>
-          <DropdownMenu.Item>Export as CSV</DropdownMenu.Item>
-          <DropdownMenu.Item>Export as PDF</DropdownMenu.Item>
-        </DropdownMenu.Group>
+            <div class="flex flex-col">
+              <Button variant={"ghost"} onclick={() => toast("Your CSV file is downloading")}>
+                Export as CSV
+              </Button>
+              <Button variant={"ghost"} onclick={() => toast("Your PDF file is downloading")}>
+                Export as PDF
+              </Button>
+            </div>
+          </DropdownMenu.Group>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
   </div>
