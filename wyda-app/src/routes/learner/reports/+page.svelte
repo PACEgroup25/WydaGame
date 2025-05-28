@@ -2,6 +2,10 @@
   let { data } = $props();
   import Chart from "$lib/components/ui/chart/chart.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
+  import { Download } from "@lucide/svelte";
+  import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.ts";
+  import { buttonVariants } from "$lib/components/ui/button/index.js";
+  import { toast } from "svelte-sonner";
   console.log(data);
 
   const keyLearningDecisionData = [
@@ -73,8 +77,40 @@
     Individual Learning Report
   </div>
   <div class="flex flex-col w-full h-full justify-start items-center">
-    <div class="flex justify-center items-center gap-10 mt-10">
-      <div class="flex flex-col bg-red-100 gap-10">
+    <div class="flex">
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger class={buttonVariants({ variant: "outline" })}
+          ><Download />Export</DropdownMenu.Trigger
+        >
+        <DropdownMenu.Content>
+          <DropdownMenu.Group>
+            <div class="flex flex-col">
+              <Button
+                variant={"ghost"}
+                onclick={() => {
+                  toast("Your CSV file is downloading");
+                  //downloadCSV(data);
+                  console.log("downloading");
+                }}
+              >
+                Export as CSV
+              </Button>
+              <Button
+                variant={"ghost"}
+                onclick={() => {
+                  toast("Your PDF file is downloading");
+                  //downloadAsPDF(data);
+                }}
+              >
+                Export as PDF
+              </Button>
+            </div>
+          </DropdownMenu.Group>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </div>
+    <div class="flex justify-center items-start gap-10 mt-10 bg-yellow-100">
+      <div class="flex flex-col justify-start bg-red-100 gap-10">
         <div class="text-3xl font-semibold">User Metrics</div>
         {#each chartdata as data, index}
           {#if index < 3}

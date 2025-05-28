@@ -1,5 +1,4 @@
 <script>
-  import SideBar from "$lib/components/ui/side-bar/SideBar.svelte";
   import { Hotel, Mail } from "@lucide/svelte";
   import * as Accordion from "$lib/components/ui/accordion";
 </script>
