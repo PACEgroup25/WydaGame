@@ -34,6 +34,16 @@
     Download,
   } from "@lucide/svelte";
 
+  import {
+    pageSize,
+    pagination,
+    sorting,
+    columnFilters,
+    globalFilter,
+    currentPageIndex,
+  } from "./table-state.svelte.ts";
+
+  //function for downloading table data as a PDF, utilises makePdf
   function downloadAsPDF(data: any[]) {
     let bodyArr: (string | number)[][] = [];
     let tableColHeaders = Object.keys(data[0]);
@@ -65,6 +75,7 @@
     data: TData[];
   };
 
+  //function for downloading table data as CSV done in native js
   function downloadCSV(data: any[]) {
     let csvContent = "";
 
@@ -90,18 +101,9 @@
   let { data, columns }: DataTableProps<TData, TValue> = $props();
 
   //local reactive variables
-  let pageSize = 10;
-  let pagination = $state<PaginationState>({
-    pageIndex: 0,
-    pageSize: pageSize,
-  });
-  let sorting = $state<SortingState>([]);
-  let columnFilters = $state<ColumnFiltersState>([]);
-  let globalFilter = $state<string>("");
-  let currentPageIndex = $state(1);
 
   //Initialisation of svelte table instance
-  const table = createSvelteTable({
+  export const table = createSvelteTable({
     get data() {
       return data;
     },
@@ -116,42 +118,42 @@
     //change handler parameters take in a function to update our reactive variables
     onPaginationChange: (updater) => {
       if (typeof updater === "function") {
-        pagination = updater(pagination);
+        pagination.paginationState = updater(pagination.paginationState);
       } else {
-        pagination = updater;
+        pagination.paginationState = updater;
       }
     },
     onSortingChange: (updater) => {
       if (typeof updater === "function") {
-        sorting = updater(sorting);
+        sorting.sortingState = updater(sorting.sortingState);
       } else {
-        sorting = updater;
+        sorting.sortingState = updater;
       }
     },
     onColumnFiltersChange: (updater) => {
       if (typeof updater === "function") {
-        columnFilters = updater(columnFilters);
+        columnFilters.columnFilters = updater(columnFilters.columnFilters);
       } else {
-        columnFilters = updater;
+        columnFilters.columnFilters = updater;
       }
       if (table.getRowCount() == 0) {
-        currentPageIndex = 0;
+        currentPageIndex.value = 0;
       } else {
-        currentPageIndex = 1;
+        currentPageIndex.value = 1;
       }
       numPages = Math.ceil(table.getRowCount() / pageSize);
     },
     onGlobalFilterChange: (updater) => {
       if (typeof updater === "function") {
         console.log(globalFilter);
-        globalFilter = updater(globalFilter);
+        globalFilter.globalFilter = updater(globalFilter.globalFilter);
       } else {
-        globalFilter = updater;
+        globalFilter.globalFilter = updater;
       }
       if (table.getRowCount() == 0) {
-        currentPageIndex = 0;
+        currentPageIndex.value = 0;
       } else {
-        currentPageIndex = 1;
+        currentPageIndex.value = 1;
       }
       numPages = Math.ceil(table.getRowCount() / pageSize);
     },
@@ -159,16 +161,16 @@
     //access our variables when it needs to
     state: {
       get globalFilter() {
-        return globalFilter;
+        return globalFilter.globalFilter;
       },
       get pagination() {
-        return pagination;
+        return pagination.paginationState;
       },
       get sorting() {
-        return sorting;
+        return sorting.sortingState;
       },
       get columnFilters() {
-        return columnFilters;
+        return columnFilters.columnFilters;
       },
     },
   });
@@ -194,7 +196,7 @@
   let numPages = $state(Math.ceil(rowAmount / pageSize));
 
   let itemBoundaryEnd = () => {
-    let res = pageSize * currentPageIndex;
+    let res = pageSize * currentPageIndex.value;
     if (res > rowAmount) {
       res = rowAmount;
     }
@@ -202,8 +204,8 @@
   };
 
   let itemBoundaryStart = () => {
-    if (pageSize * currentPageIndex > rowAmount) {
-      return pageSize * currentPageIndex - (pageSize - 1);
+    if (pageSize * currentPageIndex.value > rowAmount) {
+      return pageSize * currentPageIndex.value - (pageSize - 1);
     }
     return itemBoundaryEnd() - (pageSize - 1);
   };
@@ -230,7 +232,10 @@
       <FilterMenu filterColumns={filterableColumns} />
       {#each filterableColumns as filterColumn, i}
         {#if filterColumn.filterActive}
-          <FilterTag bind:columnData={filterableColumns[i]} {columnFilters} />
+          <FilterTag
+            bind:columnData={filterableColumns[i]}
+            columnFilters={columnFilters.columnFilters}
+          />
         {/if}
       {/each}
     </div>
@@ -344,7 +349,7 @@
         size="sm"
         onclick={() => {
           table.firstPage();
-          currentPageIndex = 1;
+          currentPageIndex.value = 1;
         }}
         disabled={!table.getCanPreviousPage()}
       >
@@ -356,7 +361,7 @@
         onclick={() => {
           table.previousPage();
           console.log("previous page pressed!");
-          currentPageIndex--;
+          currentPageIndex.value--;
         }}
         disabled={!table.getCanPreviousPage()}
       >
@@ -368,7 +373,7 @@
         onclick={() => {
           table.nextPage();
           console.log("next page pressed!");
-          currentPageIndex++;
+          currentPageIndex.value++;
         }}
         disabled={!table.getCanNextPage()}
       >
@@ -379,7 +384,7 @@
         size="sm"
         onclick={() => {
           table.lastPage();
-          currentPageIndex = numPages;
+          currentPageIndex.value = numPages;
         }}
         disabled={!table.getCanNextPage()}
       >
@@ -387,7 +392,7 @@
       </Button>
     </div>
     <div class="flex justify-center">
-      Page {currentPageIndex} of {numPages}
+      Page {currentPageIndex.value} of {numPages}
     </div>
   </div>
 </div>
