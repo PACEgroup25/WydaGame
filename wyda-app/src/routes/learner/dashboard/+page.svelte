@@ -5,12 +5,4 @@
   console.log(data);
 </script>
 
-<main>
-  <div class="page-container flex flex-row">
-    <SideBar />
-    <LearnerDashboard />
-  </div>
-</main>
-
-<style>
-</style>
+<LearnerDashboard />

@@ -29,7 +29,7 @@
   <div class="locations-container flex flex-col h-full mt-8 mb-4 gap-y-2">
     <Button
       variant="sidebarLearningCoach"
-      href="/learner"
+      href="/learner/dashboard"
       class="m-1 flex justify-start {currentPath === '/learner'
         ? 'bg-[#676969]'
         : 'bg-transparent'}"
