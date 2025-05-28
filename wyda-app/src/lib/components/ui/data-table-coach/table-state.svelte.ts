@@ -10,3 +10,4 @@
   export const pagination = $state({paginationState: {pageIndex: 0, pageSize: pageSize} as PaginationState} )
   export const globalFilter = $state({globalFilter: ""});
   export const currentPageIndex = $state({value: 1});
+  export const tableInput = $state({input: ""})
