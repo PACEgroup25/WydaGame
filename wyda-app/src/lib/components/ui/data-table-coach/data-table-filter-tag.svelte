@@ -1,17 +1,17 @@
 <script>
   import { Button } from "$lib/components/ui/button/index.js";
-  import X from "@lucide/svelte/icons/x"
+  import X from "@lucide/svelte/icons/x";
   let { columnData = $bindable(), columnFilters } = $props();
-  console.log(columnData.name + " tag created")
+  console.log(columnData.name + " tag created");
 
   function valueIndex() {
-    for(var i = 0; i<columnFilters.length; i++){
-      if(columnFilters[i].id == columnData.id){
+    for (var i = 0; i < columnFilters.length; i++) {
+      if (columnFilters[i].id == columnData.id) {
         console.log("value found");
         return columnFilters[i].value;
       }
     }
-    console.log("value not found returning first:")
+    console.log("value not found returning first:");
     return columnFilters[0].value;
   }
 </script>
@@ -25,6 +25,6 @@
     }}
   >
     {columnData.name} = {valueIndex()}
-    <X/>
+    <X />
   </Button>
 {/if}

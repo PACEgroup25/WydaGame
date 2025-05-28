@@ -1,15 +1,15 @@
 <script lang="ts">
   import FilterMenu from "./data-table-filter-menu.svelte";
+  import FilterTag from "./data-table-filter-tag.svelte";
   import TableInput from "$lib/components/ui/input/table-input.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import pdfMake from "pdfmake/build/pdfmake";
   import pdfFonts from "pdfmake/build/vfs_fonts";
   import type { TDocumentDefinitions } from "pdfmake/interfaces";
   import { tableInput } from "./table-state.svelte.ts";
-  import Button from "$lib/components/ui/button";
+  import { Button } from "$lib/components/ui/button";
   import { Download } from "@lucide/svelte";
   (pdfMake as any).addVirtualFileSystem(pdfFonts);
-  let { data } = $props();
 
   //function for downloading table data as a PDF, utilises makePdf
   function downloadAsPDF(data: any[]) {

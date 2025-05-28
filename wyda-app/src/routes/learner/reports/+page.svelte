@@ -72,12 +72,12 @@
   ];
 </script>
 
-<div class="flex w-full h-dvh flex-col justify-start">
+<div class="flex w-full flex-col justify-start">
   <div class="font-semibold text-4xl w-full flex justify-center mt-10">
     Individual Learning Report
   </div>
   <div class="flex flex-col w-full h-full justify-start items-center">
-    <div class="flex">
+    <div class="flex w-full justify-end mt-10">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger class={buttonVariants({ variant: "outline" })}
           ><Download />Export</DropdownMenu.Trigger
