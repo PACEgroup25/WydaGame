@@ -5,11 +5,18 @@
   let { data } = $props();
   let filterValue = $state("");
 
-  function applyFilter(data : any, filterValue : any) {
+  function applyFilter(data: any, filterValue: any) {
     data.filterActive = true;
-    data.column.setFilterValue(Number(filterValue));
+    if (data.column.id == "reflectionQuality") {
+      data.column.setFilterValue(Number(filterValue));
+    } else {
+      data.column.setFilterValue(filterValue);
+    }
     filterValue = "";
   }
+
+  //if status, then use select
+  //if reflection quality use number
 </script>
 
 <div class="grid gap-2">

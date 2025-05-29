@@ -7,6 +7,7 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.ts";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
   import { toast } from "svelte-sonner";
+  import * as Select from "$lib/components/ui/select/index.js";
   console.log(data);
 
   const keyLearningDecisionData = [
@@ -28,6 +29,8 @@
     { header: "Enacting McKinseys 7s", feedback: "You did well" },
     { header: "Resignation Dilemma", feedback: "You did well" },
     { header: "Securing Organisation Buy in", feedback: "You did well" },
+    { header: "Motivating Your Team", feedback: "" },
+    { header: "Setting Strategic Priorities", feedback: "" },
   ];
 
   export const chartdata = [
@@ -83,6 +86,8 @@
       data: [32, 79, 66],
     },
   ];
+
+  let value = $state("User 1");
 </script>
 
 <div class="flex w-full flex-col justify-start">
@@ -90,7 +95,17 @@
     Individual Learning Report
   </div>
   <div class="flex flex-col w-full h-full justify-start items-center">
-    <div class="flex w-full justify-end mt-10">
+    <div class="flex w-full justify-between mt-10">
+      <Select.Root type="single" bind:value>
+        <Select.Trigger class="w-[180px]">
+          {value}
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value="User 1">User 1</Select.Item>
+          <Select.Item value="User 2">User 2</Select.Item>
+          <Select.Item value="User 3">User 3</Select.Item>
+        </Select.Content>
+      </Select.Root>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger class={buttonVariants({ variant: "outline" })}
           ><Download />Export</DropdownMenu.Trigger
