@@ -44,4 +44,4 @@ async function test(id:string){
     console.log("profile built:", user);
 }
 
-test('870f99b2-46ec-4e4e-ae33-0fce97d85e1e');
+//test('870f99b2-46ec-4e4e-ae33-0fce97d85e1e');
