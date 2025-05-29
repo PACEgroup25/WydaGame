@@ -109,8 +109,8 @@
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </div>
-    <div class="flex justify-center items-start gap-10 mt-10 bg-yellow-100">
-      <div class="flex flex-col justify-start bg-red-100 gap-10">
+    <div class="flex justify-center items-start gap-10 mt-10">
+      <div class="flex flex-col justify-start gap-10">
         <div class="text-3xl font-semibold">User Metrics</div>
         {#each chartdata as data, index}
           {#if index < 3}
@@ -120,7 +120,7 @@
           {/if}
         {/each}
       </div>
-      <div class="flex flex-col bg-blue-100 gap-10">
+      <div class="flex flex-col gap-10">
         <div class="text-3xl font-semibold">Key Learning Decisions</div>
         {#each keyLearningDecisionData as data}
           <div class="border border-black gap-10">

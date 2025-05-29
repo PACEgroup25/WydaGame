@@ -36,23 +36,26 @@
   </div>
   <div class="section-1 flex gap-10">
     <div class="percentages stats gap-5">
-      <div class="flex text-2xl font-bold">Points Percentage Per Challenge</div>
+      <div class="flex text-2xl font-bold">Score Percentage Per Challenge and Time Spent</div>
       <div class="flex flex-col gap-2">
         <div class="flex text-xl font-semibold">LVL 1: Profitability Challenge</div>
-        {@render performanceIndicator("1.1 EVP Perspective",80)}
-        {@render performanceIndicator("1.2 CFO Perspective",70)}
+        {@render performanceIndicator("1.1 EVP: 15 Minutes",80)}
+        {@render performanceIndicator("1.2 CFO: 20 Minutes",70)}
         <div class="flex text-xl font-semibold">LVL 2: Launch Strategy Challenge</div>
-        {@render performanceIndicator("2.1 CMO Perspective",78)}
-        {@render performanceIndicator("2.2 COO Perspective",83)}
+        {@render performanceIndicator("2.1 CMO: 12 Minutes",78)}
+        {@render performanceIndicator("2.2 COO: 22 Minutes",83)}
       </div>
     </div>
     <div class="performances stats gap-5">
       <div class="flex text-2xl font-bold">Your Best Performances</div>
-      {@render performanceIndicator("5.1 CFO Perspective",92)}
-      {@render performanceIndicator("4.2 COO Perspective",90)}
+      {@render performanceIndicator("5.1 CFO: 24 Minutes",92)}
+      {@render performanceIndicator("4.2 COO: 18 Minutes",90)}
       <div class="flex text-2xl font-bold">Areas Needing Improvement</div>
-      {@render performanceIndicator("7.2 CEO Perspective",62)}
-      {@render performanceIndicator("6.2 CHRO Perspective",48)}
+      {@render performanceIndicator("7.2 CEO: 30 Minutes",62)}
+      {@render performanceIndicator("6.2 CHRO: 28 Minutes",48)}
     </div>
+  </div>
+  <div class="section-2 flex stats">
+    <div class="flex text-2xl font-bold">Key Takeaways</div>
   </div>
 </div>
