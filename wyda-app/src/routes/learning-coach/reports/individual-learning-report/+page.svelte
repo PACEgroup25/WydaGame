@@ -2,7 +2,7 @@
   let { data } = $props();
   import Chart from "$lib/components/ui/chart/chart.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
-  import Input from "$lib/components/ui/input/input.svelte";
+  import Textarea from "$lib/components/ui/textarea/textarea.svelte";
   import { Download } from "@lucide/svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.ts";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
@@ -134,11 +134,11 @@
         {/each}
       </div>
       <div class="flex flex-col gap-10">
-        <div class="text-3xl font-semibold">Key Learning Decisions</div>
+        <div class="text-3xl font-semibold w-md">Key Learning Decisions</div>
         {#each keyLearningDecisionData as data}
           <div class="stats gap-10">
             <div class="text-2xl font-semibold">{data.header}</div>
-            <Input />
+            <Textarea />
             <Button variant="outline">Submit</Button>
           </div>
         {/each}
