@@ -33,12 +33,26 @@
 
       </div>
     </div>
-    <div class="bg-purple-100 performances stats gap-2">
+
+    <div class="performances stats gap-2">
       <div class="flex text-2xl font-bold">Your Best Performances</div>
       <div class="flex text-xl font-semibold">5.1 CFO Perspective</div>
-      <Progress value={92} max={100}/>
+      <div class="flex items-center gap-3">
+        <Progress value={92} max={100}/> <span>92%</span>
+      </div>
       <div class="flex text-xl font-semibold">4.2 COO Perspective</div>
+      <div class="flex items-center gap-3">
+        <Progress value={90} max={100}/> <span>90%</span>
+      </div>
       <div class="flex text-2xl font-bold">Areas Needing Improvement</div>
+      <div class="flex text-xl font-semibold">7.2 CEO Perspective</div>
+      <div class="flex items-center gap-3">
+        <Progress value={62} max={100}/> <span>62%</span>
+      </div>
+      <div class="flex text-xl font-semibold">6.2 CHRO Perspective</div>
+      <div class="flex items-center gap-3">
+        <Progress value={48} max={100}/> <span>48%</span>
+      </div>
     </div>
   </div>
 </div>
