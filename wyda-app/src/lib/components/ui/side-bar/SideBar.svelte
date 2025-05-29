@@ -11,7 +11,7 @@
   import { page } from "$app/state";
   let currentPath = $derived(page.url.pathname);
 
-  // import { roleChange } from "./roleChange.ts"
+  import { roleChange } from "./roleChange.ts";
 
   async function handleRoleChange(event: Event) {
     const target = event.target as HTMLSelectElement | null;
@@ -20,6 +20,18 @@
     const role = target.value;
 
     // roleChange(role);
+
+    // function handleRoleChange(event: Event) {
+    //   const target = event.target as HTMLSelectElement | null;
+
+    //   if (!target) return;
+
+    //   const role = target.value;
+
+    if (role === "Learner") location.href = "/learner/dashboard";
+    else if (role === "Learning Coach") location.href = "/learning-coach";
+    else if (role === "Client Admin") location.href = "/client-admin";
+    else if (role === "Wyda Admin") location.href = "/wyda-admin";
   }
 </script>
 
