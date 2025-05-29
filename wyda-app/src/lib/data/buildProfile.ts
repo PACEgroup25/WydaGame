@@ -25,9 +25,6 @@ export class BuildUser{
     //     console.log("cohort assigned");
     //     return true;
     // }
-
-
-
     async getClientProfile(): Promise<EntityProfile>{ //returns client EntityHome interface (do not call for learners)
         if(await this.buildClient()){
             return this.userProfile;
