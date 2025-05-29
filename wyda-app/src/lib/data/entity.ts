@@ -21,3 +21,10 @@ export interface EntityHome extends Entity, EntityProfile{
 export interface EntityRole extends Entity, EntityProfile{
     role : string
 };
+
+export interface Cohort{
+    cohortID: string,
+    cohortName: string,
+    organisationID: string,
+    organisationName: string
+};

@@ -37,22 +37,3 @@ export async function getPool(){
 
 
 //npx ts-node --esm -r tsconfig-paths/register src/lib/data/createPool.ts
-
-
-// use:
-// import {createpool} from ./createPool
-// const pool = await createPool()
-// const [rows] = await pool.query('SHOW TABLES');
-
- //Noah's db:
-        // pool = mysql.createPool({
-        //     host: "pc25-db.mysql.database.azure.com",
-        //     user: "user1",
-        //     password: "&)*(Oklmno",
-        //     database: "testdb",
-        //     port: 3306,
-        //     ssl: {rejectUnauthorized: false},
-        //     waitForConnections: true,
-        //     connectionLimit: 10,
-        //     queueLimit: 0
-        // });
