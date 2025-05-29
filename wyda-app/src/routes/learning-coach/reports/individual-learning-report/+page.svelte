@@ -2,6 +2,7 @@
   let { data } = $props();
   import Chart from "$lib/components/ui/chart/chart.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
+  import Input from "$lib/components/ui/input/input.svelte";
   import { Download } from "@lucide/svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.ts";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
@@ -24,22 +25,11 @@
       feedback:
         "As CEO, after announcing ADA's strategic pivot and the restructure associated with it to the executive team, you had the decide whether or not to share the news with the rest of ADA's staff. In this instance, you directed the executive to keep the news quiet until the particulars of the restructure and redundancies had been decided. It's understandable to want to control information to maintain confidentiality, and commendable to want ahve all the answers buttoned down before you communicate the news. Unfortunately, it's too slow, and it's not transparent enough. Before you can share all the final details, you could share the high level strategic decisions made, and the big picture of what this means for the structure of the organisation. Being transparent where you can avoids employees being shocked and blindsided if they are impacted, and helps remaining employees adjust too. It's best to provide certainty on the reasoning and the processs, like how decisions will be made, how people will be tread, and when people will find out more.",
     },
-    {
-      header: "Enacting McKinseys 7s",
-      feedback:
-        "When deciding which of Mckinsey & Co's 7S values (strategy, structure, systems, shared values, skills, staff, style) to focus on when leading your organisation through a restructure as CEO, you chose to focus on style, systems, and shared values. While style and systems are important, these values did not warrant your immediate focus. Your first priority should have been to restructure the organisation to support the strategy you had revised in the previous challenge. When leading such a substantial change across the organisation, you are correct that it is imperative to align your people around shared values. Aligning your people around shared values allows you to delegate and still have a cohesive transformation. After delegating to your leadership team, they could then focus on what skills ADA would need going forward to implement the strategy you had revised in the previous challenge.",
-    },
-    {
-      header: "Resignation Dilemma",
-      feedback:
-        "As CEO, you chose not to accept COO Blake's resignation and offered him his planned redundancy package. There was no 'right' or 'wrong' decision here, however your approach demonstrated priority for fairness and transparency for the individual even if there was a short term additional cost the business, which had been budgeted in the restructuring costs. Your approach recognised the contribution Blake had make to the company over many years of service and ensured he was looked after with severance benefits. It's a tough decision, great work making it!",
-    },
-    {
-      header: "Securing Organisation Buy in",
-      feedback:
-        "Reflecting with your Executive Coach on the announcement of ADA's strategic restructuring to your executive team playing as CEO, you skillfully noticed the emotional signals from your team indicating they understood the change, but not all of them had bought in. You reflected that you could have spent more time detailing the 'WHY' behind the decision rather than focusing on 'how' to implement the changes. More context around why a decision has been made really helps people process news they are hearing for the first time - you'd been working on these changes for some time, but it was the first time most of your team were made aware of them. Great work! Many leaders focus too much on the transactional things to be done, or blame individuals for their reactions, great leaders reflect first on the part they played in crucial communications and use coaching to iteratively learn and continually improve their own skills.",
-    },
+    { header: "Enacting McKinseys 7s", feedback: "You did well" },
+    { header: "Resignation Dilemma", feedback: "You did well" },
+    { header: "Securing Organisation Buy in", feedback: "You did well" },
   ];
+
   export const chartdata = [
     {
       chartLabel: "Overall User's Progress By Levels",
@@ -100,7 +90,7 @@
     Individual Learning Report
   </div>
   <div class="flex flex-col w-full h-full justify-start items-center">
-    <div class="flex w-[60%] justify-end mt-10">
+    <div class="flex w-full justify-end mt-10">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger class={buttonVariants({ variant: "outline" })}
           ><Download />Export</DropdownMenu.Trigger
@@ -132,7 +122,7 @@
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </div>
-    <div class="flex justify-center items-start gap-10 mt-10 mb-10 w-[60%]">
+    <div class="flex justify-center items-start gap-10 mt-10">
       <div class="flex flex-col justify-start gap-10">
         <div class="text-3xl font-semibold">User Metrics</div>
         {#each chartdata as data, index}
@@ -146,11 +136,10 @@
       <div class="flex flex-col gap-10">
         <div class="text-3xl font-semibold">Key Learning Decisions</div>
         {#each keyLearningDecisionData as data}
-          <div class="stats flex flex-wrap gap-10">
-            <div class="text-2xl flex flex-wrap font-semibold">
-              {data.header}
-            </div>
-            <div>{data.feedback}</div>
+          <div class="stats gap-10">
+            <div class="text-2xl font-semibold">{data.header}</div>
+            <Input />
+            <Button variant="outline">Submit</Button>
           </div>
         {/each}
       </div>
