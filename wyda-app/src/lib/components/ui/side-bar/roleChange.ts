@@ -1,4 +1,4 @@
-// import { Client } from "$lib/data/buildProfile"
+import { Client } from "$lib/data/buildClient"
 
 export async  function roleChange(role: string) {
 
