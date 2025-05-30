@@ -42,7 +42,7 @@
     <Button
       variant="sidebarLearningCoach"
       href="/learner/dashboard"
-      class="m-1 flex justify-start {currentPath === '/learner'
+      class="m-1 flex justify-start {currentPath === '/learner/dashboard'
         ? 'bg-[#676969]'
         : 'bg-transparent'}"
     >
@@ -50,7 +50,7 @@
       <span>Home</span>
     </Button>
 
-    <Button
+    <!-- <Button
       variant="sidebarLearningCoach"
       href="/learner/recent-activity"
       class="m-1 flex justify-start {currentPath.includes(
@@ -61,7 +61,7 @@
     >
       <Clock />
       <span>Recent Activity</span>
-    </Button>
+    </Button> -->
 
     <Button
       variant="sidebarLearningCoach"
@@ -110,7 +110,7 @@
         <option disabled selected>Switch View</option>
         <option>Learner</option>
         <option>Learning Coach</option>
-        <option>Client Admin</option>
+        <!-- <option>Client Admin</option> -->
       </select>
     </div>
   </div>

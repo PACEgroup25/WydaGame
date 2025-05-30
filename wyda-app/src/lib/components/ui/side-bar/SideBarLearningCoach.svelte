@@ -140,7 +140,7 @@
         <option disabled selected>Switch View</option>
         <option>Learner</option>
         <option>Learning Coach</option>
-        <option>Client Admin</option>
+        <!-- <option>Client Admin</option> -->
       </select>
     </div>
   </div>
