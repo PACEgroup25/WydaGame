@@ -38,6 +38,21 @@ export class populateEntity{
         }
     }
 
+    //temporary for convenience
+    async getAllUsers(): Promise<any>{
+        try {
+            const pool = await this.poolPromise;
+            const result = await pool.request().query(
+                `SELECT * FROM Users`
+            )
+            const rows = result.recordset;
+            return rows;
+        } catch (error) {
+            console.log('Database query failed: ', error);
+            return Promise.reject("Invalid state error")
+        }
+    }
+
     async populateProfile(newUser: string): Promise<EntityProfile>{
         //populates EntityProfile interface
 
