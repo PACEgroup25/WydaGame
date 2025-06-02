@@ -11,7 +11,8 @@
   import { page } from "$app/state";
   let currentPath = $derived(page.url.pathname);
 
-  import { roleChange } from "./roleChange.ts";
+  //this was breaking learner route for some reason:
+  // import { roleChange } from "./roleChange.ts";
 
   async function handleRoleChange(event: Event) {
     const target = event.target as HTMLSelectElement | null;
