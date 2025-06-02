@@ -23,25 +23,10 @@ export async function getPool(){
             pool:{
                 max: 10,
                 min: 0,
-                idleTimeoutMillis: 30000,
+                idleTimeoutMillis: 300000,
             }
 
         });
-
-        //final project db
-        // pool = mysql.createPool({
-        //     host: "pace-test.database.windows.net",
-        //     user: "pacetest",
-        //     password: "p(6-Lp91j%",
-        //     database: "paceTest",
-        //     port: 3306,
-        //     ssl: {rejectUnauthorized: false},
-        //     waitForConnections: true,
-        //     connectionLimit: 10,
-        //     queueLimit: 0
-        // });
-
-       
     }
     if(!pool){
         console.log("failed connection")
@@ -50,48 +35,5 @@ export async function getPool(){
     return pool;
 }
 
-//test function
-
-// async function test() {
-//     let poolTest: sql.ConnectionPool | undefined;
-//     try{
-//         poolTest = await getPool();
-//         const tables = await poolTest.request().query(`
-//         SELECT TABLE_NAME
-//         FROM INFORMATION_SCHEMA.
-//         TABLES WHERE TABLE_TYPE = 'BASE TABLE';
-//     `);
-//     console.log('Tables:', tables.recordset);
-
-//     }catch (err){
-//         console.error('Database error:', err);
-//     }finally{
-//         if(poolTest !== undefined){
-//             await poolTest.close();
-//         }
-//     }
-// }
-
-// test();
-
 
 //npx ts-node --esm -r tsconfig-paths/register src/lib/data/createPool.ts
-
-
-// use:
-// import {createpool} from ./createPool
-// const pool = await createPool()
-// const [rows] = await pool.query('SHOW TABLES');
-
- //Noah's db:
-        // pool = mysql.createPool({
-        //     host: "pc25-db.mysql.database.azure.com",
-        //     user: "user1",
-        //     password: "&)*(Oklmno",
-        //     database: "testdb",
-        //     port: 3306,
-        //     ssl: {rejectUnauthorized: false},
-        //     waitForConnections: true,
-        //     connectionLimit: 10,
-        //     queueLimit: 0
-        // });

@@ -1,5 +1,5 @@
 import sql from 'mssql'; //azure databse -> SQL not mySql
-import {type EntityProfile, type EntityRole, type EntityHome} from "./entity.ts";
+import {type EntityProfile, type EntityRole, type EntityHome, type Cohort} from "./entity.ts";
 import { getPool } from "./createPool.ts";
 import { isFileLoadingAllowed } from 'vite';
 
@@ -46,17 +46,17 @@ export class populateEntity{
 
             const result = await pool.request()
             .input('userId', sql.VarChar, newUser)
-            .query('SELECT * FROM UsersProfiles WHERE PartitionKey = @userId');
+            .query(`SELECT * FROM UsersProfiles WHERE RowKey = @userId`);
 
             const rows = result.recordset;
 
             const row = rows[0] as any;
 
             const profile: EntityProfile ={
-                id: newUser,//update when db updates
+                id: newUser, 
                 entityID: row.id,
-                firstName: row.first_name, //update when db updates
-                lastName: row.last_name, //update when db updates
+                firstName: row.first_name,
+                lastName: row.last_name, 
                 createdAt: new Date (row.createdAt), //INVALLID DATE -> fix
                 updatedAt: new Date (row.updatedAt) //INVALLID DATE -> fix
             }
@@ -69,7 +69,7 @@ export class populateEntity{
         }          
     }
 
-    async getValue(column: string, table: string,  key: string, goal:string){
+    async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user
   
@@ -77,13 +77,10 @@ export class populateEntity{
             const pool = await this.poolPromise;
 
             const result = await pool.request()
-            .input('column', sql.VarChar, column)
-            .input('table', sql.VarChar, table)
-            .input('goalKey', sql.VarChar, key)
-            .input('goal', sql.VarChar, goal)
-            .query(`SELECT @column FROM @table WHERE @goalKey = @goal`) //sanatise
+            .input('key', sql.VarChar, key)
+            .query(`SELECT ${targetColumn} FROM ${table} WHERE ${referenceColumn} = @key`) //sanatise
             
-            const found = result.recordset[0]?.[column];
+            const found = result.recordset[0]?.[targetColumn];
 
             if(found != null){
                 return found;
@@ -96,7 +93,8 @@ export class populateEntity{
         }
     }
 
-    async buildcohort(cohortID: string){
+    async buildcohort(cohortID: string): Promise<string[]>{
+        console.log("finding cohort members");
         try{
             const pool = await this.poolPromise;
             
@@ -106,6 +104,24 @@ export class populateEntity{
 
             const members: string[] = result.recordset.map(row => row.RowKey);
             return members;
+
+        }catch(err){
+            console.log('query isFileLoadingAllowed:', err);
+            throw new Error("Invalid state error")
+        }
+    }
+
+    async coachLinkedCohorts(user: string): Promise<string[]>{
+        console.log("linkning coach to cohorts");
+        try{
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+                .input('user', sql.VarChar, user)
+                .query(`SELECT RowKey FROM CoachAssignedCohorts WHERE PartitionKey = @user`)
+
+            const cohorts: string[] = result.recordset.map(row => row.RowKey);
+            return cohorts;
 
         }catch(err){
             console.log('query isFileLoadingAllowed:', err);
@@ -131,7 +147,7 @@ export class populateEntity{
                 cohortID: row.cohort_id,
                 organisationID: row.PartitionKey
             }
-            console.log("profile made");
+            console.log("home profile made");
             return updatedProfile;
 
         }catch (error){
@@ -139,64 +155,55 @@ export class populateEntity{
             return Promise.reject("Invalid state error")
         }
     }
-}
-
-
-//RUN WITH: npx ts-node --esm -r tsconfig-paths/register src/lib/data/populateEntity.ts
-
-
-
-
-async function test(){
     
-    const id = '0573a9b9-c9fc-4aa6-a340-17909a6c34d2'
-    const table = 'Users'
-    const column = 'PartitionKey'
+    async defineCohort(cohortID:string): Promise<Cohort>{
+        console.log("defining Cohort");
+        try{
+            const pool = await this.poolPromise;
 
-    const pe = new populateEntity();
-    const found = await pe.findEntity(id, column, table);
+            const result = await pool.request()
+            .input('cohortID', sql.VarChar, cohortID)
+            .query(`SELECT * FROM Cohorts WHERE RowKey = @cohortID`);
 
-    if(found){
-        console.log("user exists");
-        const newProfile: EntityProfile = await pe.populateProfile(id);
-        console.log(newProfile);
+            const rows = result.recordset;
 
-        console.log("next test");
-        const accessRole = await pe.getValue('role', 'UsersRoles', 'RowKey', newProfile.entityID);
-        if(accessRole != null){
-            const updatedProfile: EntityRole = {
-                ...newProfile,
-                role: accessRole
+            const row = rows[0] as any;
+
+            const cohort: Cohort = {
+                cohortID: row.RowKey,
+                cohortName: row.cohort_name,
+                organisationID: row.organisation_id,
+                organisationName: ''
             }
-            console.log(updatedProfile);
-                       
-        }else{
-            console.log("test failure");
+            return cohort;            
         }
-        
-        console.log("next test");
-        const finalEntity: EntityHome = await pe.populateHome(newProfile, newProfile.entityID);
-        console.log(finalEntity);        
-
-        console.log(await pe.buildcohort('1063eaf1-3e34-47c2-a16f-5072ec33bd79'));
-
-    } else{
-        console.log("test failure");
+        catch (error){
+            console.log('Database query failed: ', error);
+            return Promise.reject("Invalid state error")
+        }
     }
-    
-    //await testPool.end();
+
+    async getOrgName(organisationID: string): Promise<string>{
+        console.log("getting organisation name")
+        try{
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+            .input('orgID', sql.VarChar, organisationID)
+            .query(`SELECT * FROM Organisations WHERE PartitionKey = @orgID`) //sanatise
+            
+            const rows = result.recordset;
+
+        if (!rows || rows.length === 0) {
+            throw new Error(`No organisation found with ID ${organisationID}`);
+        }
+
+        const row = rows[0];
+        return row.organisation_name;
+
+        }catch (error){
+            console.log('Database query failed: ', error);
+            return Promise.reject("Invalid state error")
+        }
+    }
 }
-
-test().catch(console.error);
-
-// const pool = await getPool();
-// const pe = new populateEntity();
-// const db = await pe.checkDB();
-// if(db){
-//     await pool.end();
-// }
-
-
-//test().catch(console.error);
-
-
