@@ -101,6 +101,7 @@ export class populateEntity{
                 userStatus: row.userStatus,
                 reflectionQuality: row.reflectionQuality,
                 lastUpdated: new Date (row.lastUpdated),
+                challenge: row.Challenge,
             }
             console.log('recent user metrics received');
             return metrics

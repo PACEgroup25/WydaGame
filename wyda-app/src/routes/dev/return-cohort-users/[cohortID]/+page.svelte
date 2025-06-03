@@ -12,9 +12,12 @@
     <Button href={"/dev/learners/" + learner.profile.id}>
       <div>name: {learner.profile.firstName}</div>
       <div>id: {learner.profile.id}</div>
+      {#if learner.metrics}
+        <div>status: {learner.metrics.userStatus}</div>
+        <div>last updated: {learner.metrics.lastUpdated?.toDateString()}</div>
+        <div>reflection quality: {learner.metrics.reflectionQuality}</div>
+        <div>challenge: {learner.metrics.challenge}</div>
+      {/if}
     </Button>
-    {#if learner.metrics}
-      <div>status: {learner.metrics.userStatus}</div>
-    {/if}
   {/each}
 </div>

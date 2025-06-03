@@ -1,3 +1,6 @@
+//new recent activity needs to include id for the row actions to bring the coach
+//to the learners related pages.
+
 export const recentActivityData = [
     {
       name: "Learner #1",
