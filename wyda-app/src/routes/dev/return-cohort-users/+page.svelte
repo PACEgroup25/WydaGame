@@ -2,18 +2,14 @@
   import Button from "$lib/components/ui/button/button.svelte";
   let { data } = $props();
   //use cohort id array to populate cohort pages
-  const result = data.data.cohortID;
-  let cohorts: string | string[] = $state([]);
-  if (result) {
-    cohorts = result;
-  }
+  const cohortData = data.value;
 </script>
 
 <div class="gap-10 h-dvh w-dvw flex justify-center items-center">
-  {#each cohorts as cohort}
+  {#each cohortData as data}
     <div>
-      <Button href={"return-cohort-users/" + cohort}>
-        {cohort}
+      <Button href={"return-cohort-users/" + data.cohortId}>
+        {data.cohortName}
       </Button>
     </div>
   {/each}

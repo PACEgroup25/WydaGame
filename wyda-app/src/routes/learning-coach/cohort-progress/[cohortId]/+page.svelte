@@ -1,6 +1,6 @@
 <script lang="ts">
   let data = $props();
-  import { columns } from "$lib/components/ui/data-table-coach/columns.js";
+  import { columns } from "./columns";
   import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
   import Chart from "$lib/components/ui/chart/chart.svelte";
 
@@ -53,7 +53,7 @@
     )}
     {@render stat((23).toString(), "Learning Streaks")}
   </div>
-  <div class="flex">
+  <!-- <div class="flex">
     <Chart
       type={"line"}
       {...chartData}
@@ -64,6 +64,6 @@
       {...chartData2}
       size={{ height: "500px", width: "500px" }}
     />
-  </div>
+  </div> -->
   <DataTable {columns} data={data.data.value} />
 </main>

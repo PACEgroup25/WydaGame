@@ -43,34 +43,21 @@ export class BuildCohort{ //2D array of EntityProfile //Cohort
     }
 }
 
-async function getCohortsArray(cohortIDs: string[]): Promise<Cohort[]>{
-
-    const ids = cohortIDs;
-
-    const cohortsArray: Cohort[] = await Promise.all(
-        ids.map(id => {
-            const build = new BuildCohort(id);
-            return build.getCohort();
-        })
-    );
-    return cohortsArray;
-}
-
 
 //npx ts-node --esm -r tsconfig-paths/register src/lib/data/buildCohort.ts
 
-async function test(){
-    const testing = new BuildCohort('1063eaf1-3e34-47c2-a16f-5072ec33bd79');
-    const testCohort = await testing.getCohort()
-    console.log("cohort info:", testCohort);
+// async function test(){
+//     const testing = new BuildCohort('1063eaf1-3e34-47c2-a16f-5072ec33bd79');
+//     const testCohort = await testing.getCohort()
+//     console.log("cohort info:", testCohort);
 
-    const members: EntityProfile[] = await testing.getLearners();
-    console.log("cohort members:", members);
+//     const members: EntityProfile[] = await testing.getLearners();
+//     console.log("cohort members:", members);
 
-    const coachCohorts = ['1063eaf1-3e34-47c2-a16f-5072ec33bd79','45019222-cbe1-4435-8122-060f9ae1db9c']
-    const coachCohortInfo: Cohort[] = await getCohortsArray(coachCohorts);
-    console.log("cohorts:", coachCohortInfo);
-}
+//     const coachCohorts = ['1063eaf1-3e34-47c2-a16f-5072ec33bd79','45019222-cbe1-4435-8122-060f9ae1db9c']
+//     const coachCohortInfo: Cohort[] = await getCohortsArray(coachCohorts);
+//     console.log("cohorts:", coachCohortInfo);
+// }
 
 
 //test();
