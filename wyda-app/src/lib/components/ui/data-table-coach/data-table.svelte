@@ -295,14 +295,14 @@
           {#each row.getVisibleCells() as cell (cell.id)}
             <Table.Cell>
               <!-- render the appropriate symbol based on cell content -->
-              {#if cell.getContext().getValue() == 1}
+              {#if cell.column.id == "status" && cell.getContext().getValue() == 1}
                 <div class="flex justify-center bg-green-50 p-1 rounded-md">
                   <FlexRender
                     content={cell.column.columnDef.cell}
                     context={cell.getContext()}
                   />
                 </div>
-              {:else if cell.getContext().getValue() == 2}
+              {:else if cell.column.id == "status" &&  cell.getContext().getValue() == 2}
                 <div
                   class="flex justify-center items-center bg-red-100 p-1 rounded-md"
                 >
