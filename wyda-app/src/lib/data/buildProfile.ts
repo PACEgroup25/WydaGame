@@ -13,7 +13,7 @@ export class BuildUser{
         this.userID = user;
         this.userProfile ={ id: '', entityID: this.userID, firstName: null, lastName: null, createdAt: null, updatedAt: null};
         this.userHome ={...this.userProfile, cohortID: null, organisationID: null};
-        this.userMetrics = {id: '', userStatus: null, reflectionQuality: null, lastUpdated: null}
+        this.userMetrics = {id: '', userStatus: null, reflectionQuality: null, challenge: null, lastUpdated: null}
     }
 
     async buildClient(): Promise<boolean>{ //builds client Entity interface
