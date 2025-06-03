@@ -32,10 +32,10 @@ export class BuildCohort{ //2D array of EntityProfile //Cohort
     return learners;
     } 
 
-    async getLatestLearnerMetrics():Promise<EntityMetrics[]>{
+    async getLatestLearnerMetrics():Promise<(EntityMetrics | undefined)[]>{
         const ids = await this.populate.buildcohort(this.cohort);
 
-        const latestMetrics: EntityMetrics[] = await Promise.all(ids.map(id =>{
+        const latestMetrics: (EntityMetrics | undefined)[] = await Promise.all(ids.map(id =>{
             const newUser = new BuildUser(id);
             return newUser.getLatestMetrics();
         }))

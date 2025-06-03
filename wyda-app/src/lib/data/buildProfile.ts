@@ -5,7 +5,7 @@ export class BuildUser{
     userID: string;
     userProfile: EntityProfile;
     userHome: EntityHome;
-    userMetrics: EntityMetrics;
+    userMetrics: EntityMetrics | undefined;
 
     populate = new populateEntity();
 
@@ -35,7 +35,7 @@ export class BuildUser{
         return Promise.reject("Invalid state error")
     }
 
-    async getLatestMetrics(): Promise<EntityMetrics>{
+    async getLatestMetrics(): Promise<EntityMetrics | undefined>{
         if(await this.buildClient()){
             return this.userMetrics;
         }

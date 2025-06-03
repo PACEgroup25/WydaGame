@@ -84,7 +84,7 @@ export class populateEntity{
         }          
     }
 
-    async populateMetrics(userID: string): Promise<EntityMetrics>{
+    async populateMetrics(userID: string): Promise<EntityMetrics | undefined>{
         try {
             const pool = await this.poolPromise;
 
@@ -106,8 +106,10 @@ export class populateEntity{
             return metrics
         } catch (error) {
             console.log('Database query failed: ', error);
-            return Promise.reject("Invalid state error")
         }
+        //skip over missing values for now, but when a user is created
+        //they should have a new metrics row made for them
+        return undefined;
     }
     async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
