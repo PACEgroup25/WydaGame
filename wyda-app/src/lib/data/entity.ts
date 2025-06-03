@@ -28,3 +28,9 @@ export interface Cohort{
     organisationID: string,
     organisationName: string
 };
+
+export interface EntityMetrics extends Entity{
+    userStatus: number | null,
+    reflectionQuality: number | null,
+    lastUpdated: Date | null,
+};

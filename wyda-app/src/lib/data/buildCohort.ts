@@ -1,4 +1,4 @@
-import {type EntityProfile, type Cohort} from "./entity.ts";
+import {type EntityProfile, type Cohort, type EntityMetrics} from "./entity.ts";
 import { populateEntity } from "./populateEntity.ts";
 import { BuildUser } from "./buildProfile.ts";
 
@@ -31,6 +31,16 @@ export class BuildCohort{ //2D array of EntityProfile //Cohort
     );
     return learners;
     } 
+
+    async getLatestLearnerMetrics():Promise<EntityMetrics[]>{
+        const ids = await this.populate.buildcohort(this.cohort);
+
+        const latestMetrics: EntityMetrics[] = await Promise.all(ids.map(id =>{
+            const newUser = new BuildUser(id);
+            return newUser.getLatestMetrics();
+        }))
+        return latestMetrics;
+    }
 }
 
 async function getCohortsArray(cohortIDs: string[]): Promise<Cohort[]>{

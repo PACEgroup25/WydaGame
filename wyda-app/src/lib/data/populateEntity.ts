@@ -1,5 +1,5 @@
 import sql from 'mssql'; //azure databse -> SQL not mySql
-import {type EntityProfile, type EntityRole, type EntityHome, type Cohort} from "./entity.ts";
+import {type EntityProfile, type EntityRole, type EntityHome, type Cohort, type EntityMetrics} from "./entity.ts";
 import { getPool } from "./createPool.ts";
 import { isFileLoadingAllowed } from 'vite';
 
@@ -84,6 +84,31 @@ export class populateEntity{
         }          
     }
 
+    async populateMetrics(userID: string): Promise<EntityMetrics>{
+        try {
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+            .input('userId', sql.VarChar, userID)
+            .query(`SELECT * FROM LatestUserMetrics WHERE RowKey = @userId`);
+            
+            const rows = result.recordset;
+
+            const row = rows[0] as any;
+            
+            const metrics: EntityMetrics ={
+                id: userID,
+                userStatus: row.userStatus,
+                reflectionQuality: row.reflectionQuality,
+                lastUpdated: new Date (row.lastUpdated),
+            }
+            console.log('recent user metrics received');
+            return metrics
+        } catch (error) {
+            console.log('Database query failed: ', error);
+            return Promise.reject("Invalid state error")
+        }
+    }
     async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user
