@@ -1,6 +1,5 @@
-import data from "./data.js";
-import { BuildCohort } from '$lib/data/buildCohort.js';
-import type { EntityMetrics, EntityProfile } from '$lib/data/entity.js';
+import { BuildCohort } from '$lib/data/buildCohort.ts';
+import type { EntityMetrics, EntityProfile } from '$lib/data/entity.ts';
 
 export async function load({params}) {
 
