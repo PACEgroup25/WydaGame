@@ -40,7 +40,8 @@
 
 <main>
   <div class="header text-2xl font-semibold mb-[1em] flex justify-between">
-    Cohort: {data.data.cohortId}
+    Cohort: {data.data.cohortName}
+    Organisation: {data.data.org}
   </div>
   <div
     class="stats-container flex flex-wrap justify-between w-full gap-10 mb-5"

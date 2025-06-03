@@ -71,6 +71,8 @@ export async function load({params}) {
 
     return {
         //values for snippets
+        cohortName: cohortData.cohortName,
+        org: cohortData.organisationName,
         cohortId: params.cohortId,
         percentageOnTrackUsers: onTrackUsers,
         usersOnTrack: onTrack,

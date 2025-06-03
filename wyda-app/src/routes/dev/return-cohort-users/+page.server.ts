@@ -1,5 +1,4 @@
 import {Client} from "$lib/data/buildClient.ts";
-import { BuildCohort } from "$lib/data/buildCohort";
 import { type Cohort } from "$lib/data/entity";
 
 export async function load(){
