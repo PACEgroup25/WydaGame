@@ -48,9 +48,13 @@
 {/snippet}
 
 <main>
-  <div class="header text-2xl font-semibold mb-[1em] flex justify-between">
-    Cohort: {data.data.cohortName}
-    Organisation: {data.data.org}
+  <div class="font-semibold mb-[4em] gap-10 flex flex-col justify-between">
+    <div class="text-4xl">
+      Cohort: {data.data.cohortName}
+    </div>
+    <div class="text-2xl">
+      Organisation: {data.data.org}
+    </div>
   </div>
   <div
     class="stats-container flex flex-wrap justify-between w-full gap-10 mb-5"
