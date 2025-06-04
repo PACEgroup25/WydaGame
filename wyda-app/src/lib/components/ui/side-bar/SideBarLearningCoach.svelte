@@ -77,18 +77,6 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/learning-coach/workshops"
-      class="m-1 flex justify-start {currentPath.includes(
-        '/learning-coach/workshops'
-      )
-        ? 'bg-[#1b5d74]'
-        : 'bg-transparent'}"
-    >
-      <CalendarDays />
-      <span>Workshops</span>
-    </Button>
-    <Button
-      variant="sidebarLearningCoach"
       href="/learning-coach/analytics"
       class="m-1 flex justify-start {currentPath.includes(
         '/learning-coach/analytics'
