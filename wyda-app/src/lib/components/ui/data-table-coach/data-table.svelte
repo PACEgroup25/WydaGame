@@ -272,7 +272,7 @@
   </div>
 </div>
 <div class="rounded-md border">
-  <Table.Root>
+  <Table.Root class="w-full">
     <Table.Header class="bg-[#f0fcff]">
       {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
         <Table.Row>
