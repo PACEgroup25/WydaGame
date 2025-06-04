@@ -1,4 +1,5 @@
 import {Client} from "$lib/data/buildClient.ts";
+import { BuildCohort } from "$lib/data/buildCohort";
 import { type Cohort } from "$lib/data/entity";
 
 export async function load(){
@@ -9,12 +10,14 @@ export async function load(){
     const cohorts = result.cohortID;
 
     let cohortData : Cohort[] = [];
-    let payload: {cohortId: string, cohortName: string, cohortOrg: string}[] = [];
+    let payload: {cohortId: string, cohortName: string, cohortOrg: string, numStudents: number}[] = [];
 
     if(Array.isArray(cohorts)){
         cohortData = await client.getCohortsArray(cohorts);
         for(var i = 0; i<cohorts.length; i++){
-            payload.push({cohortId: cohorts[i], cohortName: cohortData[i].cohortName, cohortOrg: cohortData[i].organisationName});
+            let build = await new BuildCohort(cohorts[i])
+            let learners = await build.getLearners();
+            payload.push({cohortId: cohorts[i], cohortName: cohortData[i].cohortName, cohortOrg: cohortData[i].organisationName, numStudents: learners.length});
         }
     }
     
