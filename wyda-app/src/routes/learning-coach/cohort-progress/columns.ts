@@ -16,6 +16,7 @@ export type RecentActivity = {
 export type Payload = {
     cohortName: string,
     cohortId: string,
+    cohortOrg: string
 }
 
 export const columns: ColumnDef<Payload>[] =[
@@ -39,6 +40,27 @@ export const columns: ColumnDef<Payload>[] =[
                 row.getValue("cohortName")
             );
         },
+    },
+    {
+        accessorKey:"cohortOrg",
+        header: () => {
+            const nameHeaderSnippet = createRawSnippet(()=>({
+                render: () => `<div class="text-left">Cohort Organisation</div>`
+            }));
+            return renderSnippet(nameHeaderSnippet,"");
+        },
+        cell:({row})=>{
+            const nameCellSnippet = createRawSnippet<[string]>((getCohortOrgName)=>{
+                const name = getCohortOrgName();
+                return {
+                    render: () => `<div class="font-medium text-left">${name}</div>`,
+                };
+            });
+            return renderSnippet(
+                nameCellSnippet,
+                row.getValue("cohortOrg")
+            );
+        },      
     },
     {
         id: "actions",

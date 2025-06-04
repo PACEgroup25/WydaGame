@@ -8,13 +8,7 @@
 </script>
 
 <div class="gap-10 h-dvh flex flex-col justify-center items-center">
-  {#each cohortData as data}
-    <div>
-      <Button href={"cohort-progress/" + data.cohortId}>
-        {data.cohortName}
-      </Button>
-    </div>
-  {/each}
+  <div class="text-4xl">Learner Cohorts</div>
   <DataTable columns={columns} data={data.value}/>
 </div>
 

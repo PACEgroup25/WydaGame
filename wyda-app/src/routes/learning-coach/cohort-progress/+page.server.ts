@@ -9,12 +9,12 @@ export async function load(){
     const cohorts = result.cohortID;
 
     let cohortData : Cohort[] = [];
-    let payload: {cohortId: string, cohortName: string}[] = [];
+    let payload: {cohortId: string, cohortName: string, cohortOrg: string}[] = [];
 
     if(Array.isArray(cohorts)){
         cohortData = await client.getCohortsArray(cohorts);
         for(var i = 0; i<cohorts.length; i++){
-            payload.push({cohortId: cohorts[i], cohortName: cohortData[i].cohortName});
+            payload.push({cohortId: cohorts[i], cohortName: cohortData[i].cohortName, cohortOrg: cohortData[i].organisationName});
         }
     }
     
