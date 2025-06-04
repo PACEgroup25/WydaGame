@@ -8,8 +8,8 @@
 
 <iframe
   src={iframeUrl}
-  width="800"
-  height="600"
+  width="1000"
+  height="1000"
   style="border:none"
   allowtransparency={true}
   title="Metabase Dashboard"

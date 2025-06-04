@@ -3,6 +3,13 @@
   import { columns } from "./columns";
   import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
   import Chart from "$lib/components/ui/chart/chart.svelte";
+  import {
+    UserCheck,
+    UserX,
+    Star,
+    Flame,
+    type Icon as IconType,
+  } from "@lucide/svelte";
 
   const chartData = {
     chartLabel: "Average Reflection Qualtiy Over Time",
@@ -29,12 +36,14 @@
   //the max data value and use for max y scale in chart
 </script>
 
-{#snippet stat(statistic: string, description: string)}
-  <div class="summary-stats">
-    <div class="data text-4xl">{statistic}</div>
+{#snippet stat(statistic: string, description: string, icon: typeof IconType)}
+  {@const Icon = icon}
+  <div class="summary-stats gap-2">
+    <div class="icon"><Icon /></div>
     <div class="description font-semibold">
       {description}
     </div>
+    <div class="data text-3xl font-semibold">{statistic}</div>
   </div>
 {/snippet}
 
@@ -46,13 +55,13 @@
   <div
     class="stats-container flex flex-wrap justify-between w-full gap-10 mb-5"
   >
-    {@render stat(data.data.percentageOnTrackUsers, "Users on track")}
-    {@render stat(data.data.percentageUsersAtRisk, "Users at risk")}
+    {@render stat(data.data.usersOnTrack, "Users on track", UserCheck)}
+    {@render stat(data.data.usersAtRisk, "Users at risk", UserX)}
     {@render stat(
       data.data.averageReflectionQuality,
-      "Average reflection Quality"
+      "Average reflection Quality",
+      Star
     )}
-    {@render stat((23).toString(), "Learning Streaks")}
   </div>
   <!-- <div class="flex">
     <Chart

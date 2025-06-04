@@ -25,11 +25,7 @@
   </DropdownMenu.Trigger>
   <DropdownMenu.Content>
     <DropdownMenu.Group>
-      <DropdownMenu.GroupHeading>Actions</DropdownMenu.GroupHeading>
-      <DropdownMenuSeparator />
-      <DropdownMenu.Item onclick={()=> goto("/learning-coach/learner-support/learner-profile/" + id)}>Learner Profile</DropdownMenu.Item>
-      <DropdownMenu.Item>Learner Analytics</DropdownMenu.Item>
-      <DropdownMenu.Item>Learner Workshops</DropdownMenu.Item>
+      <DropdownMenu.Item onclick={()=> goto("/learning-coach/cohort-progress/" + id)}>Cohort Progress</DropdownMenu.Item>
     </DropdownMenu.Group>
   </DropdownMenu.Content>
 </DropdownMenu.Root>

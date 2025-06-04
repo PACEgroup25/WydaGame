@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/table-core";
 import { createRawSnippet } from "svelte";
 import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
-import DataTableActions from "$lib/components/ui/data-table-coach/data-table-actions.svelte";
+import DataTableActions from "$lib/components/ui/cohorts-table/data-table-actions.svelte";
 import DataTableStatusButton from "$lib/components/ui/data-table-coach/data-table-status-button.svelte";
 import DataTableNumberOfStudentsButton from "$lib/components/ui/cohorts-table/data-table-number-of-students-button.svelte";
 
