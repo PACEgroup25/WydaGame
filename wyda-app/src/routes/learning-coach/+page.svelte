@@ -3,7 +3,7 @@
   import RecentActivity from "$lib/components/ui/recent-activity/recentActivity.svelte";
   import LearnerSupport from "$lib/components/ui/learner-support/learnerSupport.svelte";
 
-  let { data } = $props();
+  export let data;
   let learners = data.value.learners;
   let recentActivity = data.value.recentActivity;
   let statistics = data.value.statistics;

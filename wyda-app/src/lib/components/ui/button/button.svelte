@@ -50,16 +50,13 @@
 <script lang="ts">
   import { cn } from "$lib/utils.js";
 
-  let {
-    class: className,
-    variant = "default",
-    size = "default",
-    ref = $bindable(null),
-    href = undefined,
-    type = "button",
-    children,
-    ...restProps
-  }: ButtonProps = $props();
+  export let className: string ="";
+  export let variant: ButtonVariant = "default";
+  export let size: ButtonSize = "default";
+  export let ref: HTMLAnchorElement | HTMLButtonElement | null = null;
+  export let href: string | undefined = undefined;
+  export let type: "button" | "submit" | "reset" = "button";
+  export let restProps: Record<string, any> = {};
 </script>
 
 {#if href}
@@ -69,7 +66,7 @@
     {href}
     {...restProps}
   >
-    {@render children?.()}
+    <slot />
   </a>
 {:else}
   <button
@@ -78,6 +75,6 @@
     {type}
     {...restProps}
   >
-    {@render children?.()}
+    <slot />
   </button>
 {/if}
