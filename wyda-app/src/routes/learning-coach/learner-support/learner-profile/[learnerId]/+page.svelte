@@ -7,9 +7,34 @@
     console.log(data);
 </script>
 
-<div>
-    learner profile page: {data.info?.id}
+<div class="text-4xl flex flex-col gap-10">
+    Learner Profile Page 
+    <div>
+        {data.info?.firstName + " " + data.info?.lastName}
+    </div>
 </div>
-<div>
-    email: {data.email}
+<div class="flex flex-col gap-10">
+    <div>
+        User ID: {data.info?.id}
+    </div>
+    <div>
+        Email: {data.email}
+    </div>
+    <div>
+        Gender: {data.gender}
+    </div>
+    <div>
+        Role: {data.role}
+
+    </div>
+    <div>
+        Education: {data.education}
+
+    </div>
+    <div>
+        Learning Support: {data.learningSupport}
+    </div>
+    <div>
+        Account Creation Date: {data.createdAt}
+    </div>
 </div>
