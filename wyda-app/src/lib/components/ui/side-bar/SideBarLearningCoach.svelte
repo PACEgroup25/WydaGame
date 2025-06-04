@@ -65,18 +65,6 @@
     </Button>
     <Button
       variant="sidebarLearningCoach"
-      href="/learning-coach/recent-activity"
-      class="m-1 flex justify-start {currentPath.includes(
-        '/learning-coach/recent-activity'
-      )
-        ? 'bg-[#1b5d74]'
-        : 'bg-transparent'}"
-    >
-      <Clock />
-      <span>Recent Activity</span>
-    </Button>
-    <Button
-      variant="sidebarLearningCoach"
       href="/learning-coach/learner-support"
       class="m-1 flex justify-start {currentPath.includes(
         '/learning-coach/learner-support'
