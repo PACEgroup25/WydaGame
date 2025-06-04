@@ -7,13 +7,13 @@
     console.log(data);
 </script>
 
-<div class="text-4xl flex flex-col gap-10">
-    Learner Profile Page 
+<div class="flex flex-col gap-10">
+    <div class="text-4xl">
+        User Profile Page 
+    </div>
     <div>
         {data.info?.firstName + " " + data.info?.lastName}
     </div>
-</div>
-<div class="flex flex-col gap-10">
     <div>
         User ID: {data.info?.id}
     </div>
