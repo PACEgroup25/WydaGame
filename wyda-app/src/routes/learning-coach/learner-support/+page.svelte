@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
+
     const learners = [
       {
         name: 'Learner #1',
@@ -116,6 +118,25 @@
           {learner.firstName}
           {cohort.cohortId}
           {cohort.cohortName}
+        </div>
+
+        <div class="border border-blue-300 rounded-lg p-4 flex flex-col items-center">
+          <div class="text-5xl text-blue-300 mb-2">👤</div>
+          <h2 class="font-bold text-lg mb-1">{learner.firstName}</h2>
+          <div class="text-sm mb-1 text-gray-600">{learner.learningSupport} : {cohort.cohortName}</div>
+  
+          <!-- <div class={`text-white text-sm font-semibold px-3 py-1 rounded-full mb-2
+            ${learner.status === 'On track' ? 'bg-green-500' :
+              learner.status === 'Behind' ? 'bg-orange-500' :
+              learner.status === 'At risk' ? 'bg-red-600' : 'bg-gray-400'}`}>
+            {learner.status}
+          </div> -->
+  
+          <!-- <div class="text-xs text-gray-500 mb-3">Last login : {learner.lastLogin}</div> -->
+  
+          <button class="text-blue-600 font-medium hover:underline flex items-center gap-1" onclick={ () => goto("/learning-coach/learner-support/learner-profile/" + learner.entityID)}>
+            View details →
+          </button>
         </div>
       {/each}
     {/each}
