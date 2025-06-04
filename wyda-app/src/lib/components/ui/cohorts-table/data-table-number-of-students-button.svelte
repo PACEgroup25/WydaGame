@@ -15,7 +15,7 @@
     console.log(sort);
   }}
 >
-  status
+  Number of Students
   {#if sort === "false"}
     <ArrowUpDown class="ml-2" />
   {:else if sort == "asc"}

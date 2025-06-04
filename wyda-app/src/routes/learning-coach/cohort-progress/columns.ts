@@ -3,6 +3,7 @@ import { createRawSnippet } from "svelte";
 import { renderComponent, renderSnippet } from "$lib/components/ui/data-table/index.js";
 import DataTableActions from "$lib/components/ui/data-table-coach/data-table-actions.svelte";
 import DataTableStatusButton from "$lib/components/ui/data-table-coach/data-table-status-button.svelte";
+import DataTableNumberOfStudentsButton from "$lib/components/ui/cohorts-table/data-table-number-of-students-button.svelte";
 
 export type RecentActivity = {
     id: string;
@@ -65,12 +66,7 @@ export const columns: ColumnDef<Payload>[] =[
     },
     {
         accessorKey:"numStudents",
-        header: () => {
-            const nameHeaderSnippet = createRawSnippet(()=>({
-                render: () => `<div class="text-left">Number of Students</div>`
-            }));
-            return renderSnippet(nameHeaderSnippet,"");
-        },
+        header: ({column}) => renderComponent(DataTableNumberOfStudentsButton, {column}),
         cell:({row})=>{
             const nameCellSnippet = createRawSnippet<[string]>((getNumStudents)=>{
                 const number = getNumStudents();
