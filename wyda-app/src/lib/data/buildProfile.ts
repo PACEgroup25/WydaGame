@@ -11,7 +11,7 @@ export class BuildUser{
 
     constructor(user:string){
         this.userID = user;
-        this.userProfile ={ id: '', entityID: this.userID, firstName: null, lastName: null, createdAt: null, updatedAt: null};
+        this.userProfile ={ id: '', entityID: this.userID, firstName: null, lastName: null, createdAt: null, updatedAt: null, role: null, gender: null, education: null, learningSupport: null, country: null};
         this.userHome ={...this.userProfile, cohortID: null, organisationID: null};
         this.userMetrics = {id: '', userStatus: null, reflectionQuality: null, challenge: null, lastUpdated: null}
     }

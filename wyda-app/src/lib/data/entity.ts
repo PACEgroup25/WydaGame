@@ -10,7 +10,12 @@ export interface EntityProfile extends Entity, UserLinkedEntity{
     firstName: string | null,
     lastName: string | null,
     createdAt: Date | null,
-    updatedAt: Date | null
+    updatedAt: Date | null,
+    role: string | null,
+    gender: string | null,
+    education: string | null,
+    learningSupport: string | null,
+    country: string | null
 };
 
 export interface EntityHome extends Entity, EntityProfile{

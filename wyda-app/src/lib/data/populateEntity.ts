@@ -71,7 +71,12 @@ export class populateEntity{
                 id: newUser, 
                 entityID: row.id,
                 firstName: row.first_name,
+                role: row.role,
+                gender: row.gender,
+                education: row.education,
+                country: row.country,
                 lastName: row.last_name, 
+                learningSupport: row.learning_support,
                 createdAt: new Date (row.createdAt), //INVALLID DATE -> fix
                 updatedAt: new Date (row.updatedAt) //INVALLID DATE -> fix
             }
