@@ -13,7 +13,7 @@ export class Client{
 
     constructor(clientRole:string){
         this.role = clientRole;
-        this.clientProfile ={ id: '', entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null};
+        this.clientProfile ={ id: '', entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null, role: null, gender: null, education: null, learningSupport: null, country:null};
         this.clientHome ={...this.clientProfile, cohortID: null, organisationID: null};
     }
 

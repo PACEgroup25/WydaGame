@@ -85,6 +85,11 @@
         lastLogin: '6d ago'
       }
     ];
+
+    let {data} = $props();
+    console.log(data.learners);
+    let cohorts = data.learners
+
   </script>
   
   <section class="p-6">
@@ -104,6 +109,16 @@
         <button class="bg-gray-200 px-4 py-2 rounded">Export ▾</button>
       </div>
     </div>
+
+    {#each cohorts as cohort}
+      {#each cohort.learners as learner}
+        <div>
+          {learner.firstName}
+          {cohort.cohortId}
+          {cohort.cohortName}
+        </div>
+      {/each}
+    {/each}
   
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {#each learners as learner}
