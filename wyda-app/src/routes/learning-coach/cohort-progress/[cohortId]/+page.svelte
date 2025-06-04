@@ -2,7 +2,7 @@
   let data = $props();
   import { columns } from "./columns";
   import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
-  import Chart from "$lib/components/ui/chart/chart.svelte";
+  import * as Select from "$lib/components/ui/select/index";
   import {
     UserCheck,
     UserX,
@@ -48,7 +48,7 @@
 {/snippet}
 
 <main>
-  <div class="font-semibold mb-[4em] gap-10 flex flex-col justify-between">
+  <div class="mt-[5em] mb-[4em] gap-10 flex flex-col justify-between">
     <div class="text-4xl">
       Cohort: {data.data.cohortName}
     </div>
@@ -66,6 +66,7 @@
       "Average reflection Quality",
       Star
     )}
+    {@render stat((2).toString(), "Learning Streaks", Flame)}
   </div>
   <!-- <div class="flex">
     <Chart

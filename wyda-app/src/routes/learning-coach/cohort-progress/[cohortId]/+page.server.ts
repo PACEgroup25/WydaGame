@@ -1,12 +1,18 @@
+import { Client } from '$lib/data/buildClient.js';
 import { BuildCohort } from '$lib/data/buildCohort.ts';
 import type { EntityMetrics, EntityProfile } from '$lib/data/entity.ts';
 
 export async function load({params}) {
 
+    const client = new Client("Learning Coach");
+    await client.declareClient();
+    await client.assignCoachCohorts();
+    let cohorts = client.clientHome.cohortID;
     const cohort = new BuildCohort(params.cohortId);
     const cohortData = await cohort.getCohort();
     const cohortLearners = await cohort.getLearners();
     const cohortLearnersMetrics = await cohort.getLatestLearnerMetrics();
+
 
 
     let onTrack = 0;
@@ -78,6 +84,7 @@ export async function load({params}) {
         percentageUsersAtRisk: usersAtRisk,
         usersAtRisk: behind,
         averageReflectionQuality: averageReflectionQuality,
+        cohortIds: cohorts,
         //table payload
         value: tableData
     };

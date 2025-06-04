@@ -71,7 +71,11 @@ export const columns: ColumnDef<Payload>[] =[
             const nameCellSnippet = createRawSnippet<[string]>((getNumStudents)=>{
                 const number = getNumStudents();
                 return {
-                    render: () => `<div class="font-medium text-center">${number}</div>`,
+                    render: () => `<div class="font-medium w-full flex justify-center">
+                    <div class="pr-10">
+                    ${number}
+                    </div>
+                    </div>`,
                 };
             });
             return renderSnippet(

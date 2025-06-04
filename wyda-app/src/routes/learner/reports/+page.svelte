@@ -6,6 +6,7 @@
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.ts";
   import { buttonVariants } from "$lib/components/ui/button/index.js";
   import { toast } from "svelte-sonner";
+  import Progress from "$lib/components/ui/progress/progress.svelte";
   console.log(data);
 
   const keyLearningDecisionData = [
@@ -95,6 +96,19 @@
   ];
 </script>
 
+{#snippet performanceIndicator(
+  title: string,
+  value: number,
+  titleStyle?: string
+)}
+  <div class="items-center gap-3">
+    <div class={titleStyle ?? "font-normal"}>{title}</div>
+    <div class="flex items-center gap-3">
+      <Progress {value} max={100} /> <span>{value.toString() + "%"}</span>
+    </div>
+  </div>
+{/snippet}
+
 <div class="flex w-full flex-col justify-start">
   <div class="font-semibold text-4xl w-full flex justify-center mt-10">
     Individual Learning Report
@@ -108,16 +122,6 @@
         <DropdownMenu.Content>
           <DropdownMenu.Group>
             <div class="flex flex-col">
-              <Button
-                variant={"ghost"}
-                onclick={() => {
-                  toast("Your CSV file is downloading");
-                  //downloadCSV(data);
-                  console.log("downloading");
-                }}
-              >
-                Export as CSV
-              </Button>
               <Button
                 variant={"ghost"}
                 onclick={() => {
@@ -135,13 +139,130 @@
     <div class="flex justify-center items-start gap-10 mt-10 mb-10 w-[60%]">
       <div class="flex flex-col justify-start gap-10">
         <div class="text-3xl font-semibold">User Metrics</div>
-        {#each chartdata as data, index}
-          {#if index < 3}
-            <Chart {...data} type={"bar"} />
-          {:else}
-            <Chart {...data} type={"pie"} />
-          {/if}
-        {/each}
+        <div class="flex flex-col top-row gap-10">
+          <div class="score-container w-[30em] stats flex flex-col">
+            <div class="flex">Total Points</div>
+            <div class="text-3xl font-bold">2346</div>
+            <div class="flex gap-1">
+              <span class="text-green-500">+526</span><span
+                >Compared to Cohort AVG: 1820</span
+              >
+            </div>
+          </div>
+          <div class="reflection-qual stats flex flex-col">
+            <div class="flex">AVG Reflection Quality</div>
+            <div class="text-3xl font-bold">4.2</div>
+            <div class="flex gap-1">
+              <span class="text-green-500">+0.7</span><span
+                >Compared to Cohort AVG: 3.5</span
+              >
+            </div>
+          </div>
+          <div class="avg-time stats">
+            <div class="flex">AVG time spent per decision</div>
+            <div class="text-3xl font-bold">2 Minutes</div>
+            <div class="flex gap-1">
+              <span class="text-green-500">-1:32</span><span
+                >Compared to Cohort AVG: 3:32</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="percentages stats gap-5">
+          <div class="flex text-2xl font-bold">
+            Score Percentage Per Challenge and Time Spent
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="flex text-xl font-semibold">Onboarding Activities</div>
+            {@render performanceIndicator(
+              "Orientation to Simulation: 15 Minutes",
+              90
+            )}
+            {@render performanceIndicator("Company Briefing: 25 Minutes", 85)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 1: Profitability Challenge
+            </div>
+            {@render performanceIndicator("1.1 EVP: 40 Minutes", 80)}
+            {@render performanceIndicator("1.2 CFO: 25 Minutes", 70)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 2: Launch Strategy Challenge
+            </div>
+            {@render performanceIndicator("2.0 Learning Goals: 5 Minutes", 95)}
+            {@render performanceIndicator("2.1 CMO: 30 Minutes", 78)}
+            {@render performanceIndicator("2.2 COO: 30 Minutes", 83)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 3: Crisis Management Challenge
+            </div>
+            {@render performanceIndicator("3.1 CMO: 30 Minutes", 82)}
+            {@render performanceIndicator(
+              "3.2 VP Customer Experience: 30 Minutes",
+              76
+            )}
+
+            <div class="flex text-xl font-semibold">
+              LVL 4: Supply Chain Challenge
+            </div>
+            {@render performanceIndicator("4.1 HPM: 40 Minutes", 79)}
+            {@render performanceIndicator("4.2 COO: 30 Minutes", 81)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 5: Liquidity Management Challenge
+            </div>
+            {@render performanceIndicator("5.1 CFO: 40 Minutes", 75)}
+            {@render performanceIndicator("5.2 CEO: 45 Minutes", 80)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 6: Optimising Structure Challenge
+            </div>
+            {@render performanceIndicator("6.1 CEO: 45 Minutes", 83)}
+            {@render performanceIndicator("6.2 CHRO: 40 Minutes", 77)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 7: Leading Transformation Challenge
+            </div>
+            {@render performanceIndicator("7.1 CIO: 40 Minutes", 84)}
+            {@render performanceIndicator("7.2 CEO: 40 Minutes", 88)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 8: End of Game Assessment Challenge
+            </div>
+            {@render performanceIndicator("8.1 Assessment: 25 Minutes", 91)}
+
+            <div class="flex text-xl font-semibold">
+              LVL 9: Knowledge Refresh Challenge
+            </div>
+            {@render performanceIndicator(
+              "9.1 Knowledge Refresh (Always Available)",
+              100
+            )}
+          </div>
+          <div class="flex flex-col gap-2 mt-4 border-t pt-4">
+            <div class="flex text-xl font-semibold">Summary</div>
+            <div class="flex justify-between text-base">
+              <span>Average Time per Activity:</span>
+              <span>~37.35 Minutes</span>
+            </div>
+            <div class="flex justify-between text-base">
+              <span>Average Performance Score:</span>
+              <span>~79.84%</span>
+            </div>
+          </div>
+        </div>
+        <div class="performances stats gap-5">
+          <div class="flex text-2xl font-bold">Your Best Performances</div>
+          {@render performanceIndicator("8.1 Assessment: 25 Minutes", 91)}
+          {@render performanceIndicator(
+            "9.1 Knowledge Refresh (Always Available)",
+            100
+          )}
+
+          <div class="flex text-2xl font-bold">Areas Needing Improvement</div>
+          {@render performanceIndicator("1.2 CFO: 25 Minutes", 70)}
+          {@render performanceIndicator("5.1 CFO: 40 Minutes", 75)}
+        </div>
       </div>
       <div class="flex flex-col gap-10">
         <div class="text-3xl font-semibold">Key Learning Decisions</div>

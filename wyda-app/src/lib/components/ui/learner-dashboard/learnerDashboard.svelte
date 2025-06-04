@@ -48,11 +48,11 @@
         Progress
         <div class="tracker flex">
           <div class="name w-[5em]">John Doe</div>
-          <Progress class="w-[25em] ml-[1em]" />
+          <Progress value={80} class="w-[25em] ml-[1em]" />
         </div>
         <div class="tracker flex">
           <div class="target w-[5em]">Target</div>
-          <Progress class="w-[25em] ml-[1em]" />
+          <Progress value={90} class="w-[25em] ml-[1em]" />
         </div>
       </div>
     </div>

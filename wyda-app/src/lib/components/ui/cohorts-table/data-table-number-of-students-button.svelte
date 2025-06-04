@@ -14,8 +14,9 @@
     column.toggleSorting();
     console.log(sort);
   }}
+  class="flex justify-around"
 >
-  Number of Students
+  <span>No of Students</span>
   {#if sort === "false"}
     <ArrowUpDown class="ml-2" />
   {:else if sort == "asc"}
