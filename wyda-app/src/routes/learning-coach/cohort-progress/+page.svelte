@@ -1,7 +1,7 @@
 <script lang="ts">
-  import * as Select from "$lib/components/ui/select/index";
-  import DataTable from "$lib/components/ui/data-table-coach/data-table.svelte";
-  import { columns } from "$lib/components/ui/data-table-coach/columns.js";
+  import Button from "$lib/components/ui/button/button.svelte";
+  import DataTable from "$lib/components/ui/cohorts-table/data-table.svelte";
+  import { columns } from "./columns";
   import {
     UserCheck,
     UserX,
@@ -10,8 +10,8 @@
     type Icon as IconType,
   } from "@lucide/svelte";
   let { data } = $props();
-  console.log(data);
-  let cohort = $state("1");
+  //use cohort id array to populate cohort pages
+  const cohortData = data.value;
 </script>
 
 {#snippet stat(statistic: string, description: string, icon: typeof IconType)}
@@ -25,27 +25,16 @@
   </div>
 {/snippet}
 
-<main>
-  <div class="header text-3xl font-semibold mb-[1em] flex justify-between">
-    Cohort Progress
-    <Select.Root bind:value={cohort} type="single">
-      <Select.Trigger class="w-[180px] mb-5">Cohort {cohort}</Select.Trigger>
-      <Select.Content>
-        <Select.Item value={"1"}>Cohort 1</Select.Item>
-        <Select.Item value={"2"}>Cohort 2</Select.Item>
-        <Select.Item value={"3"}>Cohort 3</Select.Item>
-      </Select.Content>
-    </Select.Root>
+<div class="gap-10 h-dvh flex flex-col justify-start items-center">
+  <div class="mt-[10em] w-full">
+    <div class="text-4xl">Learner Cohorts</div>
   </div>
-  <div class="stats-container flex flex-wrap justify-around w-full gap-10 mb-5">
-    {@render stat(data.onTrackUsers, "Users on track", UserCheck)}
-    {@render stat(data.usersAtRisk, "Users at risk", UserX)}
-    {@render stat(
-      data.averageReflectionQuality,
-      "Average reflection Quality",
-      Star
-    )}
-    {@render stat((23).toString(), "Learning Streaks", Flame)}
+  <div class="w-full text-2xl">Overall Cohort Statistics</div>
+  <div class="flex gap-5">
+    {@render stat("6", "Users on track", UserCheck)}
+    {@render stat("4", "Users at risk", UserX)}
+    {@render stat("3.2", "Average reflection Quality", Star)}
+    {@render stat((2).toString(), "Learning Streaks", Flame)}
   </div>
   <DataTable {columns} data={data.value} />
-</main>
+</div>

@@ -1,5 +1,5 @@
 import sql from 'mssql'; //azure databse -> SQL not mySql
-import {type EntityProfile, type EntityRole, type EntityHome, type Cohort} from "./entity.ts";
+import {type EntityProfile, type EntityRole, type EntityHome, type Cohort, type EntityMetrics} from "./entity.ts";
 import { getPool } from "./createPool.ts";
 import { isFileLoadingAllowed } from 'vite';
 
@@ -38,6 +38,21 @@ export class populateEntity{
         }
     }
 
+    //temporary for convenience
+    async getAllUsers(): Promise<any>{
+        try {
+            const pool = await this.poolPromise;
+            const result = await pool.request().query(
+                `SELECT * FROM Users`
+            )
+            const rows = result.recordset;
+            return rows;
+        } catch (error) {
+            console.log('Database query failed: ', error);
+            return Promise.reject("Invalid state error")
+        }
+    }
+
     async populateProfile(newUser: string): Promise<EntityProfile>{
         //populates EntityProfile interface
 
@@ -56,7 +71,12 @@ export class populateEntity{
                 id: newUser, 
                 entityID: row.id,
                 firstName: row.first_name,
+                role: row.role,
+                gender: row.gender,
+                education: row.education,
+                country: row.country,
                 lastName: row.last_name, 
+                learningSupport: row.learning_support,
                 createdAt: new Date (row.createdAt), //INVALLID DATE -> fix
                 updatedAt: new Date (row.updatedAt) //INVALLID DATE -> fix
             }
@@ -69,6 +89,34 @@ export class populateEntity{
         }          
     }
 
+    async populateMetrics(userID: string): Promise<EntityMetrics | undefined>{
+        try {
+            const pool = await this.poolPromise;
+
+            const result = await pool.request()
+            .input('userId', sql.VarChar, userID)
+            .query(`SELECT * FROM LatestUserMetrics WHERE RowKey = @userId`);
+            
+            const rows = result.recordset;
+
+            const row = rows[0] as any;
+            
+            const metrics: EntityMetrics ={
+                id: userID,
+                userStatus: row.userStatus,
+                reflectionQuality: row.reflectionQuality,
+                lastUpdated: new Date (row.lastUpdated),
+                challenge: row.Challenge,
+            }
+            console.log('recent user metrics received');
+            return metrics
+        } catch (error) {
+            console.log('Database query failed: ', error);
+        }
+        //skip over missing values for now, but when a user is created
+        //they should have a new metrics row made for them
+        return undefined;
+    }
     async getValue(targetColumn: string, table: string,  referenceColumn: string, key:string){
         //returns value from a table based on other contents of a column in a table
         //example uses: finding the role of a user

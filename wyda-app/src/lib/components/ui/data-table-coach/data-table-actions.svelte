@@ -3,8 +3,10 @@
   import { Button } from "$lib/components/ui/button/index.js";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index.js";
   import DropdownMenuSeparator from "$lib/components/ui/dropdown-menu/dropdown-menu-separator.svelte";
+  import { goto } from "$app/navigation";
 
   let { id }: { id: string } = $props();
+  console.log(id);
 </script>
 
 <DropdownMenu.Root>
@@ -25,11 +27,11 @@
     <DropdownMenu.Group>
       <DropdownMenu.GroupHeading>Actions</DropdownMenu.GroupHeading>
       <DropdownMenuSeparator />
-      <DropdownMenu.Item onclick={() => navigator.clipboard.writeText(id)}>
-        Learner Profile
-      </DropdownMenu.Item>
-      <DropdownMenu.Item>Learner Analytics</DropdownMenu.Item>
-      <DropdownMenu.Item>Learner Workshops</DropdownMenu.Item>
+      <DropdownMenu.Item
+        onclick={() =>
+          goto("/learning-coach/learner-support/learner-profile/" + id)}
+        >Learner Profile</DropdownMenu.Item
+      >
     </DropdownMenu.Group>
   </DropdownMenu.Content>
 </DropdownMenu.Root>

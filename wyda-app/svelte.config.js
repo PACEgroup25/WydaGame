@@ -15,7 +15,7 @@ const config = {
 		alias: {
 			$src : "src/"
 		}
-	}
+	},
 };
 
 export default config;

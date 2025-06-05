@@ -8,7 +8,7 @@
 
   let height = data.size?.height ?? "450px";
   let width = data.size?.width ?? "450px";
-  let y = data.y ?? undefined;
+  let y = data.y ?? {};
 
   onMount(() => {
     new Chart(ctx, {
@@ -23,25 +23,23 @@
             borderColor: data.borderColor,
             borderWidth: data.borderWidth,
             cubicInterpolationMode: data.cubicInterpolationMode,
-            tension: data.tension
-          }
-        ]
+            tension: data.tension,
+          },
+        ],
       },
       options: {
         indexAxis: data.indexAxis,
-        responsive: true,
-        maintainAspectRatio: false,
         scales: {
-          y
-        }
-      }
+          y,
+        },
+      },
     });
   });
 </script>
 
-<div class="chart-container" style="width: {width}; height: {height}">
+<div class="chart-container">
   <div class="chart-header font-semibold">
     {data.chartLabel}
   </div>
-  <canvas bind:this={ctx}></canvas>
+  <canvas {height} {width} bind:this={ctx}></canvas>
 </div>

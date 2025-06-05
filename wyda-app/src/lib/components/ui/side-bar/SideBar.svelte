@@ -5,53 +5,64 @@
     ChartNoAxesCombined,
     Clock,
     Info,
-    ClipboardPlus
+    ClipboardPlus,
   } from "@lucide/svelte";
 
   import { page } from "$app/state";
   let currentPath = $derived(page.url.pathname);
 
-  import { roleChange } from "./roleChange.ts"
+  //this was breaking learner route for some reason:
+  // import { roleChange } from "./roleChange.ts";
 
-  async function handleRoleChange(event: Event){
+  async function handleRoleChange(event: Event) {
     const target = event.target as HTMLSelectElement | null;
 
     if (!target) return;
-    const role = target.value
+    const role = target.value;
 
+    // roleChange(role);
 
-    roleChange(role);
+    // function handleRoleChange(event: Event) {
+    //   const target = event.target as HTMLSelectElement | null;
+
+    //   if (!target) return;
+
+    //   const role = target.value;
+
+    if (role === "Learner") location.href = "/learner/dashboard";
+    else if (role === "Learning Coach") location.href = "/learning-coach";
+    else if (role === "Client Admin") location.href = "/client-admin";
+    else if (role === "Wyda Admin") location.href = "/wyda-admin";
   }
 </script>
 
 <div
   class="navigation-container w-60 bg-[#494A4A] border-r border-r-greyBorder h-dvh flex flex-col sticky top-0"
 >
-
-
-
   <div class="locations-container flex flex-col h-full mt-8 mb-4 gap-y-2">
     <Button
       variant="sidebarLearningCoach"
-      href="/learner"
-      class="m-1 flex justify-start {currentPath === "/learner"
+      href="/learner/dashboard"
+      class="m-1 flex justify-start {currentPath === '/learner/dashboard'
         ? 'bg-[#676969]'
         : 'bg-transparent'}"
     >
       <Home />
       <span>Home</span>
     </Button>
-    
-    <Button
+
+    <!-- <Button
       variant="sidebarLearningCoach"
       href="/learner/recent-activity"
-      class="m-1 flex justify-start {currentPath.includes('/learner/recent-activity')
+      class="m-1 flex justify-start {currentPath.includes(
+        '/learner/recent-activity'
+      )
         ? 'bg-[#1b5d74]'
         : 'bg-transparent'}"
     >
       <Clock />
       <span>Recent Activity</span>
-    </Button>
+    </Button> -->
 
     <Button
       variant="sidebarLearningCoach"
@@ -74,20 +85,23 @@
       <span>Reports</span>
     </Button>
     <Button
-    variant="sidebarLearningCoach"
-    href="/learner/help"
-    class="m-1 flex justify-start {currentPath.includes('/learner/help')
-      ? 'bg-[#1b5d74]'
-      : 'bg-transparent'}"
-  >
-    <Info />
-    <span>Help</span>
-  </Button>
-    
+      variant="sidebarLearningCoach"
+      href="/learner/help"
+      class="m-1 flex justify-start {currentPath.includes('/learner/help')
+        ? 'bg-[#1b5d74]'
+        : 'bg-transparent'}"
+    >
+      <Info />
+      <span>Help</span>
+    </Button>
 
-    <div class="mt-auto pt-4 mb-8 border-t border-gray-600 flex flex-col items-center">
-      <label for="role-switcher" class="block text-sm font-semibold text-white mb-2 text-center">
-       
+    <div
+      class="mt-auto pt-4 mb-8 border-t border-gray-600 flex flex-col items-center"
+    >
+      <label
+        for="role-switcher"
+        class="block text-sm font-semibold text-white mb-2 text-center"
+      >
       </label>
       <select
         id="role-switcher"
@@ -97,11 +111,8 @@
         <option disabled selected>Switch View</option>
         <option>Learner</option>
         <option>Learning Coach</option>
-        <option>Client Admin</option>
-     
+        <!-- <option>Client Admin</option> -->
       </select>
     </div>
-
   </div>
-  
 </div>

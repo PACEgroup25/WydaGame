@@ -1,6 +1,7 @@
 //import CollapsibleContent from "bits-ui/dist/bits/collapsible/components/collapsible-content.svelte";
-import {type Entity,type EntityProfile, type EntityHome} from "./entity.ts";
+import {type Entity,type EntityProfile, type EntityHome, type Cohort} from "./entity.ts";
 import { populateEntity } from "./populateEntity.ts";
+import { BuildCohort } from "./buildCohort.ts";
 
 
 export class Client{ 
@@ -12,7 +13,7 @@ export class Client{
 
     constructor(clientRole:string){
         this.role = clientRole;
-        this.clientProfile ={ id: '', entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null};
+        this.clientProfile ={ id: '', entityID: '', firstName: null, lastName: null, createdAt: null, updatedAt: null, role: null, gender: null, education: null, learningSupport: null, country:null};
         this.clientHome ={...this.clientProfile, cohortID: null, organisationID: null};
     }
 
@@ -68,6 +69,20 @@ export class Client{
     async getFullClientProfile(): Promise<EntityHome>{ //returns client EntityHome interface (do not call for learners)
         return this.clientHome
     }
+
+    async getCohortsArray(cohortIDs: string[]): Promise<Cohort[]>{
+
+        const ids = cohortIDs;
+
+        const cohortsArray: Cohort[] = await Promise.all(
+            ids.map(id => {
+                const build = new BuildCohort(id);
+                return build.getCohort();
+            })
+        );
+        return cohortsArray;
+    }
+
 }
 
 async function test(role: string){
