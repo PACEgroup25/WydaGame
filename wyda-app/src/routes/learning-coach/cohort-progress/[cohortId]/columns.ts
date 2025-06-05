@@ -27,7 +27,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
             const nameCellSnippet = createRawSnippet<[string]>((getName) =>{
                 const name = getName();
                 return {
-                    render: () => `<div class ="font-medium">${name}</div>`,
+                    render: () => `<a href=${"/learning-coach/learner-support/learner-profile/" + row.original.id} class ="font-medium hover:text-blue-500 transition duration-100">${name}</a>`,
                 };
             });
             return renderSnippet(
