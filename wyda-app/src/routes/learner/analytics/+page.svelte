@@ -1,4 +1,23 @@
 <script lang="ts">
+  let { data } = $props();
+
+  const METABASE_SITE_URL = "https://metabase-production-26d4.up.railway.app";
+
+  const iframeUrl = `${METABASE_SITE_URL}/embed/dashboard/${data.token}#bordered=true&titled=true`;
+</script>
+
+<iframe
+  src={iframeUrl}
+  width="1500"
+  height="1000"
+  style="border:none"
+  allowtransparency={true}
+  title="Metabase Dashboard"
+></iframe>
+
+
+
+<!-- <script lang="ts">
   import type { PageData } from "./$types";
   let { data }: { data: PageData } = $props();
   import Progress from "$lib/components/ui/progress/progress.svelte";
@@ -60,4 +79,4 @@
       <span> - You demonstrate strong ethical leadership, thoughtful decision-making under pressure</span>
       <span> - There's still room to improve in timely communication during sensitive situations</span>
     </div>
-  </div>
+  </div> -->
