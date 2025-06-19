@@ -3,11 +3,11 @@
   import {
     Home,
     ChartColumnIncreasing,
-    Clock,
+
     BookOpenCheck,
-    CalendarDays,
     ChartNoAxesCombined,
     ClipboardPlus,
+    Pencil,
   } from "@lucide/svelte";
 
   import { page } from "$app/state";
@@ -33,7 +33,6 @@
     if (role === "Learner") location.href = "/learner/dashboard";
     else if (role === "Learning Coach") location.href = "/learning-coach";
     else if (role === "Client Admin") location.href = "/client-admin";
-    else if (role === "Wyda Admin") location.href = "/wyda-admin";
   }
 </script>
 
@@ -100,6 +99,19 @@
       <span>Reports</span>
     </Button>
 
+    <Button
+      variant="sidebarLearningCoach"
+      href="/learning-coach/reports"
+      class="m-1 flex justify-start {currentPath.includes(
+        '/learning-coach/report-builder'
+      )
+        ? 'bg-[#1b5d74]'
+        : 'bg-transparent'}"
+    >
+      <Pencil />
+      <span>Report Builder</span>
+    </Button>
+
     <div
       class="mt-auto pt-4 mb-8 border-t border-gray-600 flex flex-col items-center"
     >
@@ -116,7 +128,7 @@
         <option disabled selected>Switch View</option>
         <option>Learner</option>
         <option>Learning Coach</option>
-        <!-- <option>Client Admin</option> -->
+        <option>Client Admin</option>
       </select>
     </div>
   </div>

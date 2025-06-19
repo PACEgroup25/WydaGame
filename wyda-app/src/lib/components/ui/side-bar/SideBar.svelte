@@ -3,7 +3,6 @@
   import {
     Home,
     ChartNoAxesCombined,
-    Clock,
     Info,
     ClipboardPlus,
   } from "@lucide/svelte";
@@ -32,7 +31,6 @@
     if (role === "Learner") location.href = "/learner/dashboard";
     else if (role === "Learning Coach") location.href = "/learning-coach";
     else if (role === "Client Admin") location.href = "/client-admin";
-    else if (role === "Wyda Admin") location.href = "/wyda-admin";
   }
 </script>
 
@@ -111,7 +109,7 @@
         <option disabled selected>Switch View</option>
         <option>Learner</option>
         <option>Learning Coach</option>
-        <!-- <option>Client Admin</option> -->
+        <option>Client Admin</option>
       </select>
     </div>
   </div>
